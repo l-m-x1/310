@@ -4,6 +4,16 @@ package com.space.pojo;
 public class Diary {
 
   private Integer id;
+  private Integer uid;
+
+  public Integer getUid() {
+    return uid;
+  }
+
+  public void setUid(Integer uid) {
+    this.uid = uid;
+  }
+
   private java.sql.Timestamp time;
   private String content;
 
@@ -38,6 +48,7 @@ public class Diary {
   public String toString() {
     return "Diary{" +
             "id=" + id +
+            ", uid=" + uid +
             ", time=" + time +
             ", content='" + content + '\'' +
             '}';

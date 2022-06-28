@@ -4,7 +4,7 @@ package com.space.pojo;
 public class User {
 
   private Integer id;
-  private Integer acount;
+  private Long acount;
   private String username;
   private String password;
 
@@ -18,11 +18,11 @@ public class User {
   }
 
 
-  public Integer getAcount() {
+  public Long getAcount() {
     return acount;
   }
 
-  public void setAcount(Integer acount) {
+  public void setAcount(Long acount) {
     this.acount = acount;
   }
 
