@@ -4,11 +4,20 @@ package com.space.pojo;
 public class MsgBoard {
 
   private Integer id;
+  private Integer uid;
   private Integer wrid;
   private String content;
-  private java.sql.Timestamp time;
+  private String time;
   private Integer floor;
 
+
+  public Integer getUid() {
+    return uid;
+  }
+
+  public void setUid(Integer uid) {
+    this.uid = uid;
+  }
 
   public Integer getId() {
     return id;
@@ -37,11 +46,11 @@ public class MsgBoard {
   }
 
 
-  public java.sql.Timestamp getTime() {
+  public String getTime() {
     return time;
   }
 
-  public void setTime(java.sql.Timestamp time) {
+  public void setTime(String time) {
     this.time = time;
   }
 
@@ -58,6 +67,7 @@ public class MsgBoard {
   public String toString() {
     return "MsgBoard{" +
             "id=" + id +
+            ", uid=" + uid +
             ", wrid=" + wrid +
             ", content='" + content + '\'' +
             ", time=" + time +

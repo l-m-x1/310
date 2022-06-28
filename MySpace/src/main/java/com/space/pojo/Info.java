@@ -6,7 +6,7 @@ public class Info {
     private Integer id;
     private String gender;
     private String city;
-    private java.sql.Date birthday;
+    private String birthday;
 
 
     public Integer getId() {
@@ -36,11 +36,11 @@ public class Info {
     }
 
 
-    public java.sql.Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(java.sql.Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

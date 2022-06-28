@@ -4,9 +4,17 @@ package com.space.pojo;
 public class Mood {
 
   private Integer id;
+  private Integer uid;
   private Integer type;
   private String content;
 
+  public Integer getUid() {
+    return uid;
+  }
+
+  public void setUid(Integer uid) {
+    this.uid = uid;
+  }
 
   public Integer getId() {
     return id;
@@ -38,6 +46,7 @@ public class Mood {
   public String toString() {
     return "Mood{" +
             "id=" + id +
+            ", uid=" + uid +
             ", type=" + type +
             ", content='" + content + '\'' +
             '}';

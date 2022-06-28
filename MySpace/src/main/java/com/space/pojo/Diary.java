@@ -1,56 +1,56 @@
 package com.space.pojo;
 
 
+import java.sql.Date;
+
 public class Diary {
 
-  private Integer id;
-  private Integer uid;
-
-  public Integer getUid() {
-    return uid;
-  }
-
-  public void setUid(Integer uid) {
-    this.uid = uid;
-  }
-
-  private java.sql.Timestamp time;
-  private String content;
+    private Integer id;
+    private Integer uid;
 
 
-  public Integer getId() {
-    return id;
-  }
+    private String time;
+    private String content;
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  public java.sql.Timestamp getTime() {
-    return time;
-  }
+    public Integer getUid() {
+        return uid;
+    }
 
-  public void setTime(java.sql.Timestamp time) {
-    this.time = time;
-  }
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
+    public String getTime() {
+        return time;
+    }
 
-  public String getContent() {
-    return content;
-  }
+    public void setTime(String time) {
+        this.time = time;
+    }
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+    public String getContent() {
+        return content;
+    }
 
-  @Override
-  public String toString() {
-    return "Diary{" +
-            "id=" + id +
-            ", uid=" + uid +
-            ", time=" + time +
-            ", content='" + content + '\'' +
-            '}';
-  }
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Diary{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", time=" + time +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }
