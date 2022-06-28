@@ -3,16 +3,16 @@ package com.space.pojo;
 
 public class Trends {
 
-  private long id;
+  private Integer id;
   private String content;
-  private long likes;
+  private Integer likes;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -26,11 +26,11 @@ public class Trends {
   }
 
 
-  public long getLikes() {
+  public Integer getLikes() {
     return likes;
   }
 
-  public void setLikes(long likes) {
+  public void setLikes(Integer likes) {
     this.likes = likes;
   }
 
