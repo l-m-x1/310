@@ -34,4 +34,12 @@ public class Photos {
     this.path = path;
   }
 
+  @Override
+  public String toString() {
+    return "Photos{" +
+            "id=" + id +
+            ", time=" + time +
+            ", path='" + path + '\'' +
+            '}';
+  }
 }

@@ -34,4 +34,12 @@ public class Trends {
     this.likes = likes;
   }
 
+  @Override
+  public String toString() {
+    return "Trends{" +
+            "id=" + id +
+            ", content='" + content + '\'' +
+            ", likes=" + likes +
+            '}';
+  }
 }

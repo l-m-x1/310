@@ -24,4 +24,11 @@ public class Style {
     this.type = type;
   }
 
+  @Override
+  public String toString() {
+    return "Style{" +
+            "id=" + id +
+            ", type=" + type +
+            '}';
+  }
 }
