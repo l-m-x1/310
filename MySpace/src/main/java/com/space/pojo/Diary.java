@@ -34,4 +34,12 @@ public class Diary {
     this.content = content;
   }
 
+  @Override
+  public String toString() {
+    return "Diary{" +
+            "id=" + id +
+            ", time=" + time +
+            ", content='" + content + '\'' +
+            '}';
+  }
 }

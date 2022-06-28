@@ -3,25 +3,25 @@ package com.space.pojo;
 
 public class Mood {
 
-  private long id;
-  private long type;
+  private Integer id;
+  private Integer type;
   private String content;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getType() {
+  public Integer getType() {
     return type;
   }
 
-  public void setType(long type) {
+  public void setType(Integer type) {
     this.type = type;
   }
 
@@ -34,4 +34,12 @@ public class Mood {
     this.content = content;
   }
 
+  @Override
+  public String toString() {
+    return "Mood{" +
+            "id=" + id +
+            ", type=" + type +
+            ", content='" + content + '\'' +
+            '}';
+  }
 }

@@ -3,45 +3,54 @@ package com.space.pojo;
 
 public class Info {
 
-  private long id;
-  private String gender;
-  private String city;
-  private java.sql.Timestamp birthday;
+    private Integer id;
+    private String gender;
+    private String city;
+    private java.sql.Date birthday;
 
 
-  public long getId() {
-    return id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setId(long id) {
-    this.id = id;
-  }
-
-
-  public String getGender() {
-    return gender;
-  }
-
-  public void setGender(String gender) {
-    this.gender = gender;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 
-  public String getCity() {
-    return city;
-  }
+    public String getGender() {
+        return gender;
+    }
 
-  public void setCity(String city) {
-    this.city = city;
-  }
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
 
-  public java.sql.Timestamp getBirthday() {
-    return birthday;
-  }
+    public String getCity() {
+        return city;
+    }
 
-  public void setBirthday(java.sql.Timestamp birthday) {
-    this.birthday = birthday;
-  }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
+
+    public java.sql.Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(java.sql.Date birthday) {
+        this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "Info{" +
+                "id=" + id +
+                ", gender='" + gender + '\'' +
+                ", city='" + city + '\'' +
+                ", birthday=" + birthday +
+                '}';
+    }
 }

@@ -34,4 +34,12 @@ public class Friends {
     this.access = access;
   }
 
+  @Override
+  public String toString() {
+    return "Friends{" +
+            "id=" + id +
+            ", fid=" + fid +
+            ", access=" + access +
+            '}';
+  }
 }
