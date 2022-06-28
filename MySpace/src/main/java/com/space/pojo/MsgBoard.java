@@ -4,12 +4,8 @@ package com.space.pojo;
 public class MsgBoard {
 
   private Integer id;
-  private Integer uid;
-  private Integer wrid;
-  private String content;
-  private String time;
-  private Integer floor;
 
+  private Integer uid;
 
   public Integer getUid() {
     return uid;
@@ -18,6 +14,12 @@ public class MsgBoard {
   public void setUid(Integer uid) {
     this.uid = uid;
   }
+
+  private Integer wrid;
+  private String content;
+  private String time;
+  private Integer floor;
+
 
   public Integer getId() {
     return id;
@@ -70,7 +72,7 @@ public class MsgBoard {
             ", uid=" + uid +
             ", wrid=" + wrid +
             ", content='" + content + '\'' +
-            ", time=" + time +
+            ", time='" + time + '\'' +
             ", floor=" + floor +
             '}';
   }
