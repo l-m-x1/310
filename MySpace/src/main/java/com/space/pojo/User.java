@@ -3,26 +3,26 @@ package com.space.pojo;
 
 public class User {
 
-  private long id;
-  private long acount;
+  private Integer id;
+  private Integer acount;
   private String username;
   private String password;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getAcount() {
+  public Integer getAcount() {
     return acount;
   }
 
-  public void setAcount(long acount) {
+  public void setAcount(Integer acount) {
     this.acount = acount;
   }
 

@@ -3,27 +3,27 @@ package com.space.pojo;
 
 public class MsgBoard {
 
-  private long id;
-  private long wrid;
+  private Integer id;
+  private Integer wrid;
   private String content;
   private java.sql.Timestamp time;
-  private long floor;
+  private Integer floor;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getWrid() {
+  public Integer getWrid() {
     return wrid;
   }
 
-  public void setWrid(long wrid) {
+  public void setWrid(Integer wrid) {
     this.wrid = wrid;
   }
 
@@ -46,11 +46,11 @@ public class MsgBoard {
   }
 
 
-  public long getFloor() {
+  public Integer getFloor() {
     return floor;
   }
 
-  public void setFloor(long floor) {
+  public void setFloor(Integer floor) {
     this.floor = floor;
   }
 

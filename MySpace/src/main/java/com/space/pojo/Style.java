@@ -3,24 +3,24 @@ package com.space.pojo;
 
 public class Style {
 
-  private long id;
-  private long type;
+  private Integer id;
+  private Integer type;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public long getType() {
+  public Integer getType() {
     return type;
   }
 
-  public void setType(long type) {
+  public void setType(Integer type) {
     this.type = type;
   }
 

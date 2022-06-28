@@ -3,16 +3,16 @@ package com.space.pojo;
 
 public class Photos {
 
-  private long id;
+  private Integer id;
   private java.sql.Timestamp time;
   private String path;
 
 
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
