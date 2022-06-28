@@ -1,9 +1,7 @@
 package com.space.service.impl;
 
 import com.space.mapper.MsgBoardMapper;
-import com.space.mapper.UserMapper;
 import com.space.pojo.MsgBoard;
-import com.space.pojo.User;
 import com.space.service.MsgBoardService;
 import org.apache.ibatis.session.SqlSession;
 import com.space.util.SqlSessionFactoryUtils;
@@ -24,6 +22,8 @@ public class MsgBoardServiceImpl implements MsgBoardService {
 
     }
 
+
+
     @Override
     public void insert(MsgBoard msgBoard) {
         SqlSession session = factory.openSession();
@@ -34,10 +34,10 @@ public class MsgBoardServiceImpl implements MsgBoardService {
     }
 
     @Override
-    public List<MsgBoard> selectById(Integer id) {
+    public List<MsgBoard> selectByUid(Integer uid) {
         SqlSession session = factory.openSession();
         MsgBoardMapper mapper = session.getMapper(MsgBoardMapper.class);
-        List<MsgBoard> boards = mapper.selectById(id);
+        List<MsgBoard> boards = mapper.selectByUid(uid);
 
         session.close();
         return boards;

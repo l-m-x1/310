@@ -10,7 +10,7 @@ public interface MsgBoardService {
 
      void insert(MsgBoard msgBoard);
 
-     List<MsgBoard> selectById(Integer id);
+     List<MsgBoard> selectByUid(Integer uid);
 
 
      void deleteById(Integer id);
