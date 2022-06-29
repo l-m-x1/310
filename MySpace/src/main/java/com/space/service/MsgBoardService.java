@@ -1,7 +1,7 @@
 package com.space.service;
 
 import com.space.pojo.MsgBoard;
-import com.space.pojo.User;
+
 
 import java.util.List;
 
