@@ -26,5 +26,5 @@ public interface TrendsMapper {
     void deleteByUid(Integer uid);
 
     @Update("update trends set likes = #{likes} where id=#{id} ;")
-    void update(@Param("id") Integer id, @Param("likes") Integer likes);
+    void updateLikes(@Param("id") Integer id, @Param("likes") Integer likes);
 }
