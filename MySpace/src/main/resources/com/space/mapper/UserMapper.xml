@@ -6,8 +6,8 @@
 
     </resultMap>
     <insert id="insert"   useGeneratedKeys="true" keyProperty="id">
-        insert into user (account,username,password)
-        values (#{account}, #{username}, #{password});
+        insert into user (username,password)
+        values ( #{username}, #{password});
     </insert>
 
 

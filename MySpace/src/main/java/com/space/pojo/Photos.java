@@ -15,7 +15,7 @@ public class Photos {
     this.uid = uid;
   }
 
-  private java.sql.Timestamp time;
+  private String time;
   private String path;
 
 
@@ -28,11 +28,11 @@ public class Photos {
   }
 
 
-  public java.sql.Timestamp getTime() {
+  public String getTime() {
     return time;
   }
 
-  public void setTime(java.sql.Timestamp time) {
+  public void setTime(String time) {
     this.time = time;
   }
 

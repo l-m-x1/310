@@ -4,15 +4,7 @@ package com.space.pojo;
 public class User {
 
   private Integer id;
-  private Integer uid;
 
-  public Integer getUid() {
-    return uid;
-  }
-
-  public void setUid(Integer uid) {
-    this.uid = uid;
-  }
 
   private int account;
   private String username;
@@ -58,7 +50,6 @@ public class User {
   public String toString() {
     return "User{" +
             "id=" + id +
-            ", uid=" + uid +
             ", account=" + account +
             ", username='" + username + '\'' +
             ", password='" + password + '\'' +
