@@ -68,13 +68,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User select(Long account, String password) {
+    public User select(Integer id, String password) {
         SqlSession session = factory.openSession();
         UserMapper mapper = session.getMapper(UserMapper.class);
-        User user = mapper.select(account, password);
-        session.commit();
+        User user = mapper.select(id, password);
         session.close();
         return user;
     }
 
+    @Override
+    public Integer getMaxId() {
+        SqlSession session = factory.openSession();
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        return mapper.getMaxId();
+    }
 }

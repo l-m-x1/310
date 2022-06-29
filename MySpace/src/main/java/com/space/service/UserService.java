@@ -23,5 +23,7 @@ public interface UserService {
 
      void updatePassword(Integer id, String password);
 
-     User select(Long account, String password);
+     User select(Integer id, String password);
+
+    Integer getMaxId();
 }

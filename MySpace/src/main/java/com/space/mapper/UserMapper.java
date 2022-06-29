@@ -12,8 +12,8 @@ public interface UserMapper {
     @Select("select *from user")
     List<User> selectAll();
 
-    @Select("select *from user where account=#{account} and password=#{password}")
-    User select(@Param("account") Long account,@Param("password") String password);
+    @Select("select *from user where id=#{id} and password=#{password}")
+    User select(@Param("id") Integer id,@Param("password") String password);
 
     @Select("select *from user where id=#{id}")
     User selectById(Integer id);
@@ -29,4 +29,7 @@ public interface UserMapper {
 
     @Update("update user set password =#{password} where id=#{id}")
     void updatePassword(@Param("id")Integer id,@Param("password") String password);
+
+    @Select("select max(id) from user")
+    Integer getMaxId();
 }
