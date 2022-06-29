@@ -4,7 +4,6 @@ import com.space.mapper.MoodMapper;
 import com.space.pojo.Mood;
 import com.space.service.MoodService;
 import com.space.util.SqlSessionFactoryUtils;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 

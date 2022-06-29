@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface DiaryMapper {
-    @Insert("insert into diary VALUES (null,#{time},#{uid},#{content})")
+    @Insert("insert into diary VALUES (null,#{uid},#{time},#{content})")
     void insert( Diary diary);
     @Delete("delete from diary where id=#{id}")
     void delete(Integer id);
