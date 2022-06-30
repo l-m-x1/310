@@ -6,7 +6,7 @@ public class User {
   private Integer id;
 
 
-  private int account;
+
   private String username;
   private String password;
 
@@ -20,13 +20,9 @@ public class User {
   }
 
 
-  public int getAccount() {
-    return account;
-  }
 
-  public void setAccount(int account) {
-    this.account = account;
-  }
+
+
 
 
   public String getUsername() {
@@ -50,7 +46,6 @@ public class User {
   public String toString() {
     return "User{" +
             "id=" + id +
-            ", account=" + account +
             ", username='" + username + '\'' +
             ", password='" + password + '\'' +
             '}';

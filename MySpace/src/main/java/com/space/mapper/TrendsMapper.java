@@ -16,6 +16,8 @@ public interface TrendsMapper {
     @Select("select * from trends where uid=#{uid}")
     List<Trends> selectByUid(Integer uid);
 
+    List<Trends> selectByUids(@Param("uids") int[] uids);
+
     @Insert("insert into trends(content,uid) values (#{content},#{uid})")
     void insert(Trends trends);
 

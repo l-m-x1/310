@@ -20,4 +20,6 @@ public interface TrendsService {
     void deleteByUid(Integer uid);
 
     void updateLikes(Integer id,  Integer likes);
+
+    List<Trends> selectByUids( int[] uids);
 }
