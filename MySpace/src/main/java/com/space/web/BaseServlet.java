@@ -32,8 +32,9 @@ public class BaseServlet extends HttpServlet {
         String requestBody = IOUtils.toString(req.getInputStream());
         jsonObject = JSON.parseObject(requestBody);
 
-
-        String func=jsonObject.getString("func");
+        String uri = req.getRequestURI();
+        int index = uri.lastIndexOf('/');
+        String func = uri.substring(index + 1);
         try {
             this.getClass().getMethod(func).invoke(this);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {

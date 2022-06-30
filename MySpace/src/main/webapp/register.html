@@ -137,9 +137,8 @@
                 {
                     axios({
                         method:"post",
-                        url:'http://localhost:80/RegisterServlet',
+                        url:'http://localhost:80/RegisterServlet/register',
                         data:{
-                            func:'register',
                             name:this.user.name,
                             password:this.user.password
                         }

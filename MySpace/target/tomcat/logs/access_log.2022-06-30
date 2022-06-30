@@ -32,3 +32,15 @@
 0:0:0:0:0:0:0:1 - - [30/Jun/2022:16:49:44 +0800] "GET /element-ui/lib/theme-chalk/fonts/element-icons.woff HTTP/1.1" 304 - http-bio-80-exec-2 1
 0:0:0:0:0:0:0:1 - - [30/Jun/2022:16:49:58 +0800] "GET /js/axios.min.map HTTP/1.1" 404 983 http-bio-80-exec-7 0
 0:0:0:0:0:0:0:1 - - [30/Jun/2022:16:50:01 +0800] "POST /RegisterServlet HTTP/1.1" 200 - http-bio-80-exec-7 0
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:14:42 +0800] "POST /RegisterServlet/register HTTP/1.1" 404 999 http-bio-80-exec-2 24
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:15:31 +0800] "POST /RegisterServlet/register HTTP/1.1" 404 999 http-bio-80-exec-2 64
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:18:02 +0800] "POST /RegisterServlet/register HTTP/1.1" 200 - http-bio-80-exec-2 92421
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:18:17 +0800] "GET /RegisterServlet/register HTTP/1.1" 200 - http-bio-80-exec-2 157
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:21:17 +0800] "GET /RegisterServlet/register HTTP/1.1" 200 - http-bio-80-exec-1 296
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:21:35 +0800] "GET /register.html HTTP/1.1" 200 6203 http-bio-80-exec-3 8
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:21:35 +0800] "GET /element-ui/lib/theme-chalk/index.css HTTP/1.1" 304 - http-bio-80-exec-4 8
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:21:35 +0800] "GET /js/vue.js HTTP/1.1" 304 - http-bio-80-exec-5 8
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:21:35 +0800] "GET /element-ui/lib/index.js HTTP/1.1" 304 - http-bio-80-exec-6 0
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:21:35 +0800] "GET /js/axios-0.18.0.js HTTP/1.1" 304 - http-bio-80-exec-7 0
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:21:35 +0800] "GET /element-ui/lib/theme-chalk/fonts/element-icons.woff HTTP/1.1" 304 - http-bio-80-exec-1 0
+0:0:0:0:0:0:0:1 - - [30/Jun/2022:17:21:42 +0800] "POST /RegisterServlet/register HTTP/1.1" 200 - http-bio-80-exec-1 43
