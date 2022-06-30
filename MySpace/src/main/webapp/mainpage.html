@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <link rel="stylesheet" href="./css/mainspace.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        .friendList {
+            display: none;
+            position: fixed;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            margin-left: 19%;
+            margin-top: 2%;
+            max-height: 50%;
+            overflow-y: scroll;
+        }
+
+        .friend {
+            padding: 10px;
+            box-sizing: border-box;
+            height: 70px;
+            width: 200px;
+            border: 2px solid white;
+            margin: 10px;
+        }
+        .friend:hover {
+            border-color :#3a8ee6;
+        }
+
+        .friendAvatar {
+            width: 50px;
+            height: 50px;
+            float: left;
+        }
+        .friendName {
+            float: left;
+            padding-left: 20px;
+            padding-top: 10px;
+        }
+
+
+        #setting {
+            list-style-type: none;
+            display: none;
+            position: fixed;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            margin-left: 71%;
+            margin-top: 2%;
+        }
+
+        #setting li a {
+            display: block;
+            color: #303133;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        #setting li a:hover{
+            color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="topNav">
+    <li ><a href="#home"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
+
+
+    <li>
+        <div class="friendListTrigger">
+        <a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>
+        </div>
+    </li>
+
+    <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
+
+    <li style="float: right" >
+        <div id="settingTrigger">
+            <a href="#about"><span class="iconfont icon-shezhi"></span></a>
+        </div>
+    </li>
+</ul>
+
+<div class="friendList">
+
+</div>
+
+<div id="setting">
+    <li><a href="./EditYourProfile.html">修改资料</a></li>
+    <li><a href="./PermissionManagement.html">权限管理</a></li>
+</div>
+
+<ul class="midNav">
+    <li><a href="#" class="active">主页</a></li>
+    <li><a href="#">相册</a></li>
+    <li><a href="#">日志</a></li>
+    <li><a href="#">留言版</a></li>
+    <li><a href="#">个人心情</a></li>
+</ul>
+
+<div class="row">
+    <div class="leftcolumn">
+            <div id="avatar">
+                <el-avatar :size="100" src="#" @error="errorHandler">
+                    <img src="./img.png"/>
+                </el-avatar>
+            </div>
+            <div id="userName">
+                132
+            </div>
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2>About Me</h2>
+            <p>Some text about me in culpa qui officia deserunt mollit anim..文本（text），从词源上来说，它表示编织的东西。这与中国“文”的概念颇有类似之处。“文”取象人形，指纹身，指花纹。《说文解字叙》称：“仓颉初作书，盖依类象形，故曰文。”“文者，物象之本。”物象均具纹路色彩，因以“文”来指称。《周易·系辞下》记伏羲氏“观鸟兽之文”，鸟兽身上的花纹彩羽。该书又载“物相杂故曰文”，物体的形状、线条色彩相互交错，这也是文。“观乎天文，以察时变，观乎人文，以化成天下。”《说文解字》解释“文”为“错画也。”
+                但是文本的概念后来主要变成了：“任何由书写所固定下来的任何话语。”对语言学家来说，文本指的是作品的可见可感的表层结构，是一系列语句串联而成的连贯序列。文本可能只是一个单句，例如谚语、格言、招牌等，但比较普遍的是由一系列句子组成。文本和段落的区别在于，文本构成了一个相对封闭、自足的系统。前苏联符号学家洛特曼指出，文本是外观的，即用一定的符号来表示；它是有限的，既有头有尾；它有内部结构。罗兰·巴特文本一方面是能指，即实际的语言符号以及由它们所组成的词、句子和段落章节，另一方面是所指，即固定的确定的和单一的意思，为表达这种意思的正确性所限定。以上从技术上中性地对文本做出基本界定。
+                “文本”一词来自英文text，另有本文、正文、语篇和课文等多种译法。这个词广泛应用于语言学和文体学中，而且也在文学理论与批评中扮演活跃的角色。但它含义丰富而不易界定，给实际运用和理解带来一定困难。可以一般地说，文本是语言的实际运用形态。而在具体场合中，文本是根据一定的语言衔接和语义连贯规则而组成的整体语句或语句系统，有待于读者阅读。
+                和文本相关的是文本学和解释学这两个领域。文本（text），从词源上来说，它表示编织的东西。这与中国“文”的概念颇有类似之处。“文”取象人形，指纹身，指花纹。《说文解字叙》称：“仓颉初作书，盖依类象形，故曰文。”“文者，物象之本。”物象均具纹路色彩，因以“文”来指称。《周易·系辞下》记伏羲氏“观鸟兽之文”，鸟兽身上的花纹彩羽。该书又载“物相杂故曰文”，物体的形状、线条色彩相互交错，这也是文。“观乎天文，以察时变，观乎人文，以化成天下。”《说文解字》解释“文”为“错画也。”
+                但是文本的概念后来主要变成了：“任何由书写所固定下来的任何话语。”对语言学家来说，文本指的是作品的可见可感的表层结构，是一系列语句串联而成的连贯序列。文本可能只是一个单句，例如谚语、格言、招牌等，但比较普遍的是由一系列句子组成。文本和段落的区别在于，文本构成了一个相对封闭、自足的系统。前苏联符号学家洛特曼指出，文本是外观的，即用一定的符号来表示；它是有限的，既有头有尾；它有内部结构。罗兰·巴特文本一方面是能指，即实际的语言符号以及由它们所组成的词、句子和段落章节，另一方面是所指，即固定的确定的和单一的意思，为表达这种意思的正确性所限定。以上从技术上中性地对文本做出基本界定。
+                “文本”一词来自英文text，另有本文、正文、语篇和课文等多种译法。这个词广泛应用于语言学和文体学中，而且也在文学理论与批评中扮演活跃的角色。但它含义丰富而不易界定，给实际运用和理解带来一定困难。可以一般地说，文本是语言的实际运用形态。而在具体场合中，文本是根据一定的语言衔接和语义连贯规则而组成的整体语句或语句系统，有待于读者阅读。
+                和文本相关的是文本学和解释学这两个领域。文本（text），从词源上来说，它表示编织的东西。这与中国“文”的概念颇有类似之处。“文”取象人形，指纹身，指花纹。《说文解字叙》称：“仓颉初作书，盖依类象形，故曰文。”“文者，物象之本。”物象均具纹路色彩，因以“文”来指称。《周易·系辞下》记伏羲氏“观鸟兽之文”，鸟兽身上的花纹彩羽。该书又载“物相杂故曰文”，物体的形状、线条色彩相互交错，这也是文。“观乎天文，以察时变，观乎人文，以化成天下。”《说文解字》解释“文”为“错画也。”
+                但是文本的概念后来主要变成了：“任何由书写所固定下来的任何话语。”对语言学家来说，文本指的是作品的可见可感的表层结构，是一系列语句串联而成的连贯序列。文本可能只是一个单句，例如谚语、格言、招牌等，但比较普遍的是由一系列句子组成。文本和段落的区别在于，文本构成了一个相对封闭、自足的系统。前苏联符号学家洛特曼指出，文本是外观的，即用一定的符号来表示；它是有限的，既有头有尾；它有内部结构。罗兰·巴特文本一方面是能指，即实际的语言符号以及由它们所组成的词、句子和段落章节，另一方面是所指，即固定的确定的和单一的意思，为表达这种意思的正确性所限定。以上从技术上中性地对文本做出基本界定。
+                “文本”一词来自英文text，另有本文、正文、语篇和课文等多种译法。这个词广泛应用于语言学和文体学中，而且也在文学理论与批评中扮演活跃的角色。但它含义丰富而不易界定，给实际运用和理解带来一定困难。可以一般地说，文本是语言的实际运用形态。而在具体场合中，文本是根据一定的语言衔接和语义连贯规则而组成的整体语句或语句系统，有待于读者阅读。
+                和文本相关的是文本学和解释学这两个领域。文本（text），从词源上来说，它表示编织的东西。这与中国“文”的概念颇有类似之处。“文”取象人形，指纹身，指花纹。《说文解字叙》称：“仓颉初作书，盖依类象形，故曰文。”“文者，物象之本。”物象均具纹路色彩，因以“文”来指称。《周易·系辞下》记伏羲氏“观鸟兽之文”，鸟兽身上的花纹彩羽。该书又载“物相杂故曰文”，物体的形状、线条色彩相互交错，这也是文。“观乎天文，以察时变，观乎人文，以化成天下。”《说文解字》解释“文”为“错画也。”
+                但是文本的概念后来主要变成了：“任何由书写所固定下来的任何话语。”对语言学家来说，文本指的是作品的可见可感的表层结构，是一系列语句串联而成的连贯序列。文本可能只是一个单句，例如谚语、格言、招牌等，但比较普遍的是由一系列句子组成。文本和段落的区别在于，文本构成了一个相对封闭、自足的系统。前苏联符号学家洛特曼指出，文本是外观的，即用一定的符号来表示；它是有限的，既有头有尾；它有内部结构。罗兰·巴特文本一方面是能指，即实际的语言符号以及由它们所组成的词、句子和段落章节，另一方面是所指，即固定的确定的和单一的意思，为表达这种意思的正确性所限定。以上从技术上中性地对文本做出基本界定。
+                “文本”一词来自英文text，另有本文、正文、语篇和课文等多种译法。这个词广泛应用于语言学和文体学中，而且也在文学理论与批评中扮演活跃的角色。但它含义丰富而不易界定，给实际运用和理解带来一定困难。可以一般地说，文本是语言的实际运用形态。而在具体场合中，文本是根据一定的语言衔接和语义连贯规则而组成的整体语句或语句系统，有待于读者阅读。
+                和文本相关的是文本学和解释学这两个领域。</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script src="js/axios-0.18.0.js"></script>
+<script>
+
+
+    //set button
+    $(".friendListTrigger").mouseenter(function (){
+        $(".friendList").prop("style","display:block");
+    });
+
+     $(".friendList").mouseleave(function (){
+         $(".friendList").prop("style","display:none");
+     });
+
+     $("#settingTrigger").click(function ()
+     {
+         $("#setting").prop("style","display:block");
+     });
+
+     $("#setting").mouseleave(function (){
+         $("#setting").prop("style","display:none");
+     });
+
+
+
+     //logout
+    $(".topNav .icon-logout").click(function (){
+        axios({
+            method:'get',
+            url:''
+        }).then(resp=>{
+            document.location="./login.html";
+        });
+
+    });
+
+
+     //get friend List
+    class Friend{
+        constructor(url,avatar,name) {
+            this.url=url;
+            this.avatar=avatar;
+            this.name=name;
+        }
+    };
+    let friendList=[];
+
+    axios({
+        method: "get",
+        url:''
+    }).then(resp=>{
+        let list=resp.data;
+        list.forEach(item=>{
+            friendList.push(new Friend(item.url,item.avatar,item.name));
+        })
+    });
+
+    friendList.push(new Friend("www.baidu.com","./img.png","zhuangsan"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+
+    let friends = $(".friendList");
+    friendList.forEach(item=>{
+        let friend="<a target=\"_blank\" href=\""+item.url+"\">\n" +
+            "        <div class=\"friend\">\n" +
+            "\n" +
+            "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
+            "\n" +
+            "            <div class=\"friendName\">"+item.name+"</div>\n" +
+            "\n" +
+            "        </div>\n" +
+            "    </a>";
+        friends.append(friend);
+    })
+
+
+    //set avatar and username
+    new Vue ({
+        el: "#avatar",
+        mounted(){
+            this.getUserInfo();
+        },
+
+        data(){
+            return {
+                userAvatar:'',
+                useName:''
+            }
+        },
+
+        methods: {
+
+            getUserInfo(){
+                axios({
+                    method:"get",
+                    url:'',
+
+                }).then(resp=>{
+                    this.userAvatar=resp.data.userAvatar;
+                    this.userName=resp.data.userName;
+                });
+
+                $("#avatar el-avatar img").prop("src",this.userAvatar)
+                $("#userName").text(this.userName);
+            },
+
+            errorHandler() {
+                return true
+            }
+        }
+    });
+
+
+
+
+</script>
+</body>
+</html>

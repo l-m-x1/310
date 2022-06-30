@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="./css/iconfont.css">
+  <link rel="stylesheet" href="./css/mainspace.css">
+  <style>
+    #in{
+      top: 20px;
+      position: relative;
+    }
+    #button1{
+      left: 20px;
+      position: relative;
+    }
+    #button2{
+      left: 40px;
+      position: relative;
+    }
+    #date{
+
+
+    }
+  </style>
+</head>
+<body>
+
+<ul class="topNav">
+  <li ><a href="#home"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
+  <li><a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a></li>
+  <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
+  <li style="float: right" ><a href="#about"><span class="iconfont icon-shezhi"></span></a></li>
+</ul>
+
+
+<ul class="midNav">
+  <li><a href="#home" class="active">主页</a></li>
+  <li><a href="#news">相册</a></li>
+  <li><a href="#contact">日志</a></li>
+  <li><a href="#contact">留言版</a></li>
+  <li><a href="#contact">个人心情</a></li>
+</ul>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div id="avatar" class="demo-type" >
+      <el-avatar :size="60" src="https://empty" @error="errorHandler">
+        <img src="./img.png"/>
+      </el-avatar>
+    </div>
+    <div class="card">
+      <h2>About Me</h2>
+      <div class="fakeimg" style="height:100px;">Image</div>
+      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+    </div>
+
+  </div>
+  <div class="rightcolumn">
+    <div id="app">
+      <el-form id="date" ref="form" :model="form" label-width="80px">
+        <el-row >
+          <span id="button1" class="demonstration">我的日志</span>
+          <el-button id="button2" type="info" plain @click="gotoWriteLog"><i class="el-icon-edit"></i>写日志</el-button>
+        </el-row>
+        <hr>
+        <template>
+          <el-table
+                  :data="tableData"
+                  style="width: 100%">
+            <el-table-column
+                    label="日期">
+              <template slot-scope="scope">
+                <i class="el-icon-time"></i>
+                <span style="margin-left: 10px">{{ scope.row.date }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column
+                    label="标题">
+              <template slot-scope="scope">
+                <span size="medium">{{ scope.row.name }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button
+                        size="mini"
+                        @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+                <el-button
+                        size="mini"
+                        type="danger"
+                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </template>
+
+      </el-form>
+      </el-form>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script src="js/axios-0.18.0.js"></script>
+<script>
+  new Vue ({
+    el: "#avatar",
+    methods: {
+      errorHandler() {
+        return true
+      }
+    }
+  });
+  new Vue({
+    el: '#app',
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-02',
+          name: '一场比赛',
+        }, {
+          date: '2016-05-04',
+          name: '南通',
+        }, {
+          date: '2016-05-01',
+          name: '女同画片',
+        }, {
+          date: '2016-05-03',
+          name: '刘萌象',
+        }]
+      };
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      },
+
+      gotoWriteLog()
+      {
+        alert("1");
+      }
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html {
+            background:white;
+        }
+
+        #ChangeList{
+            margin-left: 20%;
+            width: 50%;
+        }
+
+        #title{
+            left: 20px;
+            position: relative;
+            font-size: 20px;
+        }
+        .input{
+            max-width: 300px ;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<div id="app">
+    <el-form ref="form" :model="sizeForm" label-width="80px" size="mini" id="ChangeList">
+        <el-row >
+            <span id="title" class="demonstration">基本资料</span>
+        </el-row>
+        <hr>
+        <el-form-item label="昵称">
+            <el-input class="input"   v-model="sizeForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="性别">
+            <el-select v-model="sizeForm.region" placeholder="请选择性别">
+                <el-option label="男" value="shanghai"></el-option>
+                <el-option label="女" value="beijing"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="生日">
+            <el-col >
+                <el-date-picker type="date" placeholder="选择日期" v-model="sizeForm.date" style="width:200px;"></el-date-picker>
+            </el-col>
+        </el-form-item>
+        <el-form-item label="现居地">
+        <el-input class="input" v-model="sizeForm.hometown"></el-input>
+        </el-form-item>
+        <el-form-item label="故乡">
+        <el-input class="input" v-model="sizeForm.address"></el-input>
+        </el-form-item>
+        <el-form-item label="职业">
+            <el-input class="input" v-model="sizeForm.work"></el-input>
+        </el-form-item>
+        <el-form-item label="公司名称">
+            <el-input class="input" v-model="sizeForm.companyName"></el-input>
+        </el-form-item>
+        <el-form-item label="公司地址">
+            <el-input class="input" v-model="sizeForm.companyAddress"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">确认发表</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
+<script >
+
+    new Vue({
+        el: '#app',
+        mounted(){
+
+            var _this=this;
+            axios({
+                method:"get",
+                url:""//地址
+            }).then(function (resp) {
+                _this.sizeForm=resp.data;
+            })
+        },
+        data() {
+            return {
+
+                brands: {
+                    name: '',
+                    region: '',
+                    date: '',
+                    hometown:'',
+                    address:'',
+                    work:'',
+                    companyName:'',
+                    companyAddress:'',
+                },
+                sizeForm: {
+                    name: '姜明',
+                    region: '男',
+                    date: '2003/3/14',
+                    hometown:'江西',
+                    address:'武汉',
+                    work:'学生',
+                    companyName:'华中科技大学',
+                    companyAddress:'洪山区',
+                }
+            };
+        },
+        methods: {
+            onSubmit() {
+                var _this=this;
+                console.log('submit!');
+                axios({
+                            method:"post",
+                            url:"",//地址
+                            data:_this.brands
+                        }).then(function (resp) {
+                            if(resp.data=="success"){
+
+                            }
+                        })
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

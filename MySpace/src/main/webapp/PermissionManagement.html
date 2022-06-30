@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html {
+            background:white;
+        }
+        #title{
+            left: 20px;
+            position: relative;
+            font-size: 20px;
+        }
+        #Permission{
+            margin-left: 20%;
+            width: 60%;
+            display: inline-block;
+        }
+        #button{
+            position: relative;
+            top:20px;
+            right: 60px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app">
+    <el-form id="Permission" ref="form" :model="form" label-width="80px">
+        <el-row >
+            <span id="title" class="demonstration">权限管理</span>
+        </el-row>
+    <template>
+        <hr>
+        <el-table
+                :data="tableData"
+                style="width: 100%"
+                height="300">
+            <el-table-column
+                    prop="name"
+                    label="姓名">
+            </el-table-column>
+            <el-table-column
+                    prop="account"
+                    label="账号">
+            </el-table-column>
+            <el-table-column
+                    prop="permission"
+                    label="是否允许他/她进入我的空间">
+                <template slot-scope="scope">
+                    <!-- scope.row 可以取到当前一行的数据 -->
+                    <!-- {{ scope.row }} -->
+                    <el-switch v-model="scope.row.permission"
+                               @change="userStateChange(scope.row)"
+                               active-text="允许"
+                               inactive-text="不允许">
+                    </el-switch>
+                </template>
+            </el-table-column>
+        </el-table>
+    </template>
+        <el-form-item>
+            <el-button type="primary" id="button" @click="onSubmit">确认修改</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
+<script >
+
+    new Vue({
+        el: '#app',
+        mounted(){
+
+            var _this=this;
+            axios({
+                method:"get",
+                url:""//地址
+            }).then(function (resp) {
+                _this.tableData=resp.data;
+            })
+        },
+        data() {
+            return {
+                brand: {
+                    name:'',
+                    account:'',
+                    permission: Boolean,
+                },
+                tableData: [{
+                    name:'姜明',
+                    account:'1399582722',
+                    permission: true
+                    },
+                    {
+                        name:'姜明',
+                        account:'1399582722',
+                        permission:false
+                    },
+                    {
+                        name:'姜明',
+                        account:'1399582722',
+                        permission:true
+                    },
+                    {
+                        name:'姜明',
+                        account:'1399582722',
+                        permission:true
+                    },
+                    {
+                        name:'姜明',
+                        account:'1399582722',
+                        permission:true
+                    }]
+            };
+        },
+        methods: {
+            onSubmit() {
+                var _this=this;
+                console.log('submit!');
+                axios({
+                    method:"post",
+                    url:"",//地址
+                    data:_this.brands
+                }).then(function (resp) {
+                    if(resp.data=="success"){
+                        //成功后的反应
+                    }
+                })
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

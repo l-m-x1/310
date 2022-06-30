@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <link rel="stylesheet" href="./css/mainspace.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        div.gallery {
+            margin: 5px;
+            border: 1px solid #ccc;
+            float: left;
+            width: 180px;
+            height: 160px;
+            position: relative;
+
+        }
+
+        div.gallery:hover {
+            border: 1px solid #777;
+        }
+
+        div.gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+            bottom: 0;
+            left: 40px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="topNav">
+    <li ><a href="#home"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
+    <li><a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a></li>
+    <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
+    <li style="float: right" ><a href="#about"><span class="iconfont icon-shezhi"></span></a></li>
+</ul>
+
+
+<ul class="midNav">
+    <li><a href="#home" class="active">主页</a></li>
+    <li><a href="#news">相册</a></li>
+    <li><a href="#contact">日志</a></li>
+    <li><a href="#contact">留言版</a></li>
+    <li><a href="#contact">个人心情</a></li>
+</ul>
+
+<div class="row">
+    <div class="leftcolumn">
+
+        <div id="avatar">
+            <el-avatar :size="100" src="https://empty" @error="errorHandler">
+                <img src="./img.png"/>
+            </el-avatar>
+        </div>
+
+        <div class="card">
+            <h2>About Me</h2>
+            <div class="fakeimg" style="height:100px;">Image</div>
+            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+        </div>
+
+    </div>
+    <div class="rightcolumn">
+        <div id="album">
+            <el-button type="primary" plain @click="showDialog">上传照片</el-button>
+
+            <div id="uploadDialog">
+                <!--添加数据对话框表单-->
+                <el-dialog
+                        title="上传照片"
+                        :visible.sync="dialogVisible"
+                        width="50%"
+                        append-to-body="true"
+                        @close="close"
+                >
+
+                    <el-upload
+                            :auto-upload="false"
+                            action="#"
+                            :http-request="upLoadFile"
+                            :on-preview="handlePreview"
+                            :on-remove="handleRemove"
+                            :file-list="fileList"
+                            :on-change="change"
+                            list-type="picture-card"
+                            style="margin-bottom: 50px"
+                    >
+                        <i class="el-icon-plus"></i>
+                        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                    </el-upload>
+
+                    <div style="text-align: center">
+                        <el-button type="primary" @click="submitForm">提交</el-button>
+                        <el-button @click="cancel">取消</el-button>
+                    </div>
+
+                </el-dialog>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    new Vue ({
+        el: "#avatar",
+        methods: {
+            errorHandler() {
+                return true
+            }
+        }
+    });
+
+
+    let dialog = new Vue({
+        el:"#uploadDialog",
+        data()
+        {
+            return{
+                fileList:[],
+                dialogVisible: false
+            }
+        },
+        methods:{
+            change(file,fileList)
+            {
+
+            },
+
+            submitForm()
+            {
+                var formData=new FormData();
+                this.fileList.forEach((item)=>{
+                    formData.append("file",item.raw);
+                });
+
+                axios({
+                    method:"post",
+                    url:'http://localhost/MySpace_war_exploded/user/login',
+                    data:this.formData
+                }).then(resp=>{
+
+                });
+            },
+
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+
+            cancel()
+            {
+                this.dialogVisible=false;
+
+            },
+
+            close()
+            {
+                this.fileList=[];
+            }
+        }
+    });
+
+    let photoSource = new Vue({
+        el:"#album",
+        data()
+        {
+            return{
+                photos:[
+                    {
+                    date:"2002-2-1",
+                    url:"https://bangongsucai.oss-cn-hangzhou.aliyuncs.com/202004/f72b928ccf.jpg"
+                     },
+                    {
+                        date:"2002-2-1",
+                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1"
+                    },
+                    {
+                        date:"2002-2-1",
+                        url:"https://ts1.cn.mm.bing.net/th/id/R-C.f7361e4b7f43d9093351eec416e12c87?rik=INUL1eOttipD7g&riu=http%3a%2f%2fimg.aiimg.com%2fuploads%2fuserup%2f0911%2f1Z12120X95.jpg&ehk=WeGUh2zHuI%2fPsYWdHd1%2fpg6z99GL4bOyqAF%2baH4tqHs%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1"
+                    }
+                ]
+            }
+        },
+        methods:{
+          showDialog()
+          {
+              dialog.dialogVisible=true;
+          },
+
+        }
+    });
+
+    //get album
+
+    axios({
+        methods: "get",
+        url:''
+    }).then(resp=>{
+        photoSource.photos=resp.data;
+    })
+    $(document).ready(function (){
+         let albumElement = $('#album');
+         for(let i=0;i<photoSource.photos.length;i++)
+         {
+
+             let aPhoto=" <div class=\"gallery\">\n" +
+                 "            <a target=\"_blank\" href=\""+photoSource.photos[i].url+"\">\n" +
+                 "                <img src=\""+photoSource.photos[i].url+"\" alt=\"Mountains\" width=\"600\" height=\"400\">\n" +
+                 "            </a>\n" +
+                 "            <div class=\"desc\">"+photoSource.photos[i].date+"</div>\n" +
+                 "        </div>";
+             albumElement.append(aPhoto);
+         }
+
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+</head>
+<body>
+<div id="app">
+<el-form ref="form" :model="form" label-width="80px" >
+    <el-form-item label="账号">
+        <el-input v-model="form.accountNumber"></el-input>
+    </el-form-item>
+    <el-form-item label="密码">
+        <el-input v-model="form.password"></el-input>
+    </el-form-item>
+    <el-form-item label="">
+        <el-checkbox-group v-model="form.type">
+            <el-checkbox label="记住密码" name="type"></el-checkbox>
+        </el-checkbox-group>
+    </el-form-item>
+    <el-form-item>
+        <el-button type="primary" @click="onSubmit">登录</el-button>
+    </el-form-item>
+</el-form>
+
+</div>
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script src="js/axios-0.18.0.js"></script>
+<script>
+    async function commonPostRequest(url, argument) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('get', url, false); // 第三个参数为是否开启异步请求
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(argument);
+        const result = JSON.parse(xhr.responseText);
+        return result;
+    }
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                form: {
+                    accountNumber:'',
+                    password:'',
+                    type: []
+                }
+            }
+        },
+        methods: {
+            onSubmit() {
+                alert("login!");
+                axios(
+                    {
+                        method:"get",
+                        url:"http://localhost:80/MySpace_war_exploded/user/login?accountNumber="+this.form.accountNumber+"&password="+this.form.password
+                    }
+                ).then(resp=>{
+                    if("fail"==resp.data)
+                    {
+                        alert("fail!");
+                    }
+                })
+            }
+        }
+    });
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                ruleForm: {
+                    name: '',
+                    desc: ''
+                },
+                rules: {
+                    name: [
+                        { required: true, message: '请填写标题', trigger: 'blur' }
+                    ],
+                    desc: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }
+                    ]
+                }
+            };
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        alert('提交成功!');
+                    } else {
+                        console.log('提交失败!!');
+                        return false;
+                    }
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            }
+        }
+    });
+</script>
+</body>
+</html>
