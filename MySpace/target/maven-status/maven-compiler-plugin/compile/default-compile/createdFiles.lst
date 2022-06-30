@@ -1,5 +1,6 @@
 com\space\service\MoodService.class
 com\space\service\InfoService.class
+com\space\web\servlet\InfoServlet.class
 com\space\service\FriendsService.class
 com\space\mapper\TrendsMapper.class
 com\space\service\TrendsService.class

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        html {
+            background: url(https://qzonestyle.gtimg.cn/qzone/qzactStatics/imgs/20171122191630_ff8fef.jpg) no-repeat center fixed;
+            background-size: cover;
+        }
+        .box-card {
+            width: 480px;
+            top: 200px;
+            left: 35%;
+            opacity: 0.99;
+            outline:  solid 5px #66b1ff;
+            position: relative;
+            display: inline-block;
+        }
+        #app {
+
+        }
+        #button1{
+
+        }
+        #test{
+            padding-top: 20px;
+            padding-right: 20px;
+        }
+        #title{
+            font-size: 100px;
+            color: white;
+            left: 200px;
+            position: relative;
+            /*top:170px;*/
+        }
+        #text{
+            font-size: 30px;
+            position: relative;
+            left: 20px;
+            bottom: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div id="app">
+    <i id="title">QQ空间</i>
+    <el-card class="box-card">
+        <el-form :model="user" id="test" label-width="80px" ref="loginFormRef">
+            <span id="text">注册</span>
+            <el-form-item label="用户名">
+                <el-input v-model="user.name" prefix-icon="el-icon-user" placeholder="请输入用户名"></el-input>
+            </el-form-item>
+
+
+
+            <el-form-item label="密码">
+                <el-input v-model="user.password" prefix-icon="el-icon-lock" type="password" placeholder="请输入密码" @blur="checkPassword"></el-input>
+            </el-form-item>
+            <el-form-item label="确认密码">
+                <el-input v-model="user.passwordConfirm" prefix-icon="el-icon-lock" type="password" placeholder="请输入密码" @blur="checkPassword"></el-input>
+            </el-form-item>
+            <div hidden="hidden" id="passwordCorrect">
+                <el-form-item>
+                    <template>
+                        <el-alert
+                                title="密码格式正确"
+                                type="success"
+                                show-icon
+                                :closable="false" disabled="true">
+                        </el-alert>
+                    </template>
+                </el-form-item>
+            </div>
+            <div hidden="hidden" id="passwordError2">
+                <el-form-item>
+                    <template>
+                        <el-alert
+                                title="两次输入的密码不一致"
+                                type="error"
+                                show-icon
+                                :closable="false" disabled="true">
+                        </el-alert>
+                    </template>
+                </el-form-item>
+            </div>
+            <div hidden="hidden" id="passwordError1">
+                <el-form-item>
+                    <template>
+                        <el-alert
+                                title="密码格式不正确,请输入6位字母或数字"
+                                type="error"
+                                show-icon
+                                :closable="false" disabled="true">
+                        </el-alert>
+                    </template>
+                </el-form-item>
+            </div>
+
+
+            <el-form-item id="button1">
+                <el-button type="primary" @click="register">注册</el-button>
+            </el-form-item>
+        </el-form>
+    </el-card>
+</div>
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<script src="js/axios-0.18.0.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script >
+
+
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                user: {
+                    name: '',
+                    password: '',
+                    passwordConfirm:''
+                }
+            }
+        },
+
+        methods:{
+
+
+            register(){
+                if(document.getElementById("passwordCorrect").hidden==false)
+                {
+                    axios({
+                        method:"post",
+                        url:'http://localhost:80/RegisterServlet',
+                        data:{
+                            func:'register',
+                            name:this.user.name,
+                            password:this.user.password
+                        }
+                    }).then(resp=>{
+                        resp.data;
+                        this.$alert('你的账号是:\n'+resp.data, '注册成功', {
+                            confirmButtonText: '确定',
+                            callback: action => {
+                                document.location="./";
+                            }
+                        });
+
+                    })
+                }
+
+            },
+
+            checkPassword()
+            {
+                let reg=/^\w{6}$/;
+                if(reg.test(this.user.password))
+                {
+                    if(this.user.password==this.user.passwordConfirm)
+                    {
+                        document.getElementById("passwordCorrect").hidden=false;
+                        document.getElementById("passwordError2").hidden=true;
+                        document.getElementById("passwordError1").hidden=true;
+                    }
+                    else{
+                        document.getElementById("passwordCorrect").hidden=true;
+                        document.getElementById("passwordError2").hidden=false;
+                        document.getElementById("passwordError1").hidden=true;
+                    }
+                }
+                else {
+                    document.getElementById("passwordCorrect").hidden=true;
+                    document.getElementById("passwordError2").hidden=true;
+                    document.getElementById("passwordError1").hidden=false;
+                }
+            }
+
+        }
+    })
+
+</script>
+
+</body>
+</html>
