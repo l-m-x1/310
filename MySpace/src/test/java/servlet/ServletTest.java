@@ -1,6 +1,7 @@
 package servlet;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.Diary;
 import com.space.pojo.Info;
 import org.apache.commons.io.IOUtils;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ServletTest {
     @Test
@@ -46,6 +49,16 @@ public class ServletTest {
         FileInputStream fileInputStream = new FileInputStream("D:\\project\\java\\310\\MySpace\\pom.xml");
         String toString = IOUtils.toString(fileInputStream);
         System.out.println(toString);
+    }
+
+    @Test
+    public void testJSONInt(){
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("data",123);
+        JSONObject jsonObject = new JSONObject(map);
+//        String s = jsonObject.toJSONString();
+        System.out.println(jsonObject.getInteger("data"));
     }
 
 }

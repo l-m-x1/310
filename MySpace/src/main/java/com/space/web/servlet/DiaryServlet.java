@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.Diary;
 import com.space.service.DiaryService;
 import com.space.service.impl.DiaryServiceImpl;
+import com.space.web.BaseServlet;
+import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,46 +25,23 @@ import java.util.List;
  * diary封装diary信息
  */
 @WebServlet("/Diary")
-public class DiaryServlet extends HttpServlet {
-    private HttpServletRequest req;
-    private HttpServletResponse resp;
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        this.req=req;
-        this.resp=resp;
-        String func=req.getParameter("func");
-        try {
-            this.getClass().getMethod(func).invoke(this);
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        this.doGet(req, resp);
-    }
-
+public class DiaryServlet extends BaseServlet {
     public void getDiaryInfo() throws IOException {
-        Integer uid= Integer.valueOf(req.getParameter("uid"));
-
+        Integer uid = jsonObject.getInteger("uid");
         DiaryService diaryService = new DiaryServiceImpl();
         List<Diary> diaries = diaryService.selectByUid(uid);
-        String pageString = JSON.toJSONString(diaries);
+        String ret = JSON.toJSONString(diaries);
         resp.setContentType("text/json;charset=utf-8");
-        resp.getWriter().write(pageString);
+        resp.getWriter().write(ret);
     }
     public void deleteDiary(){
-        Integer id= Integer.valueOf(req.getParameter("id"));
-
+        Integer id = jsonObject.getInteger("id");
         DiaryService diaryService=new DiaryServiceImpl();
         diaryService.delete(id);
     }
     public void addDiary(){
-        String diaryString = req.getParameter("diary");
-        JSONObject jsonObject = JSON.parseObject(diaryString);
-        Integer uid= Integer.valueOf(req.getParameter("uid"));
+        Integer uid = jsonObject.getInteger("uid");
+
         Diary diary = new Diary();
         diary.setUid(uid);
         Date date = new Date();
@@ -75,10 +54,15 @@ public class DiaryServlet extends HttpServlet {
         diaryService.insert(diary);
     }
     public void modifyDiary(){
-        String diaryString = req.getParameter("diary");
-        JSONObject jsonObject = JSON.parseObject(diaryString);
-        Diary diary=new Diary();
 
-//        diary.setContent();
+        Integer uid = jsonObject.getInteger("uid");
+        Integer id = jsonObject.getInteger("id");
+
+        Diary diary=new Diary();
+        diary.setId(id);
+        diary.setUid(uid);
+        diary.setContent(jsonObject.getString("content"));
+        DiaryService diaryService = new DiaryServiceImpl();
+        diaryService.update(diary);
     }
 }

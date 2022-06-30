@@ -6,6 +6,7 @@ import com.space.pojo.*;
 import com.space.service.*;
 import com.space.service.impl.*;
 import com.space.util.DiskFileItemFactoryUtils;
+import com.space.web.BaseServlet;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -28,63 +29,14 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet("/HomePageManger")
-public class HomePageManger extends HttpServlet {
-    private HttpServletRequest req;
-    private HttpServletResponse resp;
-
-
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        this.req=req;
-        this.resp=resp;
-        String requestBody = IOUtils.toString(req.getInputStream());
-        JSONObject jsonObject = JSON.parseObject(requestBody);
-
-        String func=req.getParameter("func");
-        try {
-            this.getClass().getMethod(func).invoke(this);
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        this.doGet(req,resp);
-//
-//        DiskFileItemFactory fileItemFactory = DiskFileItemFactoryUtils.getDiskFileItemFactory();
-//        ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
-//
-//        List<FileItem> fileItems;
-//        try {
-//            fileItems = fileUpload.parseRequest(req);
-//        } catch (FileUploadException e) {
-//            throw new RuntimeException(e);
-//        }
-//        for (FileItem item : fileItems) {
-//            if(item.isFormField()){
-//
-//                System.out.println(item.getFieldName()+":"+item.getString());
-//            }
-//            else {
-//                InputStream inputStream = item.getInputStream();
-//                String itemName = item.getName();
-//                FileOutputStream outputStream = new FileOutputStream("./src/main/webapp/photos/"+itemName);
-//                IOUtils.copy(inputStream,outputStream);
-//                outputStream.close();
-//            }
-//        }
-
-    }
-
+public class HomePageManger extends BaseServlet {
     public void getAllInfo() throws IOException {
-        Integer uid= Integer.valueOf(req.getParameter("uid"));
-        String homepage_info = req.getParameter("homepage_info");
-        JSONObject jsonObject = JSON.parseObject(homepage_info);
+        Integer uid = jsonObject.getInteger("uid");
 
         HomePageInfo homePageInfo = new HomePageInfo();
-        
+
+
+
         InfoService infoService = new InfoServiceImpl();
         Info info = infoService.selectById(uid);
         
@@ -99,6 +51,8 @@ public class HomePageManger extends HttpServlet {
         
         TrendsService trendsService=new TrendsServiceImpl();
         List<Trends> trendsList = trendsService.selectByUid(uid);
+
+
         
         homePageInfo.setInfo(info);
         homePageInfo.setDiaryList(diaries);
@@ -106,8 +60,9 @@ public class HomePageManger extends HttpServlet {
         homePageInfo.setDiarySum(diaries.size());
         homePageInfo.setPhotoSum(photos.size());
         homePageInfo.setTrendsSum(trendsList.size());
-        String pageString = JSON.toJSONString(homePageInfo);
+
+        String ret = JSON.toJSONString(homePageInfo);
         resp.setContentType("text/json;charset=utf-8");
-        resp.getWriter().write(pageString);
+        resp.getWriter().write(ret);
     }
 }
