@@ -20,9 +20,9 @@ public class LoginServlet extends HttpServlet {
         User user = userService.select(account, password);
         if(user!=null)
         {
-
+            System.out.println("success");
         }else {
-
+            System.out.println("fail");
         }
 
     }
