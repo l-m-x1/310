@@ -31,10 +31,13 @@ import java.util.Map;
 public class HomePageManger extends HttpServlet {
     private HttpServletRequest req;
     private HttpServletResponse resp;
+
+    private HomePageInfo homePageInfo;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         this.req=req;
         this.resp=resp;
+
         String func=req.getParameter("func");
         try {
             this.getClass().getMethod(func).invoke(this);
