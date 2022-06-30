@@ -32,11 +32,14 @@ public class HomePageManger extends HttpServlet {
     private HttpServletRequest req;
     private HttpServletResponse resp;
 
-    private HomePageInfo homePageInfo;
+
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.req=req;
         this.resp=resp;
+        String requestBody = IOUtils.toString(req.getInputStream());
+        JSONObject jsonObject = JSON.parseObject(requestBody);
 
         String func=req.getParameter("func");
         try {
@@ -47,7 +50,7 @@ public class HomePageManger extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.doGet(req,resp);
 //
 //        DiskFileItemFactory fileItemFactory = DiskFileItemFactoryUtils.getDiskFileItemFactory();
@@ -72,6 +75,7 @@ public class HomePageManger extends HttpServlet {
 //                outputStream.close();
 //            }
 //        }
+
     }
 
     public void getAllInfo() throws IOException {

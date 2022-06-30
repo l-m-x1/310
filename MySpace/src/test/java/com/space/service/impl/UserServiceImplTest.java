@@ -21,7 +21,7 @@ public class UserServiceImplTest {
 
         User user=new User();
         user.setUsername(username);
-        user.setAccount(account);
+//        user.setAccount(account);
         user.setPassword(password);
 
         UserServiceImpl userService=new UserServiceImpl();

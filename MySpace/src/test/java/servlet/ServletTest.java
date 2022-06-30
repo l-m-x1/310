@@ -3,8 +3,13 @@ package servlet;
 import com.alibaba.fastjson.JSON;
 import com.space.pojo.Diary;
 import com.space.pojo.Info;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,6 +39,13 @@ public class ServletTest {
         allinfo.setInfo(info);
         String out = JSON.toJSONString(allinfo);
         System.out.println(out);
+    }
+
+    @Test
+    public void testStream() throws IOException {
+        FileInputStream fileInputStream = new FileInputStream("D:\\project\\java\\310\\MySpace\\pom.xml");
+        String toString = IOUtils.toString(fileInputStream);
+        System.out.println(toString);
     }
 
 }
