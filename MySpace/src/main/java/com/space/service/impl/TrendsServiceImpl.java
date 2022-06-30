@@ -76,4 +76,13 @@ public class TrendsServiceImpl implements TrendsService {
         session.commit();
         session.close();
     }
+
+    @Override
+    public List<Trends> selectByUids(int[] uids) {
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+        List<Trends> trends = mapper.selectByUids(uids);
+        session.close();
+        return trends;
+    }
 }
