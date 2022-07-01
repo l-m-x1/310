@@ -23,7 +23,7 @@ body {
 
 .topNav li {
     float: left;
-
+    margin-right: 10px;
     margin-top:2px;
     margin-bottom: 2px;
 

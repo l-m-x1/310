@@ -94,7 +94,7 @@
             onSubmit() {
                 axios({
                    method: "post",
-                   url:"http://localhost/Login/login",
+                   url:"http://10.16.80.39:8080/MySpace/login",
                    data:{
                        id:this.form.accountNumber,
                        password: this.form.password
@@ -119,7 +119,7 @@
             },
 
             formValid(){
-                let reg=/^\d{1}$/;
+                let reg=/^\d{9}$/;
                 if(reg.test(this.form.accountNumber))
                 {
                     document.getElementById("formationCheck2").hidden=true;

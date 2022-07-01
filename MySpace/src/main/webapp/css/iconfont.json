@@ -20,6 +20,13 @@
       "unicode_decimal": 58924
     },
     {
+      "icon_id": "5401278",
+      "name": "添加好友",
+      "font_class": "tianjiahaoyou",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
       "icon_id": "5504348",
       "name": "logout",
       "font_class": "logout",

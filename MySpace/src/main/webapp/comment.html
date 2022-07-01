@@ -69,10 +69,26 @@
 
 <ul class="topNav">
   <li ><a href="#home"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
-  <li><a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a></li>
+  <li>
+    <div class="friendListTrigger">
+      <a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>
+    </div>
+  </li>
+
   <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
-  <li style="float: right" ><a href="#about"><span class="iconfont icon-shezhi"></span></a></li>
+
+  <li style="float: right" >
+    <div id="settingTrigger">
+      <a href="#about"><span class="iconfont icon-shezhi"></span></a>
+    </div>
+  </li>
 </ul>
+<div class="friendList">
+</div>
+<div id="setting">
+  <li><a href="personalProfile.html">修改资料</a></li>
+  <li><a href="permissionManagement.html">权限管理</a></li>
+</div>
 
 
 <ul class="midNav">
@@ -156,9 +172,110 @@
 <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
 <script src="js/axios-0.18.0.js"></script>
 <script>
+  //set button
+  $(".friendListTrigger").mouseenter(function (){
+    $(".friendList").prop("style","display:block");
+  });
+
+  $(".friendList").mouseleave(function (){
+    $(".friendList").prop("style","display:none");
+  });
+
+  $("#settingTrigger").click(function ()
+  {
+    $("#setting").prop("style","display:block");
+  });
+
+  $("#setting").mouseleave(function (){
+    $("#setting").prop("style","display:none");
+  });
+
+
+
+  //logout
+  $(".topNav .icon-logout").click(function (){
+    axios({
+      method:'get',
+      url:''
+    }).then(resp=>{
+      document.location="./login.html";
+    });
+
+  });
+
+
+  //get friend List
+  class Friend{
+    constructor(url,avatar,name) {
+      this.url=url;
+      this.avatar=avatar;
+      this.name=name;
+    }
+  };
+  let friendList=[];
+  axios({
+    method: "get",
+    url:''
+  }).then(resp=>{
+    let list=resp.data;
+    list.forEach(item=>{
+      friendList.push(new Friend(item.url,item.avatar,item.name));
+    })
+  });
+
+  friendList.push(new Friend("www.baidu.com","./img.png","zhuangsan"));
+  friendList.push(new Friend("","./img.png","lisi"));
+  friendList.push(new Friend("","./img.png","lisi"));
+  friendList.push(new Friend("","./img.png","lisi"));
+  friendList.push(new Friend("","./img.png","lisi"));
+  friendList.push(new Friend("","./img.png","lisi"));
+  friendList.push(new Friend("","./img.png","lisi"));
+
+  let friends = $(".friendList");
+  friendList.forEach(item=>{
+    let friend="<a target=\"_blank\" href=\""+item.url+"\">\n" +
+            "        <div class=\"friend\">\n" +
+            "\n" +
+            "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
+            "\n" +
+            "            <div class=\"friendName\">"+item.name+"</div>\n" +
+            "\n" +
+            "        </div>\n" +
+            "    </a>";
+    friends.append(friend);
+  })
+
+
+  //set avatar and username
   new Vue ({
     el: "#avatar",
+    mounted(){
+      this.getUserInfo();
+    },
+
+    data(){
+      return {
+        userAvatar:'',
+        useName:''
+      }
+    },
+
     methods: {
+
+      getUserInfo(){
+        axios({
+          method:"get",
+          url:'',
+
+        }).then(resp=>{
+          this.userAvatar=resp.data.userAvatar;
+          this.userName=resp.data.userName;
+        });
+
+        $("#avatar el-avatar img").prop("src",this.userAvatar)
+        $("#userName").text(this.userName);
+      },
+
       errorHandler() {
         return true
       }
