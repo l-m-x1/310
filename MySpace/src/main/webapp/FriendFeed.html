@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <link rel="stylesheet" href="./css/mainspace.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+
+        html {
+            background: bisque;
+        }
+        #app{
+            right: 100px;
+            position: relative;
+        }
+        #title{
+            left: 20px;
+            position: relative;
+        }
+        #date{
+            margin-left: 20%;
+            max-width: 900px;
+        }
+
+        .div0{
+            border: 1px solid blue;
+            padding: 10px;
+            background-color: white;
+        }
+
+        img {
+            position: relative;
+            left: 10px;
+            float: left;
+        }
+
+        #name{
+            vertical-align: top;
+            font-size:20px;
+        }
+        #text {
+            width: 95%;
+            height: 60%;
+            top: 10px;
+            /*border: 1px solid blue;*/
+
+        }
+        #time{
+            position: relative;
+            font-size:7px;
+            right:120px;
+        }
+        #reply{
+            position: relative;
+            font-size:15px;
+        }
+        #replyname{
+            /*vertical-align: top;*/
+            position: relative;
+            left:20px;
+            font-size:10px;
+            top:5px;
+        }
+        #cheerNumber{
+            color: #3a8ee6;
+        }
+
+        #in{
+            position: relative;
+            top:10px;
+        }
+
+        #cheer{
+            position: relative;
+            right:20px;
+        }
+
+        .div1 {
+            height: 300px;
+            /*border: 1px solid blue;*/
+        }
+        .div1 span{
+            left: 20px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="topNav">
+    <li ><a href="#home"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
+    <li>
+        <div class="friendListTrigger">
+        <a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>
+        </div>
+    </li>
+
+    <li>
+        <div class="addFriendTrigger">
+        <a href="#home"><span class="iconfont icon-tianjiahaoyou">添加好友</span></a>
+        </div>
+    </li>
+
+    <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
+
+    <li style="float: right" >
+        <div id="settingTrigger">
+            <a href="#about"><span class="iconfont icon-shezhi"></span></a>
+        </div>
+    </li>
+</ul>
+
+<div id="addFriend">
+<el-dialog
+        title="添加好友"
+        :visible.sync="dialogVisible"
+        :before-close="handleClose"
+        @close="close"
+        width="50%"
+        >
+    <el-input
+            placeholder="请输入账号"
+            v-model="input"
+            @change="searchUser" >
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+    </el-input>
+
+    <div class="searchResult" style="margin-bottom: 20px;display: none">
+        <hr>
+        <img src="userAvatar" width="50" height="50">
+        <div>{{userName}}</div>
+
+        <div style="margin-top: 40px">
+            <el-button type="primary" @click="addFriend">添加好友</el-button>
+        </div>
+    </div>
+
+
+</el-dialog>
+
+
+</div>
+
+
+<div class="friendList">
+</div>
+<div id="setting">
+    <li><a href="personalProfile.html">修改资料</a></li>
+    <li><a href="permissionManagement.html">权限管理</a></li>
+</div>
+
+<ul class="midNav">
+    <li id="active"><a href="#" >主页</a></li>
+    <li><a href="#">相册</a></li>
+    <li><a href="#">日志</a></li>
+    <li><a href="#">留言版</a></li>
+    <li><a href="#">个人心情</a></li>
+</ul>
+
+<div class="row">
+    <div class="leftcolumn">
+            <div id="avatar">
+                <el-avatar :size="100" src="#" @error="errorHandler">
+                    <img src="./img.png"/>
+                </el-avatar>
+            </div>
+            <div id="userName">
+                132
+            </div>
+    </div>
+    <div class="rightcolumn">
+    <div id="app">
+        <el-form id="date" ref="form" :model="form" label-width="80px" >
+            <el-row >
+                <span id="title" class="demonstration"><i class="el-icon-user-solid"></i>好友动态</span>
+            </el-row>
+            <hr>
+            <ul>
+                <li v-for="ruleForm in ruleForms">
+                    <div class="div0">
+                        <div class="div1">
+                            <p><img src="https://ts1.cn.mm.bing.net/th/id/R-C.86a0fa17b9b37ff7518b552e2517a0ae?rik=CX0%2fMchuLIBQVA&riu=http%3a%2f%2fimg.crcz.com%2fallimg%2f201809%2f11%2f1536666825645562.jpg&ehk=g6IGr0cDabvrRd5KSQdbup2trGpltKDfA7Hx7eopcm0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1"
+                                    style="width:50px;
+                    height:50px;
+                    margin-left:10px;">
+                                <span id="name">{{ruleForm.name}}<br></span>
+                                <span id="time">{{ruleForm.time}}</span>
+                                <br>
+                            <div id="text">
+                                <span>{{ruleForm.text}}</span>
+                            </div>
+                            </p>
+                            <span >
+                   <el-button id="cheer" type="text" @click="ruleForm.cheer++"><i class="el-icon-magic-stick"></i>点赞</el-button>
+                </span>
+                            <span >
+                   <el-button id="reply" type="text" @click="ruleForm.show=!ruleForm.show"><i class="el-icon-s-comment"></i>回复</el-button>
+                </span>
+                        </div>
+                        <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px"  v-show="ruleForm.show">
+                            <hr>
+                            <el-form-item label="回复内容" prop="desc">
+                                <el-input
+                                        type="textarea"
+                                        :autosize="{ minRows: 6, maxRows: 100}"
+                                        placeholder="请输入内容"
+                                        v-model="ruleForm.desc">
+                                </el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
+                                <el-button @click="resetForm('ruleForm')">清空</el-button>
+                            </el-form-item>
+                        </el-form>
+                        <hr>
+                        <span id="cheerNumber"> <i class="el-icon-medal"></i>{{ruleForm.cheer}}人觉得很赞 </span>
+                        <div id="replyname">
+                            <span >{{ruleForm.name}}:</span>
+                            <span>{{ruleForm.text}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </li>
+            </ul>
+        </el-form>
+    </div>
+    </div>
+</div>
+
+
+
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script src="js/axios-0.18.0.js"></script>
+<script>
+
+
+    //addFriend dialog
+
+    let addFriendVue =  new Vue({
+        el:"#addFriend",
+        data(){
+            return{
+                dialogVisible:false,
+                resultVisible:false,
+                input:'',
+                userAvatar:"./img.png",
+                userID:'',
+                userName:''
+            }
+        },
+        methods:{
+
+            close(){
+                $(".searchResult").prop("style","display:none");
+                this.input='';
+            },
+            
+            addFriend()
+            {
+                alert(1);
+            },
+
+            searchUser()
+            {
+                $(".searchResult").prop("style","display:block");
+            }
+
+        }
+    })
+
+    //set button
+    $(".friendListTrigger").mouseenter(function (){
+        $(".friendList").prop("style","display:block");
+    });
+
+     $(".friendList").mouseleave(function (){
+         $(".friendList").prop("style","display:none");
+     });
+
+     $("#settingTrigger").click(function ()
+     {
+         $("#setting").prop("style","display:block");
+     });
+
+     $("#setting").mouseleave(function (){
+         $("#setting").prop("style","display:none");
+     });
+
+     $(".addFriendTrigger").click(function (){
+         addFriendVue.dialogVisible=true;
+     })
+
+
+
+     //logout
+    $(".topNav .icon-logout").click(function (){
+        axios({
+            method:'get',
+            url:''
+        }).then(resp=>{
+            document.location="./login.html";
+        });
+
+    });
+
+
+     //get friend List
+    class Friend{
+        constructor(url,avatar,name) {
+            this.url=url;
+            this.avatar=avatar;
+            this.name=name;
+        }
+    };
+    let friendList=[];
+    axios({
+        method: "get",
+        url:''
+    }).then(resp=>{
+        let list=resp.data;
+        list.forEach(item=>{
+            friendList.push(new Friend(item.url,item.avatar,item.name));
+        })
+    });
+
+    friendList.push(new Friend("www.baidu.com","./img.png","zhuangsan"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+
+    let friends = $(".friendList");
+    friendList.forEach(item=>{
+        let friend="<a target=\"_blank\" href=\""+item.url+"\">\n" +
+            "        <div class=\"friend\">\n" +
+            "\n" +
+            "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
+            "\n" +
+            "            <div class=\"friendName\">"+item.name+"</div>\n" +
+            "\n" +
+            "        </div>\n" +
+            "    </a>";
+        friends.append(friend);
+    })
+
+
+    //set avatar and username
+    new Vue ({
+        el: "#avatar",
+        mounted(){
+            this.getUserInfo();
+        },
+
+        data(){
+            return {
+                userAvatar:'',
+                useName:''
+            }
+        },
+
+        methods: {
+
+            getUserInfo(){
+                axios({
+                    method:"get",
+                    url:'',
+
+                }).then(resp=>{
+                    this.userAvatar=resp.data.userAvatar;
+                    this.userName=resp.data.userName;
+                });
+
+                $("#avatar el-avatar img").prop("src",this.userAvatar)
+                $("#userName").text(this.userName);
+            },
+
+            errorHandler() {
+                return true
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                btnText:"隐藏",
+                isShow:false,
+                ruleForms:[{
+                    name:'姜明',
+                    time:'2012-2-1',
+                    text:'津贴喝好圣诞节交罚款哈咖啡壶看不见了都',
+                    cheer:20,
+                    show:false
+                },
+                    {
+                        name:'李凯翔',
+                        time:'2015-3-1',
+                        text:'我喜欢所发生的，学金沙江今安徽饭卡是否卡解放啦',
+                        cheer:20,
+                        show:false
+                    },
+                    {
+                        name:'李凯翔',
+                        time:'2015-3-1',
+                        text:'我喜欢所发生的，学金沙江今安徽饭卡是否卡解放啦',
+                        cheer:20,
+                        show:false
+                    }
+                ],
+                rules: {
+                    desc: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }
+                    ]
+                }
+            }
+        },
+
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        alert('提交成功!');
+                        this.$refs[formName].resetFields();
+                    } else {
+                        console.log('提交失败!!');
+                        return false;
+                    }
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            OnSubmit:function(){
+
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <link rel="stylesheet" href="./css/mainspace.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        html {
+            background: bisque;
+            background-size: cover;
+        }
+        #button1{
+            left: 20px;
+            position: relative;
+        }
+        #button2{
+            left: 40px;
+            position: relative;
+        }
+        #date{
+
+            margin-left: 20%;
+            max-width: 900px;
+
+        }
+        #app{
+            position: relative;
+            right: 100px;
+        }
+
+    </style>
+</head>
+<body>
+
+<ul class="topNav">
+    <li ><a href="#home"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
+    <li>
+        <div class="friendListTrigger">
+        <a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>
+        </div>
+    </li>
+
+    <li>
+        <div class="addFriendTrigger">
+        <a href="#home"><span class="iconfont icon-tianjiahaoyou">添加好友</span></a>
+        </div>
+    </li>
+
+    <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
+
+    <li style="float: right" >
+        <div id="settingTrigger">
+            <a href="#about"><span class="iconfont icon-shezhi"></span></a>
+        </div>
+    </li>
+</ul>
+
+<div id="addFriend">
+<el-dialog
+        title="添加好友"
+        :visible.sync="dialogVisible"
+        :before-close="handleClose"
+        @close="close"
+        width="50%"
+        >
+    <el-input
+            placeholder="请输入账号"
+            v-model="input"
+            @change="searchUser" >
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+    </el-input>
+
+    <div class="searchResult" style="margin-bottom: 20px;display: none">
+        <hr>
+        <img src="userAvatar" width="50" height="50">
+        <div>{{userName}}</div>
+
+        <div style="margin-top: 40px">
+            <el-button type="primary" @click="addFriend">添加好友</el-button>
+        </div>
+    </div>
+
+
+</el-dialog>
+
+
+</div>
+
+
+<div class="friendList">
+</div>
+<div id="setting">
+    <li><a href="personalProfile.html">修改资料</a></li>
+    <li><a href="permissionManagement.html">权限管理</a></li>
+</div>
+
+<ul class="midNav">
+    <li id="active"><a href="#" >主页</a></li>
+    <li><a href="#">相册</a></li>
+    <li><a href="#">日志</a></li>
+    <li><a href="#">留言版</a></li>
+    <li><a href="#">个人心情</a></li>
+</ul>
+
+<div class="row">
+    <div class="leftcolumn">
+            <div id="avatar">
+                <el-avatar :size="100" src="#" @error="errorHandler">
+                    <img src="./img.png"/>
+                </el-avatar>
+            </div>
+            <div id="userName">
+                132
+            </div>
+    </div>
+    <div class="rightcolumn">
+        <div id="app">
+            <el-form id="date" ref="form" :model="form" label-width="80px">
+                <el-row >
+                    <span id="button1" class="demonstration"><i class="el-icon-s-management"></i>查看日志</span>
+                    <el-button id="button2" @click="OnSubmit" type="info" plain><i class="el-icon-edit"></i>写日志</el-button>
+                </el-row>
+                <hr>
+                <ul>
+                    <li v-for="ruleForm in ruleForms">
+                        <el-form :model="ruleForm"   id="in" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                            <el-form-item label="日志标题" prop="name">
+                                <el-input v-model="ruleForm.name" placeholder="请输入标题"></el-input>
+                            </el-form-item>
+                            <el-form-item label="日志内容" prop="desc">
+                                <el-input
+                                        type="textarea"
+                                        :autosize="{ minRows: 6, maxRows: 100}"
+                                        placeholder="请输入内容"
+                                        v-model="ruleForm.desc">
+                                </el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="Change">日志修改</el-button>
+                                <el-button type="danger" @click="Delete">日志删除</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </li>
+                </ul>
+            </el-form>
+            </el-form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+<script src="js/axios-0.18.0.js"></script>
+<script>
+
+
+    //addFriend dialog
+
+    let addFriendVue =  new Vue({
+        el:"#addFriend",
+        data(){
+            return{
+                dialogVisible:false,
+                resultVisible:false,
+                input:'',
+                userAvatar:"./img.png",
+                userID:'',
+                userName:''
+            }
+        },
+        methods:{
+
+            close(){
+                $(".searchResult").prop("style","display:none");
+                this.input='';
+            },
+            
+            addFriend()
+            {
+                alert(1);
+            },
+
+            searchUser()
+            {
+                $(".searchResult").prop("style","display:block");
+            }
+
+        }
+    })
+
+    //set button
+    $(".friendListTrigger").mouseenter(function (){
+        $(".friendList").prop("style","display:block");
+    });
+
+     $(".friendList").mouseleave(function (){
+         $(".friendList").prop("style","display:none");
+     });
+
+     $("#settingTrigger").click(function ()
+     {
+         $("#setting").prop("style","display:block");
+     });
+
+     $("#setting").mouseleave(function (){
+         $("#setting").prop("style","display:none");
+     });
+
+     $(".addFriendTrigger").click(function (){
+         addFriendVue.dialogVisible=true;
+     })
+
+
+
+     //logout
+    $(".topNav .icon-logout").click(function (){
+        axios({
+            method:'get',
+            url:''
+        }).then(resp=>{
+            document.location="./login.html";
+        });
+
+    });
+
+
+     //get friend List
+    class Friend{
+        constructor(url,avatar,name) {
+            this.url=url;
+            this.avatar=avatar;
+            this.name=name;
+        }
+    };
+    let friendList=[];
+    axios({
+        method: "get",
+        url:''
+    }).then(resp=>{
+        let list=resp.data;
+        list.forEach(item=>{
+            friendList.push(new Friend(item.url,item.avatar,item.name));
+        })
+    });
+
+    friendList.push(new Friend("www.baidu.com","./img.png","zhuangsan"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+    friendList.push(new Friend("","./img.png","lisi"));
+
+    let friends = $(".friendList");
+    friendList.forEach(item=>{
+        let friend="<a target=\"_blank\" href=\""+item.url+"\">\n" +
+            "        <div class=\"friend\">\n" +
+            "\n" +
+            "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
+            "\n" +
+            "            <div class=\"friendName\">"+item.name+"</div>\n" +
+            "\n" +
+            "        </div>\n" +
+            "    </a>";
+        friends.append(friend);
+    })
+
+
+    //set avatar and username
+    new Vue ({
+        el: "#avatar",
+        mounted(){
+            this.getUserInfo();
+        },
+
+        data(){
+            return {
+                userAvatar:'',
+                useName:''
+            }
+        },
+
+        methods: {
+
+            getUserInfo(){
+                axios({
+                    method:"get",
+                    url:'',
+
+                }).then(resp=>{
+                    this.userAvatar=resp.data.userAvatar;
+                    this.userName=resp.data.userName;
+                });
+
+                $("#avatar el-avatar img").prop("src",this.userAvatar)
+                $("#userName").text(this.userName);
+            },
+
+            errorHandler() {
+                return true
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        mounted(){
+            var _this=this;
+            axios({
+                method:"get",
+                url:""//地址
+            }).then(function (resp) {
+                _this.ruleForm=resp.data;
+            })
+        },
+        data() {
+            return {
+                ruleForms: [{
+                    name: '南通',
+                    desc: '我是的就会发觉回复撒酒疯好啦是否'
+                }
+                ],
+            };
+        },
+        methods: {
+            OnSubmit:function (){
+                window.location.href="WriteLog.html";
+            },
+            Change:function () {
+                var _this=this;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:_this.ruleForm
+                }).then(function (resp) {
+                    //刷新
+                })
+            },
+            Delete:function (){
+                var _this=this;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:_this.ruleForm
+                }).then(function (resp) {
+                    //刷新
+                })
+
+            }
+        }
+    })
+
+
+
+</script>
+</body>
+</html>
