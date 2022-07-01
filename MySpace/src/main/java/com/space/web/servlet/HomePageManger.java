@@ -103,4 +103,41 @@ public class HomePageManger extends BaseServlet {
         resp.setContentType("text/json;charset=utf-8");
         resp.getWriter().write(ret.toJSONString());
     }
+
+    public void addFriend(){
+        Integer uid = (Integer) req.getSession().getAttribute("uid");
+        Integer fid = jsonObject.getInteger("fid");
+//        FriendsService friendsService = new FriendsServiceImpl();
+//        Friends friends=new Friends();
+//        friends.setId(uid);
+//        friends.setFid(fid);
+//        friends.setAccess(3);
+//        friendsService.insert(friends);
+
+        AddFriService addFriService = new AddFriServiceImpl();
+        AddFriMsg addFriMsg = new AddFriMsg();
+        addFriMsg.setFrom(uid);
+        addFriMsg.setTo(fid);
+        addFriService.insert(addFriMsg);
+    }
+
+    public void accept(){
+        Integer uid = (Integer) req.getSession().getAttribute("uid");
+        Integer fid = jsonObject.getInteger("fid");
+        AddFriServiceImpl addFriService = new AddFriServiceImpl();
+        AddFriMsg addFriMsg = new AddFriMsg();
+        addFriMsg.setTo(uid);
+        addFriMsg.setFrom(fid);
+        addFriService.delete(addFriMsg);
+        FriendsService friendsService = new FriendsServiceImpl();
+        Friends friends=new Friends();
+        friends.setId(uid);
+        friends.setFid(fid);
+        friends.setAccess(3);
+        friendsService.insert(friends);
+    }
+
+    public void getAddFriMsg(){
+
+    }
 }

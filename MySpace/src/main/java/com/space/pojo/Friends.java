@@ -8,6 +8,8 @@ public class Friends {
   private Integer access;
 
 
+
+
   public Integer getId() {
     return id;
   }
