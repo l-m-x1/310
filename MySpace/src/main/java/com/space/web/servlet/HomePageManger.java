@@ -29,7 +29,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/HomePage")
+@WebServlet("/HomePage/*")
 public class HomePageManger extends BaseServlet {
 //    public void getAllInfo() throws IOException {
 //        Integer uid = jsonObject.getInteger("uid");
@@ -69,11 +69,24 @@ public class HomePageManger extends BaseServlet {
 
     public void logout(){
         HttpSession session = req.getSession();
-        session.removeAttribute("");
+        session.removeAttribute("username");
+        session.removeAttribute("password");
     }
 
-    public void getFrendList(){
+    public void getFriendList(){
 
+
+
+        Integer uid = jsonObject.getInteger("uid");
+        FriendsService friendsService = new FriendsServiceImpl();
+        List<Friends> friends = friendsService.selectById(uid);
+        for(Friends friend:friends){
+//            JSONObject  = new JSONObject();
+            Integer fid = friend.getFid();
+            InfoServiceImpl infoService = new InfoServiceImpl();
+            Info info = infoService.selectById(fid);
+            info.getAvatar();
+        }
     }
 
     public void getUserInfo(){

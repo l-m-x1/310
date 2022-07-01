@@ -61,4 +61,13 @@ public class ServletTest {
         System.out.println(jsonObject.getInteger("data"));
     }
 
+    @Test
+    public void testJSONAdd(){
+        JSONObject jsonObject1 = new JSONObject();
+        JSONObject jsonObject2=new JSONObject();
+        jsonObject2.put("name","张三");
+        jsonObject2.put("password","1234");
+        jsonObject1.put("jsob",jsonObject2);
+        System.out.println(jsonObject1.toJSONString());
+    }
 }
