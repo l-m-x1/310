@@ -1,8 +1,10 @@
 package servlet;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.Diary;
+import com.space.pojo.Friends;
 import com.space.pojo.Info;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -12,9 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ServletTest {
     @Test
@@ -64,10 +64,25 @@ public class ServletTest {
     @Test
     public void testJSONAdd(){
         JSONObject jsonObject1 = new JSONObject();
-        JSONObject jsonObject2=new JSONObject();
-        jsonObject2.put("name","张三");
-        jsonObject2.put("password","1234");
-        jsonObject1.put("jsob",jsonObject2);
+//        JSONObject jsonObject2=new JSONObject();
+//        jsonObject2.put("name","张三");
+//        jsonObject2.put("password","134");
+//        jsonObject1.put("jsob",jsonObject2);
+//        jsonObject1.put("jsob",jsonObject2);
+//        System.out.println(jsonObject1.toJSONString());
+//        JSONArray jsonArray=new JSONArray();
+        List<Friends> friends=new ArrayList<>();
+        Friends friends1 = new Friends();
+        friends1.setId(1);
+        friends1.setFid(2);
+        friends.add(friends1);
+        Friends friends2 = new Friends();
+        friends2.setId(1);
+        friends2.setFid(2);
+        friends.add(friends2);
+        System.out.println(friends.toString());
+        System.out.println(JSONObject.toJSONString(friends));
+        jsonObject1.put("data",friends);
         System.out.println(jsonObject1.toJSONString());
     }
 }

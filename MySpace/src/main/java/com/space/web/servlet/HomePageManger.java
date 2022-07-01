@@ -1,33 +1,16 @@
 package com.space.web.servlet;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.*;
 import com.space.service.*;
 import com.space.service.impl.*;
-import com.space.util.DiskFileItemFactoryUtils;
 import com.space.web.BaseServlet;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet("/HomePage/*")
 public class HomePageManger extends BaseServlet {
@@ -67,29 +50,55 @@ public class HomePageManger extends BaseServlet {
 //        resp.getWriter().write(ret);
 //    }
 
-    public void logout(){
+    public void logout() {
         HttpSession session = req.getSession();
         session.removeAttribute("username");
         session.removeAttribute("password");
     }
 
-    public void getFriendList(){
+    public void getFriendList() throws IOException {
+        JSONObject ret =new JSONObject();
+        List<UserInfo> userInfos=new ArrayList<>();
 
 
 
         Integer uid = jsonObject.getInteger("uid");
         FriendsService friendsService = new FriendsServiceImpl();
         List<Friends> friends = friendsService.selectById(uid);
-        for(Friends friend:friends){
-//            JSONObject  = new JSONObject();
+        for (Friends friend : friends) {
+
+            UserInfo homePageInfo=new UserInfo();
+
             Integer fid = friend.getFid();
+
             InfoServiceImpl infoService = new InfoServiceImpl();
             Info info = infoService.selectById(fid);
-            info.getAvatar();
+            homePageInfo.setAvatar(info.getAvatar());
+
+            UserServiceImpl userService = new UserServiceImpl();
+            User user = userService.selectById(uid);
+            homePageInfo.setUsername(user.getUsername());
+            userInfos.add(homePageInfo);
         }
+        ret.put("friendList",userInfos);
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(ret.toJSONString());
     }
 
-    public void getUserInfo(){
+    public void getUserInfo() throws IOException {
+        JSONObject ret =new JSONObject();
 
+        Integer uid = jsonObject.getInteger("uid");
+        UserService userService=new  UserServiceImpl();
+        User user = userService.selectById(uid);
+        ret.put("username",user.getUsername());
+
+
+        InfoService infoService=new InfoServiceImpl();
+        Info info = infoService.selectById(uid);
+        ret.put("avatar",info.getAvatar());
+
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(ret.toJSONString());
     }
 }
