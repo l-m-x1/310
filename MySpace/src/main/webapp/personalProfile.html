@@ -89,17 +89,6 @@
         },
         data() {
             return {
-
-                brands: {
-                    name: '',
-                    region: '',
-                    date: '',
-                    hometown:'',
-                    address:'',
-                    work:'',
-                    companyName:'',
-                    companyAddress:'',
-                },
                 sizeForm: {
                     name: '姜明',
                     region: '男',
@@ -119,12 +108,12 @@
                 axios({
                             method:"post",
                             url:"",//地址
-                            data:_this.brands
-                        }).then(function (resp) {
-                            if(resp.data=="success"){
-
-                            }
-                        })
+                            data:_this.sizeForm
+                }).then(function (resp) {
+                    if(resp.data=="success"){
+                        //成功内容
+                    }
+                })
             }
         }
     })

@@ -242,6 +242,7 @@
         },
         methods: {
             back:function () {
+                window.location.href="viewlog.html";
                 //返回日志界面
             },
             submitForm(formName) {
@@ -260,7 +261,8 @@
                 })
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        // alert('提交成功!');
+                        alert('提交成功!');
+                        window.location.href="viewlog.html";
                     } else {
                         console.log('提交失败!!');
                         return false;
