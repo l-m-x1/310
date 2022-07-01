@@ -5,6 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="./css/iconfont.css">
     <link rel="stylesheet" href="./css/mainspace.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <style>
         #in{
             top: 20px;
@@ -77,24 +78,24 @@
             <el-form id="date" ref="form" :model="form" label-width="80px">
                 <el-row >
                     <span id="button1" class="demonstration"><i class="el-icon-edit"></i>写日志</span>
-                    <el-button id="button2" type="info" plain>返回日志列表</el-button>
+                    <el-button id="button2" type="info" @click="back" plain>返回日志列表</el-button>
                 </el-row>
                 <hr>
-                <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <el-form :model="SetLog" :rules="rules"  id="in" ref="SetLog" label-width="100px" class="demo-SetLog">
                     <el-form-item label="日志标题" prop="name">
-                        <el-input v-model="ruleForm.name" placeholder="请输入标题"></el-input>
+                        <el-input v-model="SetLog.name" placeholder="请输入标题"></el-input>
                     </el-form-item>
-                    <el-form-item label="日志内容" prop="desc">
+                    <el-form-item label="日志内容" prop="text">
                         <el-input
                                 type="textarea"
                                 :autosize="{ minRows: 6, maxRows: 100}"
                                 placeholder="请输入内容"
-                                v-model="ruleForm.desc">
+                                v-model="SetLog.text">
                         </el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')">确认发表</el-button>
-                        <el-button @click="resetForm('ruleForm')">清空</el-button>
+                        <el-button type="primary" @click="submitForm('SetLog')">确认发表</el-button>
+                        <el-button @click="resetForm('SetLog')">清空</el-button>
                     </el-form-item>
 
                 </el-form>
@@ -111,6 +112,7 @@
 <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
 <script src="js/axios-0.18.0.js"></script>
 <script>
+
     //set button
     $(".friendListTrigger").mouseenter(function (){
         $(".friendList").prop("style","display:block");
@@ -224,25 +226,41 @@
         el: '#app',
         data() {
             return {
-                ruleForm: {
+                SetLog: {
                     name: '',
-                    desc: ''
+                    text: ''
                 },
                 rules: {
                     name: [
                         { required: true, message: '请填写标题', trigger: 'blur' }
                     ],
-                    desc: [
+                    text: [
                         { required: true, message: '请填写内容', trigger: 'blur' }
                     ]
                 }
             };
         },
         methods: {
+            back:function () {
+                //返回日志界面
+            },
             submitForm(formName) {
+                var _this=this;
+                axios({
+                    method:"post",
+                    url:"",//目标地址,
+                    data:_this.SetLog
+                }).then(function (resp) {
+                    if(resp.data=="success"){
+                        _this.$message({
+                            message: '恭喜你，添加成功',
+                            type: 'success'
+                        });
+                    }
+                })
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('提交成功!');
+                        // alert('提交成功!');
                     } else {
                         console.log('提交失败!!');
                         return false;
