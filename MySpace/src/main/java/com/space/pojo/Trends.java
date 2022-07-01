@@ -19,6 +19,8 @@ public class Trends {
   private Integer likes;
 
 
+
+
   public Integer getId() {
     return id;
   }

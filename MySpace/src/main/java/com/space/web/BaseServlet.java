@@ -26,7 +26,7 @@ public class BaseServlet extends HttpServlet {
     protected JSONObject jsonObject;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.req=req;
         this.resp=resp;
         String requestBody = IOUtils.toString(req.getInputStream());
@@ -36,6 +36,7 @@ public class BaseServlet extends HttpServlet {
         int index = uri.lastIndexOf('/');
         String func = uri.substring(index + 1);
         try {
+            System.out.println(this.getClass());
             this.getClass().getMethod(func).invoke(this);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);

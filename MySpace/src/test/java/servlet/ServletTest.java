@@ -85,4 +85,12 @@ public class ServletTest {
         jsonObject1.put("data",friends);
         System.out.println(jsonObject1.toJSONString());
     }
+
+    @Test
+    public void testUUID(){
+        UUID uuid = UUID.randomUUID();
+        System.out.println(uuid);
+        String path="hello"+ uuid +".jpg";
+        System.out.println(path);
+    }
 }

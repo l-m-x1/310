@@ -10,14 +10,13 @@ D:\project\java\310\code\310\MySpace\src\main\java\com\space\web\servlet\HomePag
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\mapper\UserMapper.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\impl\DiaryServiceImpl.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\impl\MoodServiceImpl.java
-D:\project\java\310\code\310\MySpace\src\main\java\com\space\pojo\HomePageInfo.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\mapper\DiaryMapper.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\pojo\Diary.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\mapper\InfoMapper.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\UserService.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\impl\FriendsServiceImpl.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\mapper\FriendsMapper.java
-D:\project\java\310\code\310\MySpace\src\main\java\com\space\web\servlet\TestServlet.java
+D:\project\java\310\code\310\MySpace\src\main\java\com\space\web\servlet\testServlet.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\impl\InfoServiceImpl.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\pojo\Photos.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\InfoService.java
@@ -27,6 +26,7 @@ D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\PhotosServi
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\impl\StyleServiceImpl.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\web\BaseServlet.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\FriendsService.java
+D:\project\java\310\code\310\MySpace\src\main\java\com\space\pojo\UserInfo.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\service\impl\UserServiceImpl.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\pojo\Info.java
 D:\project\java\310\code\310\MySpace\src\main\java\com\space\web\servlet\MsgBoardServlet.java

@@ -4,7 +4,7 @@
 body {
         padding-left: 8%;
         padding-right: 8%;
-        background-color: #87cefa;
+        background-color: #F0FFFF;
         /*opacity: 0.5;*/
     padding-bottom: 100px;
 }
@@ -13,10 +13,12 @@ body {
     list-style-type: none;
     margin-left: 7%;
     overflow: hidden;
-    background-color: #8cc5ff;
+    background-color: #FCFCFC;
     position: fixed;
-    top: -20px;
+    top: -15px;
     width: 70%;
+    border-radius: 5px;
+    border: 5px solid deepskyblue;
 }
 
 .topNav li {
@@ -55,8 +57,8 @@ body {
 
 .midNav li {
     float: left;
-    border-radius: 6px;
-    border: 2px solid white;
+    border-radius: 5px;
+    border: 2px solid rgba(0,0,0,0);
 }
 
 .midNav li a {
@@ -67,12 +69,13 @@ body {
     text-decoration: none;
 }
 
+
 .midNav li a:hover{
-    color: dodgerblue;
+    color: #3a8ee6;
 }
 
-.midNav .active {
-    border: dodgerblue;
+#active {
+    border-color: deepskyblue;
 }
 
 
@@ -81,11 +84,14 @@ body {
 /* 左列 */
 .leftcolumn {
     float: left;
-    width: 25%;
-    background-color: #13ce66;
+    width: 22%;
+    background-color: #F0FFFF;
     padding-left: 0px;
-    border: 12px solid black;
+    border: 5px solid deepskyblue;
     height: 30%;
+    margin-right: 3%;
+    border-radius: 10px;
+
 }
 .leftcolumn #avatar {
         text-align: center;
@@ -99,7 +105,7 @@ body {
 
 
 .card {
-    background: #8cc5ff;
+    background: #909399;
 }
 /* 右列 */
 .rightcolumn {
@@ -107,7 +113,8 @@ body {
     width: 75%;
     background-color: bisque;
     padding: 20px 30px;
-    border: 30px solid red;
+    border: 5px solid deepskyblue;
+    border-radius: 10px;
 }
 
 
@@ -116,4 +123,65 @@ body {
     content: "";
     display: table;
     clear: both;
+}
+
+
+
+.friendList {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-left: 19%;
+    margin-top: 2%;
+    max-height: 50%;
+    overflow-y: scroll;
+    z-index: 1;
+}
+
+.friend {
+    padding: 10px;
+    box-sizing: border-box;
+    height: 70px;
+    width: 200px;
+    border: 2px solid white;
+    margin: 10px;
+}
+.friend:hover {
+    border-color :#3a8ee6;
+}
+
+.friendAvatar {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+.friendName {
+    float: left;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+
+#setting {
+    list-style-type: none;
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-left: 71%;
+    margin-top: 2%;
+}
+
+#setting li a {
+    display: block;
+    color: #303133;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#setting li a:hover{
+    color: dodgerblue;
 }

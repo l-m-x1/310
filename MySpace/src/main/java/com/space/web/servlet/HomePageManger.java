@@ -62,7 +62,8 @@ public class HomePageManger extends BaseServlet {
 
 
 
-        Integer uid = jsonObject.getInteger("uid");
+//        Integer uid = jsonObject.getInteger("uid");
+        Integer uid= (Integer) req.getSession().getAttribute("uid");
         FriendsService friendsService = new FriendsServiceImpl();
         List<Friends> friends = friendsService.selectById(uid);
         for (Friends friend : friends) {
@@ -88,7 +89,8 @@ public class HomePageManger extends BaseServlet {
     public void getUserInfo() throws IOException {
         JSONObject ret =new JSONObject();
 
-        Integer uid = jsonObject.getInteger("uid");
+//        Integer uid = jsonObject.getInteger("uid");
+        Integer uid= (Integer) req.getSession().getAttribute("uid");
         UserService userService=new  UserServiceImpl();
         User user = userService.selectById(uid);
         ret.put("username",user.getUsername());
