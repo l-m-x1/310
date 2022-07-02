@@ -19,6 +19,7 @@ body {
     width: 70%;
     border-radius: 5px;
     border: 5px solid deepskyblue;
+    z-index: 2;
 }
 
 .topNav li {
@@ -81,27 +82,7 @@ body {
 
 
 /* 创建两个不相等的彼此并排的浮动列 */
-/* 左列 */
-.leftcolumn {
-    float: left;
-    width: 22%;
-    background-color: #F0FFFF;
-    padding-left: 0px;
-    border: 5px solid deepskyblue;
-    height: 30%;
-    margin-right: 3%;
-    border-radius: 10px;
 
-}
-.leftcolumn #avatar {
-        text-align: center;
-        padding-top: 20px;
-}
-.leftcolumn #userName {
-    padding-top: 50px;
-    text-align: center;
-    padding-bottom: 50px;
-}
 
 
 .card {
@@ -172,6 +153,7 @@ body {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     margin-left: 71%;
     margin-top: 2%;
+    z-index: 2;
 }
 
 #setting li a {

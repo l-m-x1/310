@@ -1,0 +1,71 @@
+<ul class="topNav">
+    <li ><a href="#home"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
+    <li>
+        <div class="friendListTrigger">
+            <a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>
+        </div>
+    </li>
+
+    <li>
+        <div class="addFriendTrigger">
+            <a href="#home"><span class="iconfont icon-tianjiahaoyou">添加好友</span></a>
+        </div>
+    </li>
+
+    <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
+
+    <li style="float: right" >
+        <div id="settingTrigger">
+            <a href="#about"><span class="iconfont icon-shezhi"></span></a>
+        </div>
+    </li>
+</ul>
+
+<div id="addFriend">
+    <el-dialog
+            title="添加好友"
+            :visible.sync="dialogVisible"
+            :before-close="handleClose"
+            @close="close"
+            width="50%"
+    >
+        <el-input
+                placeholder="请输入账号"
+                v-model="input"
+                @change="searchUser" >
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        </el-input>
+
+        <div class="searchResult" style="margin-bottom: 20px;display: none">
+            <hr>
+            <img src="userAvatar" width="50" height="50">
+            <div>{{userName}}</div>
+
+            <div style="margin-top: 40px">
+                <el-button type="primary" @click="addFriend">添加好友</el-button>
+            </div>
+        </div>
+
+
+    </el-dialog>
+
+
+</div>
+
+
+<div class="friendList">
+</div>
+<div id="setting">
+    <li><a href="personalProfile.html">修改资料</a></li>
+    <li><a href="permissionManagement.html">权限管理</a></li>
+</div>
+
+<ul class="midNav">
+    <li id="active"><a href="#" >主页</a></li>
+    <li><a href="#">相册</a></li>
+    <li><a href="#">日志</a></li>
+    <li><a href="#">留言版</a></li>
+    <li><a href="#">个人心情</a></li>
+</ul>
+
+<script src="./js/navigationBar.js"></script>

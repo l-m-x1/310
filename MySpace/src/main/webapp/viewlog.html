@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+    <script src="js/axios-0.18.0.js"></script>
+    <link rel="stylesheet" href="css/navigationBar.css">
+    <link rel="stylesheet" href="css/leftColumn.css">
+
+    <style>
+        html {
+            background: bisque;
+            background-size: cover;
+        }
+        #button1{
+            left: 20px;
+            position: relative;
+        }
+        #button2{
+            left: 40px;
+            position: relative;
+        }
+        #date{
+
+            margin-left: 20%;
+            max-width: 900px;
+
+        }
+        #app{
+            position: relative;
+            right: 100px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="navigationBar">
+
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+
+    </div>
+    <div class="rightcolumn">
+        <div id="app">
+            <el-form id="date"  label-width="80px">
+                <el-row >
+                    <span id="button1" class="demonstration"><i class="el-icon-s-management"></i>查看日志</span>
+                    <el-button id="button2" @click="OnSubmit" type="info" plain><i class="el-icon-edit"></i>写日志</el-button>
+                </el-row>
+                <hr>
+                <ul>
+                    <li v-for="viewlog in viwelogs">
+                        <el-form :model="viewlog"   id="in" ref="viewlog" label-width="100px" class="demo-viewlog">
+                            <el-form-item label="日志标题" prop="name">
+                                <el-input v-model="viewlog.name" placeholder="请输入标题"></el-input>
+                            </el-form-item>
+                            <el-form-item label="日志内容" prop="desc">
+                                <el-input
+                                        type="textarea"
+                                        :autosize="{ minRows: 6, maxRows: 100}"
+                                        placeholder="请输入内容"
+                                        v-model="viewlog.desc">
+                                </el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="modify">日志修改</el-button>
+                                <el-button type="danger" @click="Delete">日志删除</el-button>
+                            </el-form-item>
+                        </el-form>
+                    </li>
+                </ul>
+            </el-form>
+            </el-form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+
+    $("#navigationBar").load("./navigationBar.html");
+    $(".leftcolumn").load("./leftColumn.html");
+
+    new Vue({
+        el: '#app',
+        mounted(){
+            var _this=this;
+            axios({
+                method:"get",
+                url:""//地址
+            }).then(function (resp) {
+                _this.viewlogs=resp.data;
+            })
+        },
+        data() {
+            return {
+                viwelogs: [{
+                    name: '南通',
+                    desc: '我是的就会发觉回复撒酒疯好啦是否'
+                }, {
+                    name: '南通',
+                    desc: '我是的就会发觉回复撒酒疯好啦是否'
+                }
+                ],
+            };
+        },
+        methods: {
+            OnSubmit:function (){
+                window.location.href="WriteLog.html";
+            },
+            modify:function () {
+                var _this=this;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:_this.viewlog
+                }).then(function (resp) {
+                    //刷新
+                })
+            },
+            Delete:function (){
+                var _this=this;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:_this.viewlog.name//通过名字删除可改
+                }).then(function (resp) {
+                    //刷新
+                })
+
+            }
+        }
+    })
+
+
+
+</script>
+</body>
+</html>

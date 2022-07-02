@@ -28,14 +28,14 @@
 <body>
 
 <div id="app">
-    <el-form id="Permission" ref="form" :model="form" label-width="80px">
+    <el-form id="Permission"  label-width="80px">
         <el-row >
             <span id="title" class="demonstration">权限管理</span>
         </el-row>
     <template>
         <hr>
         <el-table
-                :data="tableData"
+                :data="PermissionData"
                 style="width: 100%"
                 height="300">
             <el-table-column
@@ -51,7 +51,6 @@
                     label="是否允许他/她进入我的空间">
                 <template slot-scope="scope">
                     <!-- scope.row 可以取到当前一行的数据 -->
-                    <!-- {{ scope.row }} -->
                     <el-switch v-model="scope.row.permission"
                                @change="userStateChange(scope.row)"
                                active-text="允许"
@@ -82,7 +81,7 @@
                 method:"get",
                 url:""//地址
             }).then(function (resp) {
-                _this.tableData=resp.data;
+                _this.PermissionData=resp.data;
             })
         },
         data() {
@@ -92,7 +91,7 @@
                     account:'',
                     permission: Boolean,
                 },
-                tableData: [{
+                PermissionData: [{
                     name:'姜明',
                     account:'1399582722',
                     permission: true
@@ -120,13 +119,14 @@
             };
         },
         methods: {
+
             onSubmit() {
                 var _this=this;
                 console.log('submit!');
                 axios({
                     method:"post",
                     url:"",//地址
-                    data:_this.brands
+                    data:_this.PermissionData
                 }).then(function (resp) {
                     if(resp.data=="success"){
                         //成功后的反应
