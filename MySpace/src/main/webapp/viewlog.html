@@ -57,7 +57,7 @@
                 </el-row>
                 <hr>
                 <ul>
-                    <li v-for="viewlog in viwelogs">
+                    <li v-for="viewlog in viewlogs">
                         <el-form :model="viewlog"   id="in" ref="viewlog" label-width="100px" class="demo-viewlog">
                             <el-form-item label="日志标题" prop="name">
                                 <el-input v-model="viewlog.name" placeholder="请输入标题"></el-input>
@@ -71,8 +71,8 @@
                                 </el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-button type="primary" @click="modify">日志修改</el-button>
-                                <el-button type="danger" @click="Delete">日志删除</el-button>
+                                <el-button type="primary" @click="modify(viewlog)">日志修改</el-button>
+                                <el-button type="danger" @click="Delete(viewlog.id)">日志删除</el-button>
                             </el-form-item>
                         </el-form>
                     </li>
@@ -101,16 +101,18 @@
                 method:"get",
                 url:""//地址
             }).then(function (resp) {
-                _this.viewlogs=resp.data;
+                //_this.viewlogs=resp.data;
             })
         },
         data() {
             return {
-                viwelogs: [{
+                viewlogs: [{
+                    id:1,
                     name: '南通',
                     desc: '我是的就会发觉回复撒酒疯好啦是否'
                 }, {
-                    name: '南通',
+                    id:2,
+                    name: '女同',
                     desc: '我是的就会发觉回复撒酒疯好啦是否'
                 }
                 ],
@@ -118,24 +120,24 @@
         },
         methods: {
             OnSubmit:function (){
-                window.location.href="WriteLog.html";
+                window.location.href="writeLog.html";
             },
-            modify:function () {
-                var _this=this;
+            modify:function (message) {//修改
+                alert(message.id)
                 axios({
                     method:"post",
                     url:"",
-                    data:_this.viewlog
+                    data:message
                 }).then(function (resp) {
                     //刷新
                 })
             },
-            Delete:function (){
-                var _this=this;
+            Delete:function (message){
+                alert(message)
                 axios({
                     method:"post",
                     url:"",
-                    data:_this.viewlog.name//通过名字删除可改
+                    data:message//通过名字删除可改
                 }).then(function (resp) {
                     //刷新
                 })

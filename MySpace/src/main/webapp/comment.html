@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
   <script src="js/axios-0.18.0.js"></script>
   <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-
   <link rel="stylesheet" href="css/navigationBar.css">
   <link rel="stylesheet" href="css/leftColumn.css">
   <style>
@@ -35,31 +34,38 @@
       float: left;
     }
 
-    #text1{
+    #name{
       vertical-align: top;
       font-size:20px;
     }
 
-    #text2{
+    #id{
       left: 5%;
       position: relative;
       font-size:7px;
     }
-    #text3 {
-      width: 300px;
-      height: 100px;
+    #text {
+      width:85%;
       top: 10px;
+      height: 60%;
+      margin-left: 80px;
     }
-    #text4{
+    #time{
       position: relative;
       font-size:7px;
-      top: 200px;
+      left:100px;
     }
-    #text5{
+    #reply{
       position: relative;
       font-size:7px;
-      top: 200px;
-      left: 10%;
+
+      left: 100px;
+    }
+    #delete{
+      position: relative;
+      font-size:7px;
+      left: 50%;
+
     }
     #in{
       position: relative;
@@ -74,6 +80,11 @@
       left: 20px;
       position: relative;
     }
+    #button2{
+      left: 40px;
+      position: relative;
+    }
+
   </style>
 </head>
 <body>
@@ -90,36 +101,59 @@
 
   <div class="rightcolumn">
     <div id="comment">
-      <el-form id="date" ref="form" :model="form" label-width="80px" >
+      <el-form id="date"  label-width="80px" >
         <el-row >
           <span id="button1" class="demonstration"><i class="el-icon-edit-outline"></i>留言板</span>
+          <el-button id="button2" @click="write.show=!write.show" type="info" plain><i class="el-icon-s-order"></i>我要留言</el-button>
         </el-row>
+        <el-form :model="write" ref="write" label-width="100px" v-show="write.show" >
+          <hr>
+          <el-form-item
+                  label="我的留言"
+                  prop="text"
+                  :rules="[
+                            { required: true, message: '不能为空'},
+                        ]">
+            <el-input v-model.number="write.text"
+                      type="textarea"
+                      :autosize="{ minRows: 6, maxRows: 100}"
+                      placeholder="请输入内容"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="OnSubmit">提交</el-button>
+            <el-button @click="resetForm('write')">重置</el-button>
+          </el-form-item>
+        </el-form>
         <hr>
         <ul>
           <li v-for="commentData in commentDatas">
             <div>
               <div class="div1">
-                <p><img src="https://ts1.cn.mm.bing.net/th/id/R-C.86a0fa17b9b37ff7518b552e2517a0ae?rik=CX0%2fMchuLIBQVA&riu=http%3a%2f%2fimg.crcz.com%2fallimg%2f201809%2f11%2f1536666825645562.jpg&ehk=g6IGr0cDabvrRd5KSQdbup2trGpltKDfA7Hx7eopcm0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1"
-                        alt="W3School"
-                        style="width:100px;
-                height:100px;
-                margin-left:10px;">
+                <p><img :src="commentData.photo"
+                        style="width:70px;
+                        height:70px;
+                        margin-left:10px;">
 
-                  <span id="text1">{{commentData.name}}</span>
-                  <span id="text2">第{{commentData.id}}楼</span>
+                  <span id="name">{{commentData.name}}</span>
+                  <span id="id">第{{commentData.id}}楼</span>
 
                   <br>
-                  <span id="text3">{{commentData.text}}</span>
+                  <div id="text">
+                  <span >{{commentData.text}}</span>
+                  </div>
                   <br>
-                  <span id="text4">
-              {{commentData.time}}
-            </span>
-                  <span id="text5">
-                   <el-button type="text" @click="showToggle">回复</el-button>
-            </span>
+                  <span id="time">
+                  {{commentData.time}}
+                  </span>
+                  <span  id="reply">
+                   <el-button type="text"  @click=" commentData.show=!commentData.show">回复</el-button>
+                  </span>
+                  <span id="delete">
+                    <el-button  type="text" @click="remove(commentData.id)" icon="el-icon-delete"></el-button>
+                  </span>
                 </p>
               </div>
-              <el-form :model="commentData" :rules="rules"  id="in" ref="commentData" label-width="100px" class="demo-commentData" v-show="isShow">
+              <el-form :model="commentData" :rules="rules"  id="in" ref="commentData" label-width="100px" class="demo-commentData" v-show="commentData.show">
                 <el-form-item label="回复内容" prop="desc">
                   <el-input
                           type="textarea"
@@ -133,6 +167,7 @@
                   <el-button @click="resetForm('commentData')">清空</el-button>
                 </el-form-item>
               </el-form>
+
             </div>
             <br>
             <br>
@@ -157,33 +192,27 @@
 
   new Vue({
     el: '#comment',
-    mounted(){
-      //选择函数this.selectAll();
-      var _this=this;
-      axios({
-        method:"get",
-        url:''//网站"http://localhost:8080/brand-case/selectAllServlet"
-      }).then(function (resp){
-        _this.commentData=resp.data;
-      })
-    },
     data() {
       return {
-        btnText:"隐藏",
-        isShow:false,
+        write: {
+          text: '',
+          show:false,
+        },
         commentDatas: [{
-          photo:'',
+          photo:'https://ts1.cn.mm.bing.net/th/id/R-C.86a0fa17b9b37ff7518b552e2517a0ae?rik=CX0%2fMchuLIBQVA&riu=http%3a%2f%2fimg.crcz.com%2fallimg%2f201809%2f11%2f1536666825645562.jpg&ehk=g6IGr0cDabvrRd5KSQdbup2trGpltKDfA7Hx7eopcm0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
           name: '姜明',
           id:'1',
           text:'津贴喝好圣诞节交罚款哈咖啡壶看不见了都',
-          time:'2018-03-27 00:23'
+          time:'2018-03-27 00:23',
+          show:false
         },
           {
             photo:'',
             name: '李凯翔',
             id:'2',
             text:'我永远喜欢佳人小姐我要到他多个',
-            time:'2018-03-27 00:23'
+            time:'2018-03-27 00:23',
+            show:false
           }
         ],
         rules: {
@@ -194,18 +223,10 @@
       }
     },
     methods: {
-      showToggle:function(){
-        this.isShow = !this.isShow
-        if(this.isShow){
-          this.btnText = "隐藏"
-        }else{
-          this.btnText = "显示"
-        }
-      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            // window.location.href="http://localhost:63342/01-%E5%88%9D%E5%A7%8B%E5%B7%A5%E7%A8%8B/brand-case/src/main/webapp/dome2.html?_ijt=q1568uo09n96m0r6pdrdlgqbis&_ij_reload=RELOAD_ON_SAVE";
+            // window.location.href="";
             alert('提交成功!');
             this.$refs[formName].resetFields();
           } else {
@@ -216,8 +237,39 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      OnSubmit:function(){
+        alert(this.write.text);
+        var _this=this;
+        axios({
+          method:"post",
+          url:"",
+          data:_this.write.text//通过内容添加
+        }).then(function (resp) {
+          //刷新
+        })
+      },
+      remove(message){
+        alert(message);
+        var _this=this;
+        axios({
+          method:"post",
+          url:"",
+          data:message//通过id删除可改
+        }).then(function (resp) {
+          //刷新
+        })
       }
-    }
+    },
+    mounted(){
+      var _this=this;
+      axios({
+        method:"get",
+        url:" "//网站
+      }).then(function (resp){
+        //_this.commentDatas=resp.data;
+      })
+    },
   })
 </script>
 </body>
