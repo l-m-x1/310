@@ -1,5 +1,6 @@
 package com.space.web.servlet;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.*;
 import com.space.service.*;
@@ -138,11 +139,15 @@ public class HomePageManger extends BaseServlet {
         friendsService.insert(friends);
     }
 
-    public void getAddFriMsg(){
+    public void getAddFriMsg() throws IOException {
         Integer uid = (Integer) req.getSession().getAttribute("uid");
         AddFriService addFriService = new AddFriServiceImpl();
-//        List<AddFriMsg> select = addFriService.select(uid);
-
-
+        List<AddFriMsg> addFriMsgs = addFriService.selectByTo(uid);
+        ArrayList<Integer> froms = new ArrayList<>();
+        for (AddFriMsg addFriMsg:addFriMsgs){
+            froms.add(addFriMsg.getFrom());
+        }
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(JSON.toJSONString(froms));
     }
 }

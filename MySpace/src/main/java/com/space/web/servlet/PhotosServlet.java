@@ -95,8 +95,8 @@ public class PhotosServlet extends HttpServlet {
     }
 
     public void upload() throws IOException {
-//        Integer id = (Integer) req.getSession().getAttribute("id");
-        Integer id=1;
+        Integer id = (Integer) req.getSession().getAttribute("id");
+//        Integer id=1;
         PhotosService photosService = new PhotosServiceImpl();
 
 
@@ -129,9 +129,15 @@ public class PhotosServlet extends HttpServlet {
                 photosService.insert(photos);
             }
         }
-
-//        photos.setUid(id);
-
-//        photosService.insert();
     }
+
+    public void getPhotos() throws IOException {
+        Integer uid= (Integer) req.getSession().getAttribute("id");
+        PhotosService photosService = new PhotosServiceImpl();
+        List<Photos> photos = photosService.selectByUid(uid);
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(JSON.toJSONString(photos));
+    }
+
+
 }

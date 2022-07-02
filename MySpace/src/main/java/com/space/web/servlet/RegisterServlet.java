@@ -2,6 +2,7 @@ package com.space.web.servlet;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.space.pojo.Info;
 import com.space.pojo.User;
 import com.space.service.UserService;
 import com.space.service.impl.UserServiceImpl;
