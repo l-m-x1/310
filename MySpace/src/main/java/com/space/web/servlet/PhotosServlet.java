@@ -177,5 +177,9 @@ public class PhotosServlet extends BaseServlet {
         }
     }
 
+    public void setAvatar(){
+
+    }
+
 }
 

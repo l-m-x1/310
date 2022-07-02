@@ -107,5 +107,14 @@ public class ServletTest {
         System.out.println(jsonObject1);
 
     }
+
+    @Test
+    public void arrayList(){
+        ArrayList<Integer> integers = new ArrayList<>();
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+        System.out.println(JSON.toJSONString(integers));
+    }
 }
 

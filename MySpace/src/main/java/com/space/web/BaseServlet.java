@@ -53,25 +53,3 @@ public class BaseServlet extends HttpServlet {
         this.doGet(req,resp);
     }
 }
-//        DiskFileItemFactory fileItemFactory = DiskFileItemFactoryUtils.getDiskFileItemFactory();
-//        ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
-//
-//        List<FileItem> fileItems;
-//        try {
-//            fileItems = fileUpload.parseRequest(req);
-//        } catch (FileUploadException e) {
-//            throw new RuntimeException(e);
-//        }
-//        for (FileItem item : fileItems) {
-//            if(item.isFormField()){
-//
-//                System.out.println(item.getFieldName()+":"+item.getString());
-//            }
-//            else {
-//                InputStream inputStream = item.getInputStream();
-//                String itemName = item.getName();
-//                FileOutputStream outputStream = new FileOutputStream("./src/main/webapp/photos/"+itemName);
-//                IOUtils.copy(inputStream,outputStream);
-//                outputStream.close();
-//            }
-//        }

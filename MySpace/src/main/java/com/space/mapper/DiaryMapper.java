@@ -10,11 +10,11 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface DiaryMapper {
-    @Insert("insert into diary VALUES (null,#{uid},#{time},#{content})")
+    @Insert("insert into diary VALUES (null,#{uid},#{time},#{content},#{title})")
     void insert( Diary diary);
     @Delete("delete from diary where id=#{id}")
     void delete(Integer id);
-    @Update("update diary set time=#{time},content=#{content} where id=#{id}")
+    @Update("update diary set time=#{time},content=#{content},title=#{title} where id=#{id}")
     void update(Diary diary);
     @Select("select *from diary where uid=#{uid}")
     List<Diary> selectByUid(Integer uid);
