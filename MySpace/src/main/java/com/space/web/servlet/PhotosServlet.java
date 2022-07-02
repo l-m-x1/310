@@ -2,9 +2,10 @@ package com.space.web.servlet;
 
 import com.alibaba.fastjson.JSON;
 import com.space.pojo.Photos;
+import com.space.pojo.User;
 import com.space.service.PhotosService;
 import com.space.service.impl.PhotosServiceImpl;
-import com.space.util.DiskFileItemFactoryUtils;
+import com.space.service.impl.UserServiceImpl;
 import com.space.web.BaseServlet;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -12,23 +13,21 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.annotation.WebServlet;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @WebServlet("/Photos/*")
-public class PhotosServlet extends HttpServlet {
+public class PhotosServlet extends BaseServlet {
 
-    protected HttpServletRequest req;
-    protected HttpServletResponse resp;
+//    protected HttpServletRequest req;
+//    protected HttpServletResponse resp;
 ////    private  HttpServletRequest request;
 ////    private HttpServletResponse response;
 ////
@@ -83,16 +82,17 @@ public class PhotosServlet extends HttpServlet {
 ////    }
 
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.req=req;this.resp=resp;
-        upload();
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doGet(req,resp);
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+//        this.req=req;this.resp=resp;
+////        upload();
+//        getPhotos();
+//    }
+//
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        this.doGet(req,resp);
+//    }
 
     public void upload() throws IOException {
         Integer id = (Integer) req.getSession().getAttribute("id");
@@ -123,7 +123,7 @@ public class PhotosServlet extends HttpServlet {
                 photos.setUid(id);
                 photos.setPath(path);
                 Date date = new Date();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String s = format.format(date);
                 photos.setTime(s);
                 photosService.insert(photos);
@@ -132,12 +132,43 @@ public class PhotosServlet extends HttpServlet {
     }
 
     public void getPhotos() throws IOException {
-        Integer uid= (Integer) req.getSession().getAttribute("id");
+        System.out.println("getPhotos");
+//        Integer uid= (Integer) req.getSession().getAttribute("id");
+        Integer uid=1;
         PhotosService photosService = new PhotosServiceImpl();
         List<Photos> photos = photosService.selectByUid(uid);
+
+        class ret{
+            public String date;
+            public String url;
+            public Integer id;
+        }
+        List<ret> retMsg=new ArrayList<>();
+        for (Photos photo:photos){
+            ret ret = new ret();
+            ret.date=photo.getTime();
+            ret.url=photo.getPath();
+            ret.id=photo.getId();
+            retMsg.add(ret);
+        }
         resp.setContentType("text/json;charset=utf-8");
-        resp.getWriter().write(JSON.toJSONString(photos));
+        System.out.println(JSON.toJSONString(photos));
+        System.out.println(JSON.toJSONString(retMsg));
+        resp.getWriter().write(JSON.toJSONString(retMsg));
     }
 
+    public void getAvatar() throws IOException {
+        Integer uid=1;
+        UserServiceImpl userService = new UserServiceImpl();
+        User user = userService.selectById(uid);
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(user.getAvatar());
+    }
+
+    public void deletePhotos(){
+        Integer id = (Integer) req.getSession().getAttribute("id");
+
+    }
 
 }
+

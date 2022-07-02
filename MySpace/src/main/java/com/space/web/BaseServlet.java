@@ -29,8 +29,13 @@ public class BaseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.req=req;
         this.resp=resp;
-        String requestBody = IOUtils.toString(req.getInputStream());
-        jsonObject = JSON.parseObject(requestBody);
+        if(req.getMethod().equals("POST")){
+            String requestBody = IOUtils.toString(req.getInputStream());
+            jsonObject = JSON.parseObject(requestBody);
+        }
+
+//        req.getSession().setAttribute("id",1);
+
 
         String uri = req.getRequestURI();
         int index = uri.lastIndexOf('/');

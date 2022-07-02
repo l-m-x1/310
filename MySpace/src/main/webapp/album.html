@@ -57,6 +57,7 @@
 
                 <div class="block" v-for="photo in photos" :key="photo">
                     <div class="gallery">
+                        <input type="checkbox" name="deletePhotos" :value="photo.id" style="position: fixed;z-index: 1"/>
                         <el-image
                                 style="width: 100%; height: 80%"
                                 :src="photo.url"
@@ -178,6 +179,11 @@
 
     let photoSource = new Vue({
         el:"#album",
+        mounted()
+        {
+          this.getPhotos();
+        },
+
         data()
         {
             return{
@@ -212,6 +218,19 @@
             }
         },
         methods:{
+
+            getPhotos()
+            {
+                //get album
+                axios({
+                    methods: "get",
+                    url:'http://localhost/Photos/getPhotos'
+                }).then(resp=>{
+                    photoSource.photos=resp.data;
+                });
+
+            },
+
           showDialog()
           {
               dialog.dialogVisible=true;
@@ -219,36 +238,29 @@
 
             deleteByQuery()
             {
+               let obj = document.getElementsByName("deletePhotos");
+               for(let i=0;i<obj.length;i++)
+                   if(obj[i].checked)
+                       this.checkList.push(obj[i].value);
 
+               axios({
+                   method: "post",
+                   url:'http://localhost/Photos/deletePhotos',
+                   data:this.checkList
+               }).then(resp=>{
+                   this.$message({
+                       message: '删除成功！',
+                       type: 'success'
+                   });
+                   this.checkList=[];
+                   this.getPhotos();
+               })
             }
 
         }
     });
-    //
-    // //get album
-    //
-    // axios({
-    //     methods: "get",
-    //     url:''
-    // }).then(resp=>{
-    //     photoSource.photos=resp.data;
-    // })
-    // $(document).ready(function (){
-    //      let albumElement = $('#album');
-    //      for(let i=0;i<photoSource.photos.length;i++)
-    //      {
-    //
-    //          let aPhoto=" <div class=\"gallery\">\n" +
-    //              "            <a target=\"_blank\" href=\""+photoSource.photos[i].url+"\">\n" +
-    //              "             <input type=\"checkbox\"  size=\"big\" style=\"position:fixed\">\n                                    "+
-    //              "                <img src=\""+photoSource.photos[i].url+"\" alt=\"Mountains\" style=\"width: 100%;height: 70%\">\n" +
-    //              "            </a>\n" +
-    //              "            <div class=\"desc\">"+photoSource.photos[i].date+"</div>\n" +
-    //              "        </div>";
-    //          albumElement.append(aPhoto);
-    //      }
-    //
-    // });
+
+
 
 </script>
 </body>
