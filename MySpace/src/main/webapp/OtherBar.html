@@ -27,7 +27,6 @@
         </div>
     </li>
 </ul>
-
 <div id="message">
     <el-dialog
             title="添加好友请求"
@@ -98,14 +97,14 @@
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
         <div hidden="hidden" id="formationCheck">
-                <template>
-                    <el-alert
-                            title="账号格式错误，请输入9位数字"
-                            type="error"
-                            show-icon
-                            :closable="false" disabled="true">
-                    </el-alert>
-                </template>
+            <template>
+                <el-alert
+                        title="账号格式错误，请输入9位数字"
+                        type="error"
+                        show-icon
+                        :closable="false" disabled="true">
+                </el-alert>
+            </template>
         </div>
 
         <div class="searchResult" style="margin-bottom: 20px;display: none">
@@ -130,11 +129,11 @@
 </div>
 
 <ul class="midNav">
-    <li id="active"><a href="FriendFeed.html" >主页</a></li>
-    <li><a href="album.html">相册</a></li>
-    <li><a href="viewlog.html">日志</a></li>
-    <li><a href="comment.html">留言版</a></li>
-    <li><a href="#">个人心情</a></li>
+    <li id="active"><a href="OtherFeed.html" >主页</a></li>
+<!--    <li><a href="album.html">相册</a></li>-->
+<!--    <li><a href="viewlog.html">日志</a></li>-->
+    <li><a href="OtherComment.html">留言版</a></li>
+<!--    <li><a href="#">个人心情</a></li>-->
 </ul>
 
-<script src="./js/navigationBar.js"></script>
+<script src="./js/OtherBar.js"></script>

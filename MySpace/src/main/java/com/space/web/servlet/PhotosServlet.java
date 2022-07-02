@@ -1,6 +1,7 @@
 package com.space.web.servlet;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.space.pojo.Photos;
 import com.space.pojo.User;
 import com.space.service.PhotosService;
@@ -167,6 +168,16 @@ public class PhotosServlet extends BaseServlet {
 
     public void deletePhotos(){
         Integer id = (Integer) req.getSession().getAttribute("id");
+//        id=1;
+        JSONArray deletes = jsonObject.getJSONArray("checkList");
+        PhotosServiceImpl photosService = new PhotosServiceImpl();
+
+        for(Object delete:deletes){
+            photosService.deleteById((Integer) delete);
+        }
+    }
+
+    public void setAvatar(){
 
     }
 

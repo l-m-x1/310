@@ -10,33 +10,26 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-@WebServlet("/MsgBoard")
+@WebServlet("/MsgBoard/*")
 public class MsgBoardServlet extends BaseServlet {
 
     MsgBoardService msgBoardService=new MsgBoardServiceImpl();
-    HttpSession session=req.getSession();
+
+
     //添加一条留言板数据
     public void add(){
-//        int wrid = Integer.parseInt(request.getParameter("wrid"));
-//        String content = request.getParameter("content");
-//        String time = request.getParameter("time");
-//        int uid = Integer.parseInt(request.getParameter("uid"));
-//        MsgBoard msgBoard=new MsgBoard();
-//        msgBoard.setContent(content);
-//        msgBoard.setWrid(wrid);
-//        msgBoard.setTime(time);
-//        msgBoard.setUid(uid);
-//        //楼层数并未处理
-//
-//        msgBoardImpl.insert(msgBoard);
 
-
+        HttpSession session=req.getSession();
+        //session.setAttribute("id",30);
         MsgBoard msgBoard=new MsgBoard();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         msgBoard.setUid((Integer) session.getAttribute("id"));
         msgBoard.setContent(jsonObject.getString("content"));
-        msgBoard.setTime(jsonObject.getString("time"));
+        msgBoard.setTime(simpleDateFormat.format(new Date()));
         msgBoard.setWrid(jsonObject.getInteger("wrid"));
         msgBoard.setFloor(jsonObject.getInteger("floor"));
         msgBoardService.insert(msgBoard);
@@ -45,6 +38,8 @@ public class MsgBoardServlet extends BaseServlet {
 
     //展示该用户的相关留言板
     public void show() throws IOException {
+        HttpSession session=req.getSession();
+        //session.setAttribute("id",30);
         Integer uid = (Integer) session.getAttribute("id");
         List<MsgBoard> boards = msgBoardService.selectByUid(uid);
 

@@ -12,6 +12,16 @@ public class Diary {
     private String time;
     private String content;
 
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -49,8 +59,9 @@ public class Diary {
         return "Diary{" +
                 "id=" + id +
                 ", uid=" + uid +
-                ", time=" + time +
+                ", time='" + time + '\'' +
                 ", content='" + content + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 }

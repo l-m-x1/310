@@ -19,8 +19,11 @@
         }
         #button{
             position: relative;
-            top:20px;
-            right: 60px;
+            left: 60px;
+        }
+        #return{
+            position: relative;
+            left: 60px;
         }
     </style>
 
@@ -31,6 +34,8 @@
     <el-form id="Permission"  label-width="80px">
         <el-row >
             <span id="title" class="demonstration">权限管理</span>
+            <el-button id="return" icon="el-icon-caret-left" @click="returnSubmit">返回主页</el-button>
+<!--            <el-button type="primary" icon="el-icon-check" id="button" @click="onSubmit">确认修改</el-button>-->
         </el-row>
     <template>
         <hr>
@@ -52,7 +57,7 @@
                 <template slot-scope="scope">
                     <!-- scope.row 可以取到当前一行的数据 -->
                     <el-switch v-model="scope.row.permission"
-                               @change="userStateChange(scope.row)"
+                               @change="onSubmit(scope.row.name)"
                                active-text="允许"
                                inactive-text="不允许">
                     </el-switch>
@@ -60,9 +65,6 @@
             </el-table-column>
         </el-table>
     </template>
-        <el-form-item>
-            <el-button type="primary" id="button" @click="onSubmit">确认修改</el-button>
-        </el-form-item>
     </el-form>
 </div>
 
@@ -75,7 +77,6 @@
     new Vue({
         el: '#app',
         mounted(){
-
             var _this=this;
             axios({
                 method:"get",
@@ -86,48 +87,40 @@
         },
         data() {
             return {
-                brand: {
-                    name:'',
-                    account:'',
-                    permission: Boolean,
-                },
                 PermissionData: [{
                     name:'姜明',
                     account:'1399582722',
                     permission: true
                     },
                     {
-                        name:'姜明',
-                        account:'1399582722',
-                        permission:false
-                    },
-                    {
-                        name:'姜明',
+                        name:'李凯翔',
                         account:'1399582722',
                         permission:true
                     },
                     {
-                        name:'姜明',
+                        name:'胡洋洋',
                         account:'1399582722',
                         permission:true
                     },
                     {
-                        name:'姜明',
+                        name:'刘萌象',
                         account:'1399582722',
                         permission:true
                     }]
             };
         },
         methods: {
-
-            onSubmit() {
+            returnSubmit(){
+                window.location.href="MyFeed.html";
+            },
+            onSubmit(message) {
                 var _this=this;
-                alert(this.PermissionData)
+                alert(message)
                 console.log('submit!');
                 axios({
                     method:"post",
                     url:"",//地址
-                    data:_this.PermissionData
+                    data:message
                 }).then(function (resp) {
                     if(resp.data=="success"){
                         //成功后的反应

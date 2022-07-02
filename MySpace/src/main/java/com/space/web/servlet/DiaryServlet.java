@@ -9,14 +9,11 @@ import com.space.web.BaseServlet;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/***
- * 向/Diary发送请求，参数func,diary
- * func为调用方法名
- * diary封装diary信息
- */
+
 @WebServlet("/Diary/*")
 public class DiaryServlet extends BaseServlet {
     public void getDiaryInfo() throws IOException {
@@ -57,5 +54,43 @@ public class DiaryServlet extends BaseServlet {
         diary.setContent(jsonObject.getString("content"));
         DiaryService diaryService = new DiaryServiceImpl();
         diaryService.update(diary);
+    }
+
+    public void setLog(){
+//        Integer uid = jsonObject.getInteger("uid");
+        Integer uid=(Integer)req.getSession().getAttribute("id");
+        Diary diary = new Diary();
+        diary.setUid(uid);
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String s = format.format(date);
+        diary.setTime(s);
+        diary.setTitle(jsonObject.getString("name"));
+        diary.setContent(jsonObject.getString("content"));
+        DiaryService diaryService=new DiaryServiceImpl();
+        diaryService.insert(diary);
+    }
+
+    public void viewLogs() throws IOException {
+//        Integer uid = jsonObject.getInteger("uid");
+
+        class ret{
+            public Integer id;
+            public String name;
+            public String text;
+        }
+        Integer uid= (Integer) req.getSession().getAttribute("uid");
+        DiaryService diaryService = new DiaryServiceImpl();
+        List<Diary> diaries = diaryService.selectByUid(uid);
+        ArrayList<ret> rets = new ArrayList<>();
+        for(Diary diary:diaries){
+            ret ret = new ret();
+            ret.id=diary.getId();
+            ret.name=diary.getTitle();
+            ret.text=diary.getContent();
+            rets.add(ret);
+        }
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(JSON.toJSONString(rets));
     }
 }
