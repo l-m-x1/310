@@ -78,7 +78,7 @@ public class TrendsServiceImpl implements TrendsService {
     }
 
     @Override
-    public List<Trends> selectByUids(int[] uids) {
+    public List<Trends> selectByUids(List<Integer> uids) {
 //        SqlSession session = factory.openSession();
 //        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         List<Trends> trends = mapper.selectByUids(uids);

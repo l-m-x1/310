@@ -22,7 +22,7 @@ public interface StyleMapper {
     @Delete("delete from  style where id=#{id}")
     void deleteById(Integer id);
 
-    @Update("update style set type=#{type} where id=#{id}")
-    void updateType(@Param("id") Integer id, @Param("type") Integer type);
+    @Update("update style set type=#{type} where uid=#{uid}")
+    void updateType(@Param("uid") Integer uid, @Param("type") Integer type);
 
 }

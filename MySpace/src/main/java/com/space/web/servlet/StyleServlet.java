@@ -1,8 +1,10 @@
 package com.space.web.servlet;
 
+import com.alibaba.fastjson.JSON;
 import com.space.pojo.Style;
 import com.space.service.StyleService;
 import com.space.service.impl.StyleServiceImpl;
+import com.space.web.BaseServlet;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -10,32 +12,22 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "StyleServlet", value = "/StyleServlet")
-public class StyleServlet extends HttpServlet {
-    private  HttpServletRequest request;
-    private HttpServletResponse response;
+@WebServlet( "Style")
+public class StyleServlet extends BaseServlet {
 
-    private StyleService styleImpel=new StyleServiceImpl();
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.request=request;
-        this.response=response;
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
-    }
-
-    public void selectByUid(){
-        int uid = Integer.parseInt(request.getParameter("uid"));
-        List<Style> styles = styleImpel.selectByUid(uid);
+    StyleService styleService=new StyleServiceImpl();
+    HttpSession session=req.getSession();
+    public void show() throws IOException {
+        Integer uid = (Integer) session.getAttribute("id");
+        List<Style> styles = styleService.selectByUid(uid);
+        String jsonString = JSON.toJSONString(styles);
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(jsonString);
     }
 
     public void updateType(){
-        int id= Integer.parseInt(request.getParameter("id"));
-        int type= Integer.parseInt(request.getParameter("type"));
-        styleImpel.updateType(id,type);
+        Integer uid = (Integer) session.getAttribute("id");
+        int type=jsonObject.getInteger("type");
+        styleService.updateType(uid,type);
     }
 }

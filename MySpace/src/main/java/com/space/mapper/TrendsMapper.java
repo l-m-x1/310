@@ -1,5 +1,6 @@
 package com.space.mapper;
 
+import com.space.pojo.Info;
 import com.space.pojo.Trends;
 import org.apache.ibatis.annotations.*;
 
@@ -16,7 +17,7 @@ public interface TrendsMapper {
     @Select("select * from trends where uid=#{uid}")
     List<Trends> selectByUid(Integer uid);
 
-    List<Trends> selectByUids(@Param("uids") int[] uids);
+    List<Trends> selectByUids(@Param("uids") List<Integer> uids);
 
     @Insert("insert into trends(content,uid) values (#{content},#{uid})")
     void insert(Trends trends);
