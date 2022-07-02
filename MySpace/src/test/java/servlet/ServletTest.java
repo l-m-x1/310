@@ -94,7 +94,18 @@ public class ServletTest {
         System.out.println(path);
     }
 
+    @Test
     public void testJSONARRAY(){
+        int[]a=new int[]{1,2,3,4,5,6,7,8,9,0};
+
+        JSONObject jsonObject1 = new JSONObject();
+        jsonObject1.put("array",a);
+        JSONArray array = jsonObject1.getJSONArray("array");
+        for (Object o:array){
+            System.out.println(o);
+        }
+        System.out.println(jsonObject1);
 
     }
 }
+

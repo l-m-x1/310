@@ -34,7 +34,7 @@ public class BaseServlet extends HttpServlet {
             jsonObject = JSON.parseObject(requestBody);
         }
 
-//        req.getSession().setAttribute("id",1);
+        req.getSession().setAttribute("id",1);
 
 
         String uri = req.getRequestURI();
