@@ -1,7 +1,6 @@
 package servlet;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.Diary;
 import com.space.pojo.Friends;
@@ -10,9 +9,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -95,26 +92,9 @@ public class ServletTest {
     }
 
     @Test
-    public void testJSONARRAY(){
-        int[]a=new int[]{1,2,3,4,5,6,7,8,9,0};
+    public void testTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        JSONObject jsonObject1 = new JSONObject();
-        jsonObject1.put("array",a);
-        JSONArray array = jsonObject1.getJSONArray("array");
-        for (Object o:array){
-            System.out.println(o);
-        }
-        System.out.println(jsonObject1);
-
-    }
-
-    @Test
-    public void arrayList(){
-        ArrayList<Integer> integers = new ArrayList<>();
-        integers.add(1);
-        integers.add(2);
-        integers.add(3);
-        System.out.println(JSON.toJSONString(integers));
+        System.out.println(simpleDateFormat.format(new Date()));
     }
 }
-

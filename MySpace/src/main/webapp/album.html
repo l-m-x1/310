@@ -73,7 +73,7 @@
                 <!--添加数据对话框表单-->
                 <el-dialog
                         title="上传照片"
-                        :visible.sync="true"
+                        :visible.sync="dialogVisible"
                         width="50%"
                         append-to-body="true"
                         @close="close"
@@ -246,7 +246,9 @@
                axios({
                    method: "post",
                    url:'http://localhost/Photos/deletePhotos',
-                   data:this.checkList
+                   data:{
+                       checkList:this.checkList
+                   }
                }).then(resp=>{
                    this.$message({
                        message: '删除成功！',

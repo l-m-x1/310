@@ -7,9 +7,9 @@ let addFriendVue =  new Vue({
             dialogVisible:false,
             resultVisible:false,
             input:'',
-            userAvatar:"./img.png",
-            userID:'',
-            userName:''
+            userAvatar:"./photos/p1.jpg",
+            userID:'123',
+            userName:'123'
         }
     },
     methods:{
@@ -21,12 +21,49 @@ let addFriendVue =  new Vue({
 
         addFriend()
         {
-            alert(1);
+           axios({
+               method:"post",
+               url:'',
+               data:{
+                   id:this.userID
+               }
+           }).then(resp=>{
+               this.$message({
+                   message: '请求发送成功！',
+                   type: 'success'
+               });
+           });
         },
 
         searchUser()
         {
-            $(".searchResult").prop("style","display:block");
+            let reg=/^\d{9}$/;
+            if(reg.test(this.input))
+            {
+                document.getElementById("formationCheck").hidden=true;
+                $(".searchResult").prop("style","display:block");
+                axios({
+                    method:"post",
+                    url:'',
+                    data:{
+                        id:this.input
+                    }
+                }).then(resp=>{
+                    if(resp.data!=null)
+                    {
+                        this.userAvatar=resp.data.avatar;
+                        this.userID=resp.data.id;
+                        this.userName=resp.data.name;
+                    }
+
+                })
+
+
+            }
+            else{
+                document.getElementById("formationCheck").hidden=false;
+            }
+
         }
 
     }
@@ -129,14 +166,14 @@ let message = new Vue({
         return{
             dialogVisible:false,
             tableData:[{
-                avatarUrl:'D:\\ideaC\\MyZone\\MySpace\\src\\main\\webapp\\img.png',
+                avatarUrl:'./photos/p1.jpg',
                 name:'zhansan',
-                id:''
+                id:'1'
             },
                 {
                     avatarUrl:'./img.png',
                     name:'lisi',
-                    id:''
+                    id:'2'
                 }
             ]
         }
@@ -151,17 +188,18 @@ let message = new Vue({
                 url:""
 
             }).then(resp=>{
-
+                this.tableData=resp.data();
             });
         },
 
         agree(row)
         {
+
             axios({
                 method:"post",
                 url:'',
                 data:{
-                    id:'',
+                    id:row.id,
                     type:"agree"
                 }
             }).then(resp=>{
@@ -181,7 +219,7 @@ let message = new Vue({
                 method:"post",
                 url:'',
                 data:{
-                    id:'',
+                    id:row.id,
                     type:"refuse"
                 }
             }).then(resp=>{
