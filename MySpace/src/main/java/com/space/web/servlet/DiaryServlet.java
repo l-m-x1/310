@@ -1,20 +1,13 @@
 package com.space.web.servlet;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.Diary;
 import com.space.service.DiaryService;
 import com.space.service.impl.DiaryServiceImpl;
 import com.space.web.BaseServlet;
-import org.apache.commons.io.IOUtils;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +17,7 @@ import java.util.List;
  * func为调用方法名
  * diary封装diary信息
  */
-@WebServlet("/Diary")
+@WebServlet("/Diary/*")
 public class DiaryServlet extends BaseServlet {
     public void getDiaryInfo() throws IOException {
         Integer uid = jsonObject.getInteger("uid");

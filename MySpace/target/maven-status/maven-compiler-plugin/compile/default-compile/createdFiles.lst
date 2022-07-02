@@ -36,6 +36,7 @@ com\space\pojo\Mood.class
 com\space\web\servlet\RegisterServlet.class
 com\space\service\AddFriService.class
 com\space\service\impl\AddFriServiceImpl.class
+com\space\web\servlet\PhotosServlet$1ret.class
 com\space\pojo\MsgBoard.class
 com\space\service\impl\FriendsServiceImpl.class
 com\space\web\servlet\TrendsServlet.class
@@ -46,6 +47,7 @@ com\space\mapper\MsgBoardMapper.class
 com\space\mapper\DiaryMapper.class
 com\space\service\DiaryService.class
 com\space\service\StyleService.class
+com\space\web\servlet\HomePageManger$1ret.class
 com\space\service\impl\InfoServiceImpl.class
 com\space\mapper\InfoMapper.class
 com\space\pojo\Friends.class

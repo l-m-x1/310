@@ -5,9 +5,8 @@ import com.space.service.UserService;
 import com.space.service.impl.UserServiceImpl;
 import com.space.web.BaseServlet;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/Login/*")
@@ -51,5 +50,6 @@ public class LoginServlet extends BaseServlet {
             session.setAttribute("password",password);
             resp.getWriter().write("successfully login");
         }
+
     }
 }

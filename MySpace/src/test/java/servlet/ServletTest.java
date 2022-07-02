@@ -93,4 +93,8 @@ public class ServletTest {
         String path="hello"+ uuid +".jpg";
         System.out.println(path);
     }
+
+    public void testJSONARRAY(){
+
+    }
 }
