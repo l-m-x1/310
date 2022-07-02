@@ -80,6 +80,10 @@
       left: 20px;
       position: relative;
     }
+    #button2{
+      left: 40px;
+      position: relative;
+    }
 
   </style>
 </head>
@@ -100,7 +104,26 @@
       <el-form id="date"  label-width="80px" >
         <el-row >
           <span id="button1" class="demonstration"><i class="el-icon-edit-outline"></i>留言板</span>
+          <el-button id="button2" @click="write.show=!write.show" type="info" plain><i class="el-icon-s-order"></i>我要留言</el-button>
         </el-row>
+        <el-form :model="write" ref="write" label-width="100px" v-show="write.show" >
+          <hr>
+          <el-form-item
+                  label="我的留言"
+                  prop="text"
+                  :rules="[
+                            { required: true, message: '不能为空'},
+                        ]">
+            <el-input v-model.number="write.text"
+                      type="textarea"
+                      :autosize="{ minRows: 6, maxRows: 100}"
+                      placeholder="请输入内容"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="OnSubmit">提交</el-button>
+            <el-button @click="resetForm('write')">重置</el-button>
+          </el-form-item>
+        </el-form>
         <hr>
         <ul>
           <li v-for="commentData in commentDatas">
@@ -171,6 +194,10 @@
     el: '#comment',
     data() {
       return {
+        write: {
+          text: '',
+          show:false,
+        },
         commentDatas: [{
           photo:'https://ts1.cn.mm.bing.net/th/id/R-C.86a0fa17b9b37ff7518b552e2517a0ae?rik=CX0%2fMchuLIBQVA&riu=http%3a%2f%2fimg.crcz.com%2fallimg%2f201809%2f11%2f1536666825645562.jpg&ehk=g6IGr0cDabvrRd5KSQdbup2trGpltKDfA7Hx7eopcm0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
           name: '姜明',
@@ -199,7 +226,7 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            // window.location.href="http://localhost:63342/01-%E5%88%9D%E5%A7%8B%E5%B7%A5%E7%A8%8B/brand-case/src/main/webapp/dome2.html?_ijt=q1568uo09n96m0r6pdrdlgqbis&_ij_reload=RELOAD_ON_SAVE";
+            // window.location.href="";
             alert('提交成功!');
             this.$refs[formName].resetFields();
           } else {
@@ -211,13 +238,24 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
+      OnSubmit:function(){
+        alert(this.write.text);
+        var _this=this;
+        axios({
+          method:"post",
+          url:"",
+          data:_this.write.text//通过内容添加
+        }).then(function (resp) {
+          //刷新
+        })
+      },
       remove(message){
         alert(message);
         var _this=this;
         axios({
           method:"post",
           url:"",
-          data:_this.commentDatas[message].id//通过id删除可改
+          data:message//通过id删除可改
         }).then(function (resp) {
           //刷新
         })

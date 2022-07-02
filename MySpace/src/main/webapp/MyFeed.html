@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+    <script src="js/vue.js"></script>
+    <script src="element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+    <script src="js/axios-0.18.0.js"></script>
+
+    <link rel="stylesheet" href="css/navigationBar.css">
+    <link rel="stylesheet" href="css/leftColumn.css">
+    <style>
+
+        html {
+            background: bisque;
+        }
+        #FriendFeed{
+            right: 100px;
+            position: relative;
+        }
+        #title{
+            left: 20px;
+            position: relative;
+        }
+        #date{
+            margin-left: 20%;
+            max-width: 900px;
+        }
+
+        .div0{
+            border: 1px solid blue;
+            padding: 10px;
+            background-color: white;
+        }
+
+        img {
+            position: relative;
+            left: 10px;
+            float: left;
+        }
+
+        #name{
+            vertical-align: top;
+            font-size:20px;
+        }
+        #text {
+            width: 95%;
+            height: 60%;
+            top: 10px;
+            /*border: 1px solid blue;*/
+        }
+        #time{
+            position: relative;
+            font-size:7px;
+            right:120px;
+        }
+        #reply{
+            position: relative;
+            font-size:15px;
+        }
+        #replyname{
+            /*vertical-align: top;*/
+            position: relative;
+            left:20px;
+            font-size:10px;
+            top:5px;
+        }
+        #cheerNumber{
+            color: #3a8ee6;
+        }
+
+        #in{
+            position: relative;
+            top:10px;
+        }
+
+        #cheer{
+            position: relative;
+            right:20px;
+        }
+        #delete{
+            position: relative;
+            left:70%;
+        }
+        #change{
+            position: relative;
+            left:20px;
+        }
+        .div1 {
+            height: 300px;
+        }
+        .div1 span{
+            left: 20px;
+            position: relative;
+        }
+        #button{
+            left: 40px;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="navigationBar">
+
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+
+    </div>
+    <div class="rightcolumn">
+        <div id="FriendFeed">
+            <el-form id="date" >
+                <el-row >
+                    <span id="title" class="demonstration"><i class="el-icon-user-solid"></i>我的主页</span>
+                    <el-button id="button" @click="write.show=!write.show" type="info" plain><i class="el-icon-edit"></i>写说说</el-button>
+                </el-row>
+                <el-form :model="write" ref="write" label-width="100px" v-show="write.show" >
+                    <hr>
+                    <el-form-item
+                            label="说说"
+                            prop="text"
+                            :rules="[
+                            { required: true, message: '不能为空'},
+                        ]">
+                        <el-input v-model.number="write.text"
+                                  type="textarea"
+                                  :autosize="{ minRows: 6, maxRows: 100}"
+                                  placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="OnSubmit">提交</el-button>
+                        <el-button @click="resetForm('write')">重置</el-button>
+                    </el-form-item>
+                </el-form>
+                <hr>
+                <ul>
+                    <li v-for="ruleForm in ruleForms">
+                        <div class="div0">
+                            <div class="div1">
+                                <p>
+                                    <img :src="ruleForm.photo"
+                                         style="width:50px;
+                                     height:50px;
+                                     margin-left:10px;">
+                                    <span id="name">{{ruleForm.name}}<br></span>
+                                    <span id="time">{{ruleForm.time}}</span>
+                                    <br>
+                                <div id="text">
+                                    <span>{{ruleForm.text}}</span>
+                                </div>
+                                </p>
+                                <span >
+                            <el-button id="cheer" type="text" @click="cheer(ruleForm)"><i class="el-icon-magic-stick"></i>点赞</el-button>
+                            </span><span>
+                            <el-button id="reply" type="text" @click="ruleForm.show=!ruleForm.show"><i class="el-icon-s-comment"></i>回复</el-button>
+                            </span><span>
+                            <el-button id="change" type="text" @click="ruleForm.modify=!ruleForm.modify"><i class="el-icon-edit"></i>修改</el-button>
+                            </span><span >
+                            <el-button id="delete" type="text" @click="remove(ruleForm.id)" icon="el-icon-delete"></el-button>
+                            </span>
+                            </div>
+                            <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px"  v-show="ruleForm.show">
+                                <hr>
+                                <el-form-item label="回复内容" prop="desc">
+                                    <el-input
+                                            type="textarea"
+                                            :autosize="{ minRows: 6, maxRows: 100}"
+                                            placeholder="请输入内容"
+                                            v-model="ruleForm.desc">
+                                    </el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="submitForm(ruleForm)">确认</el-button>
+                                    <el-button @click="resetForm('ruleForm')">清空</el-button>
+                                </el-form-item>
+                            </el-form>
+                            <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px"  v-show="ruleForm.modify">
+                                <hr>
+                                <el-form-item label="修改内容" prop="text">
+                                    <el-input
+                                            type="textarea"
+                                            :autosize="{ minRows: 6, maxRows: 100}"
+                                            placeholder="请输入内容"
+                                            v-model="ruleForm.text">
+                                    </el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="submitForm(ruleForm)">确认修改</el-button>
+                                </el-form-item>
+                            </el-form>
+                            <hr>
+                            <span id="cheerNumber"> <i class="el-icon-medal"></i>{{ruleForm.cheer}}人觉得很赞 </span>
+                            <div id="replyname">
+                                <span >{{ruleForm.name}}:</span>
+                                <span>{{ruleForm.text}}</span>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                    </li>
+                </ul>
+            </el-form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+
+    $("#navigationBar").load("./navigationBar.html");
+    $(".leftcolumn").load("./leftColumn.html");
+
+    new Vue({
+        el: '#FriendFeed',
+        mounted(){
+            var _this=this;
+            axios({
+                method:"get",
+                url:''//网站
+            }).then(function (resp){
+                //_this.ruleForms=resp.data;
+            })
+        },
+        data() {
+            return {
+                write: {
+                    text: '',
+                    show:false,
+                },
+                ruleForms:[{
+                    id:1,
+                    photo:'https://ts1.cn.mm.bing.net/th/id/R-C.86a0fa17b9b37ff7518b552e2517a0ae?rik=CX0%2fMchuLIBQVA&riu=http%3a%2f%2fimg.crcz.com%2fallimg%2f201809%2f11%2f1536666825645562.jpg&ehk=g6IGr0cDabvrRd5KSQdbup2trGpltKDfA7Hx7eopcm0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
+                    name:'姜明',
+                    time:'2012-2-1',
+                    text:'津贴喝好圣诞节交罚款哈咖啡壶看不见了都',
+                    cheer:0,
+                    show:false,
+                    modify:false
+                },
+                    {
+                        id:2,
+                        photo:'./photos/p4.jpg',
+                        name:'姜明',
+                        time:'2015-3-1',
+                        text:'我喜欢所发生的，学金沙江今安徽饭卡是否卡解放啦',
+                        cheer:0,
+                        show:false,
+                        modify:false
+                    }
+                ],
+                rules: {
+                    desc: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }
+                    ]
+                }
+            }
+        },
+
+        methods: {
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            OnSubmit:function(){//添加
+                alert(this.write.text);
+                var _this=this;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:_this.write.text//通过内容添加
+                }).then(function (resp) {
+                    //刷新
+                })
+            },
+            remove:function(message){//删除
+                alert(message);
+                axios({
+                    method:"post",
+                    url:"",
+                    data:message//message通过id删除
+                }).then(function (resp) {
+                    //刷新
+                })
+            },
+            submitForm(message){//修改内容
+                alert(message.id);
+                axios({
+                    method:"post",
+                    url:"",
+                    data:message//message通过id可改
+                }).then(function (resp) {
+                    //刷新
+                })
+            },
+            cheer(message){//修改点赞数
+                message.cheer++;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:message//message通过id可改
+                }).then(function (resp) {
+                    //刷新
+                })
+            }
+
+        }
+    })
+
+
+</script>
+</body>
+</html>

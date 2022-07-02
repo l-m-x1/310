@@ -52,8 +52,6 @@
             height: 60%;
             top: 10px;
             /*border: 1px solid blue;*/
-            border: 1px solid blue;
-
         }
         #time{
             position: relative;
@@ -154,11 +152,11 @@
                             </div>
                             </p>
                             <span >
-                            <el-button id="cheer" type="text" @click="ruleForm.cheer++"><i class="el-icon-magic-stick"></i>点赞</el-button>
+                            <el-button id="cheer" type="text" @click="cheer(ruleForm)"><i class="el-icon-magic-stick"></i>点赞</el-button>
                             </span><span>
                             <el-button id="reply" type="text" @click="ruleForm.show=!ruleForm.show"><i class="el-icon-s-comment"></i>回复</el-button>
                             </span><span >
-                            <el-button id="delete" type="text" @click="remove(ruleForm.name)" icon="el-icon-delete"></el-button>
+                            <el-button id="delete" type="text" @click="remove(ruleForm.id)" icon="el-icon-delete"></el-button>
                             </span>
                         </div>
                         <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px"  v-show="ruleForm.show">
@@ -219,27 +217,30 @@
                     show:false,
                 },
                 ruleForms:[{
+                    id:1,
                     photo:'https://ts1.cn.mm.bing.net/th/id/R-C.86a0fa17b9b37ff7518b552e2517a0ae?rik=CX0%2fMchuLIBQVA&riu=http%3a%2f%2fimg.crcz.com%2fallimg%2f201809%2f11%2f1536666825645562.jpg&ehk=g6IGr0cDabvrRd5KSQdbup2trGpltKDfA7Hx7eopcm0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
                     name:'姜明',
                     time:'2012-2-1',
                     text:'津贴喝好圣诞节交罚款哈咖啡壶看不见了都',
-                    cheer:20,
+                    cheer:0,
                     show:false
                 },
                     {
+                        id:2,
                         photo:'D:\\software\\java\\MySpace\\src\\main\\webapp\\photos\\p1.jpg',
                         name:'李凯翔',
                         time:'2015-3-1',
                         text:'我喜欢所发生的，学金沙江今安徽饭卡是否卡解放啦',
-                        cheer:20,
+                        cheer:0,
                         show:false
                     },
                     {
+                        id:3,
                         photo:'D:\\software\\java\\MySpace\\src\\main\\webapp\\photos\\p1.jpg',
                         name:'李凯翔',
                         time:'2015-3-1',
                         text:'我喜欢所发生的，学金沙江今安徽饭卡是否卡解放啦',
-                        cheer:20,
+                        cheer:0,
                         show:false
                     }
                 ],
@@ -256,6 +257,7 @@
                 this.$refs[formName].resetFields();
             },
             OnSubmit:function(){
+                alert(this.write.text);
                 var _this=this;
                 axios({
                     method:"post",
@@ -271,7 +273,17 @@
                 axios({
                     method:"post",
                     url:"",
-                    data:_this.ruleForm.name//通过名字删除可改
+                    data:message//message通过id删除可改
+                }).then(function (resp) {
+                    //刷新
+                })
+            },
+            cheer(message){//修改点赞数
+                message.cheer++;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:message//message通过id可改
                 }).then(function (resp) {
                     //刷新
                 })
