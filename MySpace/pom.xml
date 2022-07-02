@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
@@ -9,9 +9,9 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-<!--  <name>MySpace Maven Webapp</name>-->
+  <!--  <name>MySpace Maven Webapp</name>-->
 
-<!--  <url>http://www.example.com</url>-->
+  <!--  <url>http://www.example.com</url>-->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -64,16 +64,16 @@
 
   <build>
     <finalName>MySpace</finalName>
-   <plugins>
-     <plugin>
-       <groupId>org.apache.tomcat.maven</groupId>
-       <artifactId>tomcat7-maven-plugin</artifactId>
-       <version>2.2</version>
-       <configuration>
-         <port>80</port>
-         <path>/</path>
-       </configuration>
-     </plugin>
-   </plugins>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <port>80</port>
+          <path>/</path>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

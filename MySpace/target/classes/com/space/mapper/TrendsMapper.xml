@@ -3,7 +3,7 @@
 <mapper namespace="com.space.mapper.TrendsMapper">
 
     <select id="selectByUids" resultType="com.space.pojo.Trends">
-        delete from trends where uid in
+        select from trends where uid in
         <foreach collection="uids" item="uid" separator="," open="(" close=")">
             #{uid}
         </foreach>
