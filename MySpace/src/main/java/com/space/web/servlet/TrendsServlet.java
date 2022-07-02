@@ -21,7 +21,7 @@ public class TrendsServlet extends BaseServlet {
    TrendsService trendsService=new TrendsServiceImpl();
     HttpSession session=req.getSession();
 
-    public void showTrends() throws IOException {
+    public void show() throws IOException {
         //int[] uids = new int[0];
 
         List<Integer> uids=new ArrayList<>();
