@@ -87,7 +87,7 @@ axios({
     })
 });
 
-friendList.push(new Friend("www.baidu.com","./img.png","zhuangsan"));
+friendList.push(new Friend("http://www.baidu.com","./img.png","zhuangsan"));
 friendList.push(new Friend("","./img.png","lisi"));
 friendList.push(new Friend("","./img.png","lisi"));
 friendList.push(new Friend("","./img.png","lisi"));
@@ -109,19 +109,21 @@ friendList.forEach(item=>{
     friends.append(friend);
 });
 
+
+
+
+
+
+
+
+
+
 let message = new Vue({
     el:"#message",
-    //
-    // mounted() {
-    //
-    //     axios({
-    //         method:"get",
-    //         url:""
-    //
-    //     }).then(resp=>{
-    //         this.tableData='';
-    //     });
-    // },
+
+    mounted() {
+
+    },
 
     data(){
         return{
@@ -141,16 +143,53 @@ let message = new Vue({
     },
 
     methods:{
+
+        getMessage()
+        {
+            axios({
+                method:"get",
+                url:""
+
+            }).then(resp=>{
+
+            });
+        },
+
         agree(row)
         {
-            // axios({
-            //     method:"post",
-            //     url:''
-            // })
+            axios({
+                method:"post",
+                url:'',
+                data:{
+                    id:'',
+                    type:"agree"
+                }
+            }).then(resp=>{
+                if(resp.data=="success")
+                {
+                    this.$message({
+                        message: '添加成功！',
+                        type: 'success'
+                    });
+                    this.getMessage()
+                }
+            })
         },
 
         refuse(row){
-
+            axios({
+                method:"post",
+                url:'',
+                data:{
+                    id:'',
+                    type:"refuse"
+                }
+            }).then(resp=>{
+                if(resp.data=="success")
+                {
+                    this.getMessage()
+                }
+            })
         }
     }
 });

@@ -17,8 +17,8 @@
             margin: 5px;
             border: 1px solid #ccc;
             float: left;
-            width: 180px;
-            height: 160px;
+            width: 135px;
+            height: 120px;
             position: relative;
 
         }
@@ -27,16 +27,11 @@
             border: 1px solid #777;
         }
 
-        div.gallery img {
-            width: 100%;
-            height: auto;
-        }
-
         div.desc {
-            padding: 15px;
+
             text-align: center;
             bottom: 0;
-            left: 40px;
+            width: 100%;
             position: absolute;
         }
     </style>
@@ -53,15 +48,31 @@
 
 
     </div>
+
     <div class="rightcolumn">
         <div id="album">
             <el-button type="primary" plain @click="showDialog">上传照片</el-button>
+            <el-button type="danger" @click="deleteByQuery">批量删除</el-button>
+
+
+                <div class="block" v-for="photo in photos" :key="photo">
+                    <div class="gallery">
+                        <el-image
+                                style="width: 100%; height: 80%"
+                                :src="photo.url"
+                                :fit="scale-down">
+
+                        </el-image>
+                        <div class="desc">{{photo.date}}</div>
+                    </div>
+                </div>
+
 
             <div id="uploadDialog">
                 <!--添加数据对话框表单-->
                 <el-dialog
                         title="上传照片"
-                        :visible.sync="dialogVisible"
+                        :visible.sync="true"
                         width="50%"
                         append-to-body="true"
                         @close="close"
@@ -92,6 +103,10 @@
 
                 </el-dialog>
             </div>
+
+
+
+
         </div>
     </div>
 </div>
@@ -166,18 +181,32 @@
         data()
         {
             return{
+                checkList:[],
                 photos:[
                     {
                     date:"2002-2-1",
-                    url:"https://bangongsucai.oss-cn-hangzhou.aliyuncs.com/202004/f72b928ccf.jpg"
+                    url:"https://bangongsucai.oss-cn-hangzhou.aliyuncs.com/202004/f72b928ccf.jpg",
+                    id:'1'
                      },
                     {
-                        date:"2002-2-1",
-                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1"
+                        date:"202-2-1",
+                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1",
+                        id:'2'
                     },
                     {
-                        date:"2002-2-1",
-                        url:"https://ts1.cn.mm.bing.net/th/id/R-C.f7361e4b7f43d9093351eec416e12c87?rik=INUL1eOttipD7g&riu=http%3a%2f%2fimg.aiimg.com%2fuploads%2fuserup%2f0911%2f1Z12120X95.jpg&ehk=WeGUh2zHuI%2fPsYWdHd1%2fpg6z99GL4bOyqAF%2baH4tqHs%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1"
+                        date:"202-2-1",
+                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1",
+                        id:'3'
+                    },
+                    {
+                        date:"202-2-1",
+                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1",
+                        id:'4'
+                    },
+                    {
+                        date:"202-2-1",
+                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1",
+                        id:'5'
                     }
                 ]
             }
@@ -188,32 +217,38 @@
               dialog.dialogVisible=true;
           },
 
+            deleteByQuery()
+            {
+
+            }
+
         }
     });
-
-    //get album
-
-    axios({
-        methods: "get",
-        url:''
-    }).then(resp=>{
-        photoSource.photos=resp.data;
-    })
-    $(document).ready(function (){
-         let albumElement = $('#album');
-         for(let i=0;i<photoSource.photos.length;i++)
-         {
-
-             let aPhoto=" <div class=\"gallery\">\n" +
-                 "            <a target=\"_blank\" href=\""+photoSource.photos[i].url+"\">\n" +
-                 "                <img src=\""+photoSource.photos[i].url+"\" alt=\"Mountains\" width=\"600\" height=\"400\">\n" +
-                 "            </a>\n" +
-                 "            <div class=\"desc\">"+photoSource.photos[i].date+"</div>\n" +
-                 "        </div>";
-             albumElement.append(aPhoto);
-         }
-
-    });
+    //
+    // //get album
+    //
+    // axios({
+    //     methods: "get",
+    //     url:''
+    // }).then(resp=>{
+    //     photoSource.photos=resp.data;
+    // })
+    // $(document).ready(function (){
+    //      let albumElement = $('#album');
+    //      for(let i=0;i<photoSource.photos.length;i++)
+    //      {
+    //
+    //          let aPhoto=" <div class=\"gallery\">\n" +
+    //              "            <a target=\"_blank\" href=\""+photoSource.photos[i].url+"\">\n" +
+    //              "             <input type=\"checkbox\"  size=\"big\" style=\"position:fixed\">\n                                    "+
+    //              "                <img src=\""+photoSource.photos[i].url+"\" alt=\"Mountains\" style=\"width: 100%;height: 70%\">\n" +
+    //              "            </a>\n" +
+    //              "            <div class=\"desc\">"+photoSource.photos[i].date+"</div>\n" +
+    //              "        </div>";
+    //          albumElement.append(aPhoto);
+    //      }
+    //
+    // });
 
 </script>
 </body>
