@@ -19,7 +19,68 @@
             <a href="#about"><span class="iconfont icon-shezhi"></span></a>
         </div>
     </li>
+    <li style="float: right">
+        <div id="checkMesg">
+            <el-badge :value="messageNumber" :max="10" class="item">
+                <el-button size="small" @click="handleClick">消息</el-button>
+            </el-badge>
+        </div>
+    </li>
 </ul>
+
+<div id="message">
+    <el-dialog
+            title="添加好友请求"
+            :visible.sync="dialogVisible"
+            :before-close="handleClose"
+            @close="close"
+            width="50%"
+    >
+        <el-table
+                :data="tableData"
+                style="width:100%"
+                :row-class-name="tableRowClassName"
+                @selection-change="handleSelectionChange"
+        >
+
+
+
+            <el-table-column
+                    align="center"
+                    prop="avatarUrl"
+            >
+                <template   slot-scope="scope">
+                    <img :src="scope.row.avatarUrl"  min-width="50" height="50" />
+                </template>
+            </el-table-column>
+
+            <el-table-column
+                    prop="name"
+                    align="center"
+            >
+
+            </el-table-column>
+
+            <el-table-column
+                    align="center"
+            >
+                <template slot-scope="scope">
+                    <el-row>
+                        <el-button type="primary" @click="agree(scope.row)">同意</el-button>
+                        <el-button type="danger" @click="refuse(scope.row)">拒绝</el-button>
+                    </el-row>
+                </template>
+            </el-table-column>
+
+        </el-table>
+
+
+    </el-dialog>
+
+
+</div>
+
+
 
 <div id="addFriend">
     <el-dialog

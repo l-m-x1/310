@@ -107,4 +107,75 @@ friendList.forEach(item=>{
         "        </div>\n" +
         "    </a>";
     friends.append(friend);
-})
+});
+
+let message = new Vue({
+    el:"#message",
+    //
+    // mounted() {
+    //
+    //     axios({
+    //         method:"get",
+    //         url:""
+    //
+    //     }).then(resp=>{
+    //         this.tableData='';
+    //     });
+    // },
+
+    data(){
+        return{
+            dialogVisible:false,
+            tableData:[{
+                avatarUrl:'D:\\ideaC\\MyZone\\MySpace\\src\\main\\webapp\\img.png',
+                name:'zhansan',
+                id:''
+            },
+                {
+                    avatarUrl:'./img.png',
+                    name:'lisi',
+                    id:''
+                }
+            ]
+        }
+    },
+
+    methods:{
+        agree(row)
+        {
+            // axios({
+            //     method:"post",
+            //     url:''
+            // })
+        },
+
+        refuse(row){
+
+        }
+    }
+});
+
+let checkMesg = new Vue({
+    el:"#checkMesg",
+
+    mounted()
+    {
+        this.messageNumber=message.tableData.length;
+    },
+
+
+    data(){
+        return{
+            messageNumber:0
+
+        }
+    },
+
+    methods:{
+        handleClick()
+        {
+            message.dialogVisible=true;
+        }
+    }
+});
+
