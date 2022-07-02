@@ -93,23 +93,31 @@
         <el-input
                 placeholder="请输入账号"
                 v-model="input"
-                @change="searchUser" >
+                @change="searchUser"
+                style="margin-bottom: 10px">
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
         </el-input>
+        <div hidden="hidden" id="formationCheck">
+                <template>
+                    <el-alert
+                            title="账号格式错误，请输入9位数字"
+                            type="error"
+                            show-icon
+                            :closable="false" disabled="true">
+                    </el-alert>
+                </template>
+        </div>
 
         <div class="searchResult" style="margin-bottom: 20px;display: none">
             <hr>
-            <img src="userAvatar" width="50" height="50">
+            <img :src="userAvatar" width="50" height="50">
             <div>{{userName}}</div>
 
             <div style="margin-top: 40px">
                 <el-button type="primary" @click="addFriend">添加好友</el-button>
             </div>
         </div>
-
-
     </el-dialog>
-
 
 </div>
 
