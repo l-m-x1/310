@@ -122,6 +122,7 @@
 
             onSubmit() {
                 var _this=this;
+                alert(this.PermissionData)
                 console.log('submit!');
                 axios({
                     method:"post",
@@ -132,6 +133,7 @@
                         //成功后的反应
                     }
                 })
+                window.location.href="MyFeed.html";
             }
         }
     })
