@@ -1,0 +1,175 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    padding-left: 8%;
+    padding-right: 8%;
+    background-color: #F0FFFF;
+    /*opacity: 0.5;*/
+    padding-bottom: 100px;
+}
+
+.topNav {
+    list-style-type: none;
+    margin-left: 7%;
+    overflow: hidden;
+    background-color: #FCFCFC;
+    position: fixed;
+    top: -15px;
+    width: 70%;
+    border-radius: 5px;
+    border: 5px solid deepskyblue;
+    z-index: 1;
+
+}
+
+.topNav li {
+    float: left;
+    margin-right: 10px;
+    margin-top:2px;
+    margin-bottom: 2px;
+
+}
+
+.topNav li a {
+    display: block;
+    color: #303133;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.topNav li a:hover{
+    color: dodgerblue;
+}
+
+
+
+
+
+.midNav {
+    list-style-type: none;
+    padding-top: 150px;
+    padding-left: 300px;
+    padding-right: 100px;
+    background-color: #85ce61;
+    overflow: hidden;
+
+}
+
+.midNav li {
+    float: left;
+    border-radius: 5px;
+    border: 2px solid rgba(0,0,0,0);
+}
+
+.midNav li a {
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+.midNav li a:hover{
+    color: #3a8ee6;
+}
+
+#active {
+    border-color: deepskyblue;
+}
+
+
+
+/* 创建两个不相等的彼此并排的浮动列 */
+
+
+
+.card {
+    background: #909399;
+}
+/* 右列 */
+.rightcolumn {
+    float: left;
+    width: 75%;
+    background-color: bisque;
+    padding: 20px 30px;
+    border: 5px solid deepskyblue;
+    border-radius: 10px;
+}
+
+
+/* 清除列之后的浮动 */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+
+.friendList {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-left: 19%;
+    margin-top: 3%;
+    max-height: 50%;
+    overflow-y: scroll;
+    z-index: 1;
+}
+
+.friend {
+    padding: 10px;
+    box-sizing: border-box;
+    height: 70px;
+    width: 200px;
+    border: 2px solid white;
+    margin: 10px;
+}
+.friend:hover {
+    border-color :#3a8ee6;
+}
+
+.friendAvatar {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+.friendName {
+    float: left;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+
+#setting {
+    list-style-type: none;
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-left: 69%;
+    margin-top: 3%;
+
+}
+
+#setting li a {
+    display: block;
+    color: #303133;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#setting li a:hover{
+    color: dodgerblue;
+}
+
+.item {
+    margin-top: 10px;
+    margin-right: 40px;
+}

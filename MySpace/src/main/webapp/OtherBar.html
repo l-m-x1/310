@@ -1,0 +1,139 @@
+<ul class="topNav">
+    <li ><a href="MyFeed.html"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
+    <li>
+        <div class="friendListTrigger">
+            <a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>
+        </div>
+    </li>
+
+    <li>
+        <div class="addFriendTrigger">
+            <a href="#home"><span class="iconfont icon-tianjiahaoyou">添加好友</span></a>
+        </div>
+    </li>
+
+    <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
+
+    <li style="float: right" >
+        <div id="settingTrigger">
+            <a href="#about"><span class="iconfont icon-shezhi"></span></a>
+        </div>
+    </li>
+    <li style="float: right">
+        <div id="checkMesg">
+            <el-badge :value="messageNumber" :max="10" class="item">
+                <el-button size="small" @click="handleClick">消息</el-button>
+            </el-badge>
+        </div>
+    </li>
+</ul>
+<div id="message">
+    <el-dialog
+            title="添加好友请求"
+            :visible.sync="dialogVisible"
+            :before-close="handleClose"
+            @close="close"
+            width="50%"
+    >
+        <el-table
+                :data="tableData"
+                style="width:100%"
+                :row-class-name="tableRowClassName"
+                @selection-change="handleSelectionChange"
+        >
+
+
+
+            <el-table-column
+                    align="center"
+                    prop="avatarUrl"
+            >
+                <template   slot-scope="scope">
+                    <img :src="scope.row.avatarUrl"  min-width="50" height="50" />
+                </template>
+            </el-table-column>
+
+            <el-table-column
+                    prop="name"
+                    align="center"
+            >
+
+            </el-table-column>
+
+            <el-table-column
+                    align="center"
+            >
+                <template slot-scope="scope">
+                    <el-row>
+                        <el-button type="primary" @click="agree(scope.row)">同意</el-button>
+                        <el-button type="danger" @click="refuse(scope.row)">拒绝</el-button>
+                    </el-row>
+                </template>
+            </el-table-column>
+
+        </el-table>
+
+
+    </el-dialog>
+
+
+</div>
+
+
+
+<div id="addFriend">
+    <el-dialog
+            title="添加好友"
+            :visible.sync="dialogVisible"
+            :before-close="handleClose"
+            @close="close"
+            width="50%"
+    >
+        <el-input
+                placeholder="请输入账号"
+                v-model="input"
+                @change="searchUser"
+                style="margin-bottom: 10px">
+            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        </el-input>
+        <div hidden="hidden" id="formationCheck">
+            <template>
+                <el-alert
+                        title="账号格式错误，请输入9位数字"
+                        type="error"
+                        show-icon
+                        :closable="false" disabled="true">
+                </el-alert>
+            </template>
+        </div>
+
+        <div class="searchResult" style="margin-bottom: 20px;display: none">
+            <hr>
+            <img :src="userAvatar" width="50" height="50">
+            <div>{{userName}}</div>
+
+            <div style="margin-top: 40px">
+                <el-button type="primary" @click="addFriend">添加好友</el-button>
+            </div>
+        </div>
+    </el-dialog>
+
+</div>
+
+
+<div class="friendList">
+</div>
+<div id="setting">
+    <li><a href="personalProfile.html">修改资料</a></li>
+    <li><a href="permissionManagement.html">权限管理</a></li>
+</div>
+
+<ul class="midNav">
+    <li id="active"><a href="OtherFeed.html" >主页</a></li>
+<!--    <li><a href="album.html">相册</a></li>-->
+<!--    <li><a href="viewlog.html">日志</a></li>-->
+    <li><a href="OtherComment.html">留言版</a></li>
+<!--    <li><a href="#">个人心情</a></li>-->
+</ul>
+
+<script src="./js/OtherBar.js"></script>
