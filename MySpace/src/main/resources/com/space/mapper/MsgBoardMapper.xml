@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.space.mapper.MsgBoardMapper">
     <insert id="insert">
-        insert into msg_board (id, wrid, content, time, floor)
-        values (#{id},#{wrid},#{content},#{time},#{floor});
+        insert into msg_board (uid, wrid, content, time, floor)
+        values (#{uid},#{wrid},#{content},#{time},#{floor});
     </insert>
 </mapper>

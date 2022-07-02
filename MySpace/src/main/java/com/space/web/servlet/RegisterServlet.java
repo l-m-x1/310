@@ -14,7 +14,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet("/RegisterServlet/*")
+@WebServlet("/Register/*")
 public class RegisterServlet extends BaseServlet {
     public void register() throws IOException {
         UserService userService = new UserServiceImpl();

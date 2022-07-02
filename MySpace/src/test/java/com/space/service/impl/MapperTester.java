@@ -9,7 +9,6 @@ import com.space.pojo.Friends;
 import com.space.pojo.Info;
 import com.space.pojo.Mood;
 import com.space.util.SqlSessionFactoryUtils;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
