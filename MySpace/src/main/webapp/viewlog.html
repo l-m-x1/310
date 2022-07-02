@@ -57,7 +57,7 @@
                 </el-row>
                 <hr>
                 <ul>
-                    <li v-for="viewlog in viwelogs">
+                    <li v-for="viewlog in viewlogs">
                         <el-form :model="viewlog"   id="in" ref="viewlog" label-width="100px" class="demo-viewlog">
                             <el-form-item label="日志标题" prop="name">
                                 <el-input v-model="viewlog.name" placeholder="请输入标题"></el-input>
@@ -101,12 +101,12 @@
                 method:"get",
                 url:""//地址
             }).then(function (resp) {
-                _this.viewlogs=resp.data;
+                //_this.viewlogs=resp.data;
             })
         },
         data() {
             return {
-                viwelogs: [{
+                viewlogs: [{
                     name: '南通',
                     desc: '我是的就会发觉回复撒酒疯好啦是否'
                 }, {
