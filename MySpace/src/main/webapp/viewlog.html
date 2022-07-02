@@ -62,12 +62,12 @@
                             <el-form-item label="日志标题" prop="name">
                                 <el-input v-model="viewlog.name" placeholder="请输入标题"></el-input>
                             </el-form-item>
-                            <el-form-item label="日志内容" prop="desc">
+                            <el-form-item label="日志内容" prop="text">
                                 <el-input
                                         type="textarea"
                                         :autosize="{ minRows: 6, maxRows: 100}"
                                         placeholder="请输入内容"
-                                        v-model="viewlog.desc">
+                                        v-model="viewlog.text">
                                 </el-input>
                             </el-form-item>
                             <el-form-item>
@@ -109,11 +109,11 @@
                 viewlogs: [{
                     id:1,
                     name: '南通',
-                    desc: '我是的就会发觉回复撒酒疯好啦是否'
+                    text: '我是的就会发觉回复撒酒疯好啦是否'
                 }, {
                     id:2,
                     name: '女同',
-                    desc: '我是的就会发觉回复撒酒疯好啦是否'
+                    text: '我是的就会发觉回复撒酒疯好啦是否'
                 }
                 ],
             };

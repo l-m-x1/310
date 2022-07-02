@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <script src="js/vue.js"></script>
+    <script src="element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+    <script src="js/axios-0.18.0.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/navigationBar.css">
+    <link rel="stylesheet" href="css/leftColumn.css">
+    <style>
+        #comment{
+            right: 100px;
+            position: relative;
+        }
+        html {
+            background: bisque;
+        }
+
+        #button1{
+            left: 20px;
+            position: relative;
+        }
+        #date{
+            margin-left: 20%;
+            max-width: 900px;
+
+        }
+        img {
+            position: relative;
+            float: left;
+        }
+
+        #name{
+            vertical-align: top;
+            font-size:20px;
+        }
+
+        #id{
+            left: 5%;
+            position: relative;
+            font-size:7px;
+        }
+        #text {
+            width:85%;
+            top: 10px;
+            height: 60%;
+            margin-left: 80px;
+        }
+        #time{
+            position: relative;
+            font-size:7px;
+            left:100px;
+        }
+        #reply{
+            position: relative;
+            font-size:7px;
+
+            left: 100px;
+        }
+        #delete{
+            position: relative;
+            font-size:7px;
+            left: 50%;
+
+        }
+        #in{
+            position: relative;
+            top: 20px;
+        }
+
+        .div1 {
+            height: 300px;
+            border: 1px solid blue;
+        }
+        .div1 span{
+            left: 20px;
+            position: relative;
+        }
+        #button2{
+            left: 40px;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="navigationBar">
+
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+
+
+    </div>
+
+    <div class="rightcolumn">
+        <div id="comment">
+            <el-form id="date"  label-width="80px" >
+                <el-row >
+                    <span id="button1" class="demonstration"><i class="el-icon-edit-outline"></i>留言板</span>
+                    <el-button id="button2" @click="write.show=!write.show" type="info" plain><i class="el-icon-s-order"></i>我要留言</el-button>
+                </el-row>
+                <el-form :model="write" ref="write" label-width="100px" v-show="write.show" >
+                    <hr>
+                    <el-form-item
+                            label="我的留言"
+                            prop="text"
+                            :rules="[
+                            { required: true, message: '不能为空'},
+                        ]">
+                        <el-input v-model.number="write.text"
+                                  type="textarea"
+                                  :autosize="{ minRows: 6, maxRows: 100}"
+                                  placeholder="请输入内容"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="OnSubmit">提交</el-button>
+                        <el-button @click="resetForm('write')">重置</el-button>
+                    </el-form-item>
+                </el-form>
+                <hr>
+                <ul>
+                    <li v-for="commentData in commentDatas">
+                        <div>
+                            <div class="div1">
+                                <p><img :src="commentData.photo"
+                                        style="width:70px;
+                        height:70px;
+                        margin-left:10px;">
+
+                                    <span id="name">{{commentData.name}}</span>
+                                    <span id="id">第{{commentData.id}}楼</span>
+
+                                    <br>
+                                <div id="text">
+                                    <span >{{commentData.text}}</span>
+                                </div>
+                                <br>
+                                <span id="time">
+                                    {{commentData.time}}
+                                </span>
+                                </p>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                    </li>
+                </ul>
+
+            </el-form>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+<script>
+    $("#navigationBar").load("./navigationBar.html");
+    $(".leftcolumn").load("./leftColumn.html");
+
+    new Vue({
+        el: '#comment',
+        data() {
+            return {
+                write: {
+                    text: '',
+                    show:false,
+                },
+                commentDatas: [{
+                    photo:'https://ts1.cn.mm.bing.net/th/id/R-C.86a0fa17b9b37ff7518b552e2517a0ae?rik=CX0%2fMchuLIBQVA&riu=http%3a%2f%2fimg.crcz.com%2fallimg%2f201809%2f11%2f1536666825645562.jpg&ehk=g6IGr0cDabvrRd5KSQdbup2trGpltKDfA7Hx7eopcm0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
+                    name: '姜明',
+                    id:'1',
+                    text:'津贴喝好圣诞节交罚款哈咖啡壶看不见了都',
+                    time:'2018-03-27 00:23',
+                    show:false
+                },
+                    {
+                        photo:'',
+                        name: '李凯翔',
+                        id:'2',
+                        text:'我永远喜欢佳人小姐我要到他多个',
+                        time:'2018-03-27 00:23',
+                        show:false
+                    }
+                ],
+                rules: {
+                    desc: [
+                        { required: true, message: '请填写内容', trigger: 'blur' }
+                    ]
+                }
+            }
+        },
+        methods: {
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            OnSubmit:function(){
+                alert(this.write.text);
+                var _this=this;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:_this.write.text//通过内容添加
+                }).then(function (resp) {
+                    //刷新
+                })
+            },
+            remove(message){
+                alert(message);
+                var _this=this;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:message//通过id删除可改
+                }).then(function (resp) {
+                    //刷新
+                })
+            }
+        },
+        mounted(){
+            var _this=this;
+            axios({
+                method:"get",
+                url:" "//网站
+            }).then(function (resp){
+                //_this.commentDatas=resp.data;
+            })
+        },
+    })
+</script>
+</body>
+</html>

@@ -105,11 +105,12 @@
                 //返回日志界面
             },
             submitForm(formName) {
-                var _this=this;
                 axios({
                     method:"post",
                     url:"",//目标地址,
-                    data:_this.SetLog
+                    data:{
+                        diary:this.SetLog
+                    }
                 }).then(function (resp) {
                     if(resp.data=="success"){
                         _this.$message({

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+    <script src="js/vue.js"></script>
+    <script src="element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+    <script src="js/axios-0.18.0.js"></script>
+
+    <link rel="stylesheet" href="css/navigationBar.css">
+    <link rel="stylesheet" href="css/leftColumn.css">
+    <style>
+
+        html {
+            background: bisque;
+        }
+        #FriendFeed{
+            right: 100px;
+            position: relative;
+        }
+        #title{
+            left: 20px;
+            position: relative;
+        }
+        #date{
+            margin-left: 20%;
+            max-width: 900px;
+        }
+
+        .div0{
+            border: 1px solid blue;
+            padding: 10px;
+            background-color: white;
+        }
+
+        img {
+            position: relative;
+            left: 10px;
+            float: left;
+        }
+
+        #name{
+            vertical-align: top;
+            font-size:20px;
+        }
+        #text {
+            width: 95%;
+            height: 60%;
+            top: 10px;
+            /*border: 1px solid blue;*/
+        }
+        #time{
+            position: relative;
+            font-size:7px;
+            right:120px;
+        }
+        #reply{
+            position: relative;
+            font-size:15px;
+        }
+        /*#replyname{*/
+        /*    !*vertical-align: top;*!*/
+        /*    position: relative;*/
+        /*    left:20px;*/
+        /*    font-size:10px;*/
+        /*    top:5px;*/
+        /*}*/
+        #cheerNumber{
+            color: #3a8ee6;
+        }
+
+        #in{
+            position: relative;
+            top:10px;
+        }
+
+        #cheer{
+            position: relative;
+            right:20px;
+        }
+
+        .div1 {
+            height: 300px;
+        }
+        .div1 span{
+            left: 20px;
+            position: relative;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div id="navigationBar">
+
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+
+    </div>
+    <div class="rightcolumn">
+        <div id="FriendFeed">
+            <el-form id="date" >
+                <el-row >
+                    <span id="title" class="demonstration"><i class="el-icon-user-solid"></i>好友主页</span>
+                </el-row>
+                <hr>
+                <ul>
+                    <li v-for="ruleForm in ruleForms">
+                        <div class="div0">
+                            <div class="div1">
+                                <p>
+                                    <img :src="ruleForm.photo"
+                                         style="width:50px;
+                                     height:50px;
+                                     margin-left:10px;">
+                                    <span id="name">{{ruleForm.name}}<br></span>
+                                    <span id="time">{{ruleForm.time}}</span>
+                                    <br>
+                                <div id="text">
+                                    <span>{{ruleForm.text}}</span>
+                                </div>
+                                </p>
+                                <span >
+                            <el-button id="cheer" type="text" @click="cheer(ruleForm)"><i class="el-icon-magic-stick"></i>点赞</el-button>
+                            </span>
+                            </div>
+                            <hr>
+                            <span id="cheerNumber"> <i class="el-icon-medal"></i>{{ruleForm.cheer}}人觉得很赞 </span>
+                        </div>
+                        <br>
+                        <br>
+                    </li>
+                </ul>
+            </el-form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+
+    $("#navigationBar").load("./navigationBar.html");
+    $(".leftcolumn").load("./leftColumn.html");
+
+    new Vue({
+        el: '#FriendFeed',
+        mounted(){
+            var _this=this;
+            axios({
+                method:"get",
+                url:''//网站
+            }).then(function (resp){
+                //_this.ruleForms=resp.data;
+            })
+        },
+        data() {
+            return {
+                ruleForms:[{
+                    id:1,
+                    photo:'https://ts1.cn.mm.bing.net/th/id/R-C.86a0fa17b9b37ff7518b552e2517a0ae?rik=CX0%2fMchuLIBQVA&riu=http%3a%2f%2fimg.crcz.com%2fallimg%2f201809%2f11%2f1536666825645562.jpg&ehk=g6IGr0cDabvrRd5KSQdbup2trGpltKDfA7Hx7eopcm0%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1',
+                    name:'姜明',
+                    time:'2012-2-1',
+                    text:'津贴喝好圣诞节交罚款哈咖啡壶看不见了都',
+                    cheer:0,
+                    show:false,
+                    modify:false
+                },
+                    {
+                        id:2,
+                        photo:'./photos/p4.jpg',
+                        name:'姜明',
+                        time:'2015-3-1',
+                        text:'我喜欢所发生的，学金沙江今安徽饭卡是否卡解放啦',
+                        cheer:0,
+                        show:false,
+                        modify:false
+                    }
+                ],
+            }
+        },
+
+        methods: {
+            cheer(message){//修改点赞数
+                message.cheer++;
+                axios({
+                    method:"post",
+                    url:"",
+                    data:message//message通过id可改
+                }).then(function (resp) {
+                    //刷新
+                })
+            }
+
+        }
+    })
+
+
+</script>
+</body>
+</html>
