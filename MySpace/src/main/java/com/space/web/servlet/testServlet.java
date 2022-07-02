@@ -40,6 +40,7 @@ public class testServlet extends HttpServlet {
                 FileOutputStream fileOutputStream = new FileOutputStream("./src/main/webapp/photos/"+"3"+suffix);
                 IOUtils.copy(inputStream,fileOutputStream);
             }
+
         }
     }
 
