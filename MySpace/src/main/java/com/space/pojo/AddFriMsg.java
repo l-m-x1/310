@@ -1,17 +1,9 @@
 package com.space.pojo;
 
 public class AddFriMsg {
-    private Integer id;
     private Integer from;
     private Integer to;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getFrom() {
         return from;
@@ -32,8 +24,7 @@ public class AddFriMsg {
     @Override
     public String toString() {
         return "AddFriMsg{" +
-                "id=" + id +
-                ", from=" + from +
+                "from=" + from +
                 ", to=" + to +
                 '}';
     }

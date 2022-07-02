@@ -14,5 +14,7 @@ public interface AddFriService {
 
     void delete(AddFriMsg addFriMsg);
 
-    List<AddFriMsg> select(Integer to);
+    List<AddFriMsg> selectByTo(Integer to);
+
+    AddFriMsg selectSingle(AddFriMsg addFriMsg);
 }

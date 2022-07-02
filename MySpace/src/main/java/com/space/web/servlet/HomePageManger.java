@@ -133,11 +133,16 @@ public class HomePageManger extends BaseServlet {
         Friends friends=new Friends();
         friends.setId(uid);
         friends.setFid(fid);
+
         friends.setAccess(3);
         friendsService.insert(friends);
     }
 
     public void getAddFriMsg(){
+        Integer uid = (Integer) req.getSession().getAttribute("uid");
+        AddFriService addFriService = new AddFriServiceImpl();
+//        List<AddFriMsg> select = addFriService.select(uid);
+
 
     }
 }
