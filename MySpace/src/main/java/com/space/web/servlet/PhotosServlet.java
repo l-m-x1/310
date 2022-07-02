@@ -143,6 +143,30 @@ public class PhotosServlet extends BaseServlet {
             public String date;
             public String url;
             public Integer id;
+
+            public String getDate() {
+                return date;
+            }
+
+            public void setDate(String date) {
+                this.date = date;
+            }
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public Integer getId() {
+                return id;
+            }
+
+            public void setId(Integer id) {
+                this.id = id;
+            }
         }
         List<ret> retMsg=new ArrayList<>();
         for (Photos photo:photos){

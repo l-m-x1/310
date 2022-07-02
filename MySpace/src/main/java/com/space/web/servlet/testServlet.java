@@ -1,5 +1,6 @@
 package com.space.web.servlet;
 
+import com.space.web.BaseServlet;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -17,10 +18,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-@WebServlet("/test")
+@WebServlet("/test/*")
 public class testServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("hello");
         DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
         ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);

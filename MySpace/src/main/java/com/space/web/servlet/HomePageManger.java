@@ -36,6 +36,22 @@ public class HomePageManger extends BaseServlet {
         class ret{
             public String name;
             public String avatar;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getAvatar() {
+                return avatar;
+            }
+
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
+            }
         }
         List<ret> retList=new ArrayList<>();
         Integer uid= (Integer) req.getSession().getAttribute("id");
