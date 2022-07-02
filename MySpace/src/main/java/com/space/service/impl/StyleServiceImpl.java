@@ -60,10 +60,10 @@ public class StyleServiceImpl implements StyleService {
     }
 
     @Override
-    public void updateType(Integer id, Integer type) {
+    public void updateType(Integer uid, Integer type) {
 //        SqlSession session = factory.openSession();
 //        StyleMapper mapper = session.getMapper(StyleMapper.class);
-        mapper.updateType(id,type);
+        mapper.updateType(uid,type);
         session.commit();
         session.close();
     }

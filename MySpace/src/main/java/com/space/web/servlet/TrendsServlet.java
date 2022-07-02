@@ -1,45 +1,46 @@
 package com.space.web.servlet;
 
 import com.alibaba.fastjson.JSON;
+import com.space.pojo.Friends;
 import com.space.pojo.Trends;
 import com.space.service.TrendsService;
+import com.space.service.impl.FriendsServiceImpl;
 import com.space.service.impl.TrendsServiceImpl;
+import com.space.web.BaseServlet;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet( "/TrendsServlet")
-public class TrendsServlet extends HttpServlet {
+public class TrendsServlet extends BaseServlet {
 
-    private  HttpServletRequest request;
-    private HttpServletResponse response;
-
-    private TrendsService trendsImpl=new TrendsServiceImpl();
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.request=request;
-        this.response=response;
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
-    }
+   TrendsService trendsService=new TrendsServiceImpl();
+    HttpSession session=req.getSession();
 
     public void showTrends() throws IOException {
-        int[] uids = new int[0];
-        List<Trends> trends = trendsImpl.selectByUids(uids);
+        //int[] uids = new int[0];
+
+        List<Integer> uids=new ArrayList<>();
+        Integer uid = (Integer) session.getAttribute("id");
+        uids.add(uid);
+        FriendsServiceImpl friendsService = new FriendsServiceImpl();
+        List<Friends> friends = friendsService.selectById(uid);
+        for (Friends friend:friends) {
+            uids.add(friend.getFid());
+        }
+        List<Trends> trends = trendsService.selectByUids(uids);
 
         String jsonString = JSON.toJSONString(trends);
-        response.setContentType("text/json;charset=utf-8");
-        response.getWriter().write(jsonString);
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(jsonString);
     }
 
     public void deleteById(){
-        int id = Integer.parseInt(request.getParameter("id"));
-        trendsImpl.deleteById(id);
+        int id = jsonObject.getInteger("id");
+        trendsService.deleteById(id);
     }
 }

@@ -21,5 +21,5 @@ public interface TrendsService {
 
     void updateLikes(Integer id,  Integer likes);
 
-    List<Trends> selectByUids( int[] uids);
+    List<Trends> selectByUids( List<Integer> uids);
 }
