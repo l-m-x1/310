@@ -12,7 +12,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet( "Style")
+@WebServlet( "/Style")
 public class StyleServlet extends BaseServlet {
 
     StyleService styleService=new StyleServiceImpl();

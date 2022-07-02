@@ -227,12 +227,12 @@
     //
     // //get album
     //
-    // axios({
-    //     methods: "get",
-    //     url:''
-    // }).then(resp=>{
-    //     photoSource.photos=resp.data;
-    // })
+    axios({
+        methods: "get",
+        url:'http://localhost/Photos/getPhotos'
+    }).then(resp=>{
+        photoSource.photos=resp.data;
+    })
     // $(document).ready(function (){
     //      let albumElement = $('#album');
     //      for(let i=0;i<photoSource.photos.length;i++)
