@@ -89,8 +89,42 @@ $("#setting").mouseleave(function (){
 
 $(".addFriendTrigger").click(function (){
     addFriendVue.dialogVisible=true;
-})
+});
 
+
+$(".decorationTrigger").click(function (){
+    $("#decoration").prop("style","display:block");
+});
+
+$("#decoration").mouseleave(function (){
+    $("#decoration").prop("style","display:none");
+});
+
+
+
+ let decorations =document.getElementsByClassName("decorationColor");
+
+ for(let i=0;i<decorations.length;i++)
+ {
+     decorations[i].addEventListener("click",function (){
+         $("body").prop("style","background-color:"+decorations[i].style.backgroundColor);
+         $(".leftcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
+         $(".rightcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
+
+         axios({
+             method:"post",
+             url:'/HomePage/changeDecoration',
+             data:{
+                 color:decorations[i].style.backgroundColor
+             }
+         }).then(resp=>{
+             this.$message({
+                 message: '更换空间装扮！',
+                 type: 'success'
+             });
+         });
+     });
+ }
 
 
 //logout

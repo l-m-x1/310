@@ -111,7 +111,14 @@
         },
         methods: {
             returnSubmit(){
-                window.location.href="MyFeed.html";
+                this.$confirm('是否确认返回主页?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    window.location.href="MyFeed.html";
+                }).catch(() => {
+                });
             },
             onSubmit(message) {
                 var _this=this;

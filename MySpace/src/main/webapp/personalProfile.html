@@ -77,7 +77,7 @@
         </el-row>
 
         <hr>
-        <el-form-item label="昵称" >
+        <el-form-item label="昵称">
             <el-input class="input"   v-model="sizeForm.name"></el-input>
         </el-form-item>
         <el-form-item label="性别">
@@ -167,12 +167,18 @@
             onSubmit() {
 
                 let form=new FormData();
-                form.append("form",this.sizeForm);
-                form.append("imageUrl",this.sizeForm.imageUrl);
+                form.append("name",this.sizeForm.name);
+                form.append("region",this.sizeForm.region);
+                form.append("date",this.sizeForm.date);
+                form.append("hometown",this.sizeForm.hometown);
+                form.append("address",this.sizeForm.address);
+                form.append("work",this.sizeForm.work);
+                form.append("companyName",this.sizeForm.companyName);
+                form.append("companyAddress",this.sizeForm.companyAddress);
                 form.append("avatar",this.avatar);
                 axios({
                             method:"post",
-                            url:"http://localhost:80/test",
+                            url:"http://localhost:80/",
                             data:form
                 }).then(function (resp) {
                     if(resp.data=="success"){
