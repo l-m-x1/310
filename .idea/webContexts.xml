@@ -4,6 +4,9 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/MySpace/src/main/webapp/FriendFeed.html" value="file://$PROJECT_DIR$/MySpace/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/MySpace/src/main/webapp/MyFeed.html" value="file://$PROJECT_DIR$/MySpace/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/MySpace/src/main/webapp/personalProfile.html" value="file://$PROJECT_DIR$/MySpace/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/MySpace/src/main/webapp/writelog.html" value="file://$PROJECT_DIR$/MySpace/src/main/webapp" />
       </map>
     </option>
   </component>

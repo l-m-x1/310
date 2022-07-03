@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <link rel="stylesheet" href="./css/iconfont.css">
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
   <script src="js/vue.js"></script>
   <script src="element-ui/lib/index.js"></script>
   <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
   <script src="js/axios-0.18.0.js"></script>
-  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
   <link rel="stylesheet" href="css/navigationBar.css">
   <link rel="stylesheet" href="css/leftColumn.css">
   <style>
@@ -55,12 +57,12 @@
       font-size:7px;
       left:100px;
     }
-    #reply{
-      position: relative;
-      font-size:7px;
+    /*#reply{*/
+    /*  position: relative;*/
+    /*  font-size:7px;*/
 
-      left: 100px;
-    }
+    /*  left: 100px;*/
+    /*}*/
     #delete{
       position: relative;
       font-size:7px;
@@ -133,10 +135,9 @@
                         style="width:70px;
                         height:70px;
                         margin-left:10px;">
-
-                  <span id="name">{{commentData.username}}</span>
-                  <span id="id">第{{commentData.id}}楼</span>
-
+                  <span id="name">{{commentData.name}}</span>
+<!--                  <span id="id" type="index">第{{floor}}楼</span>-->
+<!--                  {{add()}}-->
                   <br>
                   <div id="text">
                   <span >{{commentData.text}}</span>
@@ -145,9 +146,9 @@
                   <span id="time">
                   {{commentData.time}}
                   </span>
-                  <span  id="reply">
-                   <el-button type="text"  @click=" commentData.show=!commentData.show">回复</el-button>
-                  </span>
+<!--                  <span  id="reply">-->
+<!--                   <el-button type="text"  @click=" commentData.show=!commentData.show">回复</el-button>-->
+<!--                  </span>-->
                   <span id="delete">
                     <el-button  type="text" @click="remove(commentData.id)" icon="el-icon-delete"></el-button>
                   </span>
@@ -187,8 +188,10 @@
 
 
 <script>
+
   $("#navigationBar").load("./navigationBar.html");
   $(".leftcolumn").load("./leftColumn.html");
+
 
   new Vue({
     el: '#comment',
@@ -236,20 +239,49 @@
         });
       },
       resetForm(formName) {
-        this.$refs[formName].resetFields();
+        this.$confirm('是否删除该内容?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$refs[formName].resetFields();
+        }).catch(() => {
+        });
       },
       OnSubmit:function(){
-        alert(this.write.text);
-        var _this=this;
-        axios({
-          method:"post",
-          url:"http://localhost:80/MsgBoard/add",
-          data:_this.write.text//通过内容添加
-        }).then(function (resp) {
-          //刷新
-        })
+        this.$confirm('是否提交该内容?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          alert(this.write.text);
+          var _this=this;
+          axios({
+            method:"post",
+            url:"http://localhost:80/MsgBoard/add",
+            data:_this.write.text//通过内容添加
+          }).then(function (resp) {
+            //刷新
+          })
+        }).catch(() => {
+        });
       },
       remove(message){
+        this.$confirm('是否提交该内容?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          var _this=this;
+          axios({
+            method:"post",
+            url:"http://localhost:80/MsgBoard/deleteById",
+            data:{id:message}//通过id删除可改
+          }).then(function (resp) {
+            //刷新
+          })
+        }).catch(() => {
+        });
         //alert(message);
         var _this=this;
         axios({

@@ -21,84 +21,42 @@ import java.util.List;
 
 @WebServlet("/HomePage/*")
 public class HomePageManger extends BaseServlet {
-//    public void getAllInfo() throws IOException {
-//        Integer uid = jsonObject.getInteger("uid");
-//
-//        HomePageInfo homePageInfo = new HomePageInfo();
-//
-//
-//
-//        InfoService infoService = new InfoServiceImpl();
-//        Info info = infoService.selectById(uid);
-//
-//        UserServiceImpl userService = new UserServiceImpl();
-//        User user = userService.selectById(uid);
-//
-//        DiaryService diaryService = new DiaryServiceImpl();
-//        List<Diary> diaries = diaryService.selectByUid(uid);
-//
-//        PhotosService photosService=new PhotosServiceImpl();
-//        List<Photos> photos = photosService.selectByUid(uid);
-//
-//        TrendsService trendsService=new TrendsServiceImpl();
-//        List<Trends> trendsList = trendsService.selectByUid(uid);
-//
-//
-//
-//        homePageInfo.setInfo(info);
-//        homePageInfo.setDiaryList(diaries);
-//        homePageInfo.setUser(user);
-//        homePageInfo.setDiarySum(diaries.size());
-//        homePageInfo.setPhotoSum(photos.size());
-//        homePageInfo.setTrendsSum(trendsList.size());
-//
-//        String ret = JSON.toJSONString(homePageInfo);
-//        resp.setContentType("text/json;charset=utf-8");
-//        resp.getWriter().write(ret);
-//    }
+
 
     public void logout() {
         HttpSession session = req.getSession();
-        session.removeAttribute("username");
+        session.removeAttribute("id");
+        session.removeAttribute("name");
         session.removeAttribute("password");
     }
 
     public void getFriendList() throws IOException {
         JSONObject ret =new JSONObject();
-//        List<UserInfo> userInfos=new ArrayList<>();
 
         class ret{
             public String name;
             public String avatar;
         }
         List<ret> retList=new ArrayList<>();
-
-
-//        Integer uid = jsonObject.getInteger("uid");
         Integer uid= (Integer) req.getSession().getAttribute("id");
+
         FriendsService friendsService = new FriendsServiceImpl();
         List<Friends> friends = friendsService.selectById(uid);
+        UserServiceImpl userService = new UserServiceImpl();
         for (Friends friend : friends) {
-
             ret tmp = new ret();
             Integer fid = friend.getFid();
-
-
-            UserServiceImpl userService = new UserServiceImpl();
             User user = userService.selectById(uid);
             tmp.name=user.getUsername();
             tmp.avatar=user.getAvatar();
             retList.add(tmp);
         }
-//        ret.put("friendList",retList);
         resp.setContentType("text/json;charset=utf-8");
         resp.getWriter().write(JSON.toJSONString(retList));
     }
 
     public void getUserInfo() throws IOException {
         JSONObject ret =new JSONObject();
-
-//        Integer uid = jsonObject.getInteger("uid");
         Integer uid= (Integer) req.getSession().getAttribute("id");
         UserService userService=new  UserServiceImpl();
         User user = userService.selectById(uid);
@@ -133,8 +91,11 @@ public class HomePageManger extends BaseServlet {
         Friends friends=new Friends();
         friends.setId(uid);
         friends.setFid(fid);
-
-        friends.setAccess(3);
+        friends.setAccess(1);
+        friendsService.insert(friends);
+        friends.setId(fid);
+        friends.setFid(uid);
+        friends.setAccess(1);
         friendsService.insert(friends);
     }
 

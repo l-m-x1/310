@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/vue.js"></script>
+    <script src="element-ui/lib/index.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+    <link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
     <style>
         html {
             background:white;
         }
 
         #ChangeList{
-            margin-left: 20%;
-            width: 50%;
+            margin-left: 30%;
+            margin-top: 5%;
+            width: 30%;
+            height: 50%;
         }
 
         #title{
@@ -20,6 +26,41 @@
         }
         .input{
             max-width: 300px ;
+
+        }
+
+        #changeAvatar {
+            width: 100px;
+            margin-top: 10%;
+            margin-left: 60%;
+            position: absolute;
+        }
+
+        .avatar-uploader {
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100px;
+            height: 100px;
+
+        }
+        .avatar-uploader:hover {
+            border-color: #409EFF;
+        }
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 100px;
+            height: 100px;
+
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            display: block;
         }
 
 
@@ -29,10 +70,12 @@
 <body>
 
 <div id="app">
-    <el-form ref="form" :model="sizeForm" label-width="80px" size="mini" id="ChangeList">
+    <el-form ref="form" :model="sizeForm" label-width="80px" size="mini" id="ChangeList" style="float: left">
         <el-row >
-            <span id="title" class="demonstration">基本资料</span>
+            <div id="title" class="demonstration" style="float: left">基本资料</div>
+            <el-button type="primary" size="small" @click="returnMainPage"style="float: right" >返回主页</el-button>
         </el-row>
+
         <hr>
         <el-form-item label="昵称">
             <el-input class="input"   v-model="sizeForm.name"></el-input>
@@ -64,14 +107,26 @@
             <el-input class="input" v-model="sizeForm.companyAddress"></el-input>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" @click="onSubmit">确认发表</el-button>
+            <el-button type="primary" @click="onSubmit">提交</el-button>
         </el-form-item>
     </el-form>
+    <div id="changeAvatar">
+        <el-upload
+                class="avatar-uploader"
+                action="#"
+                :auto-upload="false"
+                :show-file-list="false"
+                :on-change="change"
+                :before-upload="beforeAvatarUpload">
+            <img v-if="sizeForm.imageUrl" :src="sizeForm.imageUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+        <div style="width: 100%;text-align: center" >更换头像</div>
+    </div>
+
 </div>
 
-<script src="js/vue.js"></script>
-<script src="element-ui/lib/index.js"></script>
-<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
 
 <script >
 
@@ -79,17 +134,17 @@
         el: '#app',
         mounted(){
 
-            var _this=this;
-            axios({
-                method:"get",
-                url:""//地址
-            }).then(function (resp) {
-                _this.sizeForm=resp.data;
-            })
+            // axios({
+            //     method:"get",
+            //     url:""
+            // }).then(resp=>{
+            //     this.sizeForm=resp.data;
+            // })
         },
         data() {
             return {
                 sizeForm: {
+                    imageUrl: 'https://ts1.cn.mm.bing.net/th?id=OIP-C.KPNhjDww9-Y1Jli6dpjiHgHaFj&w=200&h=170&c=8&rs=1&qlt=90&o=6&dpr=1.88&pid=3.1&rm=2',
                     name: '姜明',
                     region: '男',
                     date: '2003/3/14',
@@ -98,23 +153,63 @@
                     work:'学生',
                     companyName:'华中科技大学',
                     companyAddress:'洪山区',
-                }
-            };
+                },
+                avatar:''
+            }
         },
         methods: {
+
+            returnMainPage()
+            {
+                this.$confirm('是否返回主页，未提交的修改将被清空?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                    window.location.href="MyFeed.html";
+            }).catch(() => {
+            });
+            },
             onSubmit() {
-                var _this=this;
-                console.log('submit!');
-                axios({
-                            method:"post",
-                            url:"",//地址
-                            data:_this.sizeForm
-                }).then(function (resp) {
+                    let form = new FormData();
+                    form.append("name", this.sizeForm.name);
+                    form.append("region", this.sizeForm.region);
+                    form.append("date", this.sizeForm.date);
+                    form.append("hometown", this.sizeForm.hometown);
+                    form.append("address", this.sizeForm.address);
+                    form.append("work", this.sizeForm.work);
+                    form.append("companyName", this.sizeForm.companyName);
+                    form.append("companyAddress", this.sizeForm.companyAddress);
+                    form.append("avatar", this.avatar);
+                    axios({
+                        method: "post",
+                        url: "http://localhost:80/",
+                        data: form
+                    }).then(function (resp) {
                     if(resp.data=="success"){
-                        //成功内容
+
                     }
-                })
-                window.location.href="MyFeed.html";
+                    })
+                window.location.href = "personalProfile.html";
+            },
+            change(file){
+                this.sizeForm.imageUrl = URL.createObjectURL(file.raw);
+                this.avatar=file.raw;
+
+            },
+
+            beforeAvatarUpload(file)
+                {
+                const isJPGOrONG = (file.type === 'image/jpeg')||(file.type === 'image/png');
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPGOrONG) {
+                    this.$message.error('上传头像图片只能是 JPG 或 PNG 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPGOrONG && isLt2M;
             }
         }
     })

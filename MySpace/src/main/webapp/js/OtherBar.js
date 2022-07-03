@@ -21,18 +21,18 @@ let addFriendVue =  new Vue({
 
         addFriend()
         {
-           axios({
-               method:"post",
-               url:'',
-               data:{
-                   id:this.userID
-               }
-           }).then(resp=>{
-               this.$message({
-                   message: '请求发送成功！',
-                   type: 'success'
-               });
-           });
+            axios({
+                method:"post",
+                url:'',
+                data:{
+                    id:this.userID
+                }
+            }).then(resp=>{
+                this.$message({
+                    message: '请求发送成功！',
+                    type: 'success'
+                });
+            });
         },
 
         searchUser()
@@ -89,60 +89,7 @@ $("#setting").mouseleave(function (){
 
 $(".addFriendTrigger").click(function (){
     addFriendVue.dialogVisible=true;
-});
-
-
-$(".decorationTrigger").click(function (){
-    $("#decoration").prop("style","display:block");
-});
-
-$("#decoration").mouseleave(function (){
-    $("#decoration").prop("style","display:none");
-});
-
-
-
-//set decoration
-let userDecoration="#DCE2F1";
-axios({
-    method:"get",
-    url:"/HomePage/getDecoration"
-}).then(resp=>{
-    if(resp.data!="no decoration")
-    {
-        userDecoration=resp.data;
-    }
-});
-$("body").prop("style","background-color:"+userDecoration);
-$(".leftcolumn").prop("style","background-color:"+userDecoration);
-$(".rightcolumn").prop("style","background-color:"+userDecoration);
-
-
-
-
-// change decoration
- let decorations =document.getElementsByClassName("decorationColor");
- for(let i=0;i<decorations.length;i++)
- {
-     decorations[i].addEventListener("click",function (){
-         $("body").prop("style","background-color:"+decorations[i].style.backgroundColor);
-         $(".leftcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
-         $(".rightcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
-
-         axios({
-             method:"post",
-             url:'/HomePage/changeDecoration',
-             data:{
-                 color:decorations[i].style.backgroundColor
-             }
-         }).then(resp=>{
-             this.$message({
-                 message: '更换空间装扮！',
-                 type: 'success'
-             });
-         });
-     });
- }
+})
 
 
 
@@ -161,10 +108,10 @@ $(".topNav .icon-logout").click(function (){
 
 //get friend List
 class Friend{
-    constructor(avatar,name,id) {
+    constructor(url,avatar,name) {
+        this.url=url;
         this.avatar=avatar;
         this.name=name;
-        this.id=id;
     }
 };
 let friendList=[];
@@ -174,25 +121,21 @@ axios({
 }).then(resp=>{
     let list=resp.data;
     list.forEach(item=>{
-        friendList.push(new Friend(item.avatar,item.name,item.id));
+        friendList.push(new Friend(item.url,item.avatar,item.name));
     })
 });
 
-friendList.push(new Friend("./img.png","zhuangsan",id="1"));
-friendList.push(new Friend("./img.png","lisi",id="2"));
-friendList.push(new Friend("./img.png","lisi",id="3"));
-friendList.push(new Friend("./img.png","lisi",id="4"));
-friendList.push(new Friend("./img.png","lisi",id="5"));
-friendList.push(new Friend("./img.png","lisi",id="6"));
-friendList.push(new Friend("./img.png","lisi",id="7"));
-
-
-
-
+friendList.push(new Friend("http://www.baidu.com","./img.png","zhuangsan"));
+friendList.push(new Friend("","./img.png","lisi"));
+friendList.push(new Friend("","./img.png","lisi"));
+friendList.push(new Friend("","./img.png","lisi"));
+friendList.push(new Friend("","./img.png","lisi"));
+friendList.push(new Friend("","./img.png","lisi"));
+friendList.push(new Friend("","./img.png","lisi"));
 
 let friends = $(".friendList");
 friendList.forEach(item=>{
-    let friend="<a target=\"_blank\" href=\""+"/OtherFeed.html?id="+item.id+"\">\n" +
+    let friend="<a target=\"_blank\" href=\""+item.url+"\">\n" +
         "        <div class=\"friend\">\n" +
         "\n" +
         "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +

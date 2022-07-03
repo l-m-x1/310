@@ -62,12 +62,12 @@
                             <el-form-item label="日志标题" prop="name">
                                 <el-input v-model="viewlog.name" placeholder="请输入标题"></el-input>
                             </el-form-item>
-                            <el-form-item label="日志内容" prop="desc">
+                            <el-form-item label="日志内容" prop="text">
                                 <el-input
                                         type="textarea"
                                         :autosize="{ minRows: 6, maxRows: 100}"
                                         placeholder="请输入内容"
-                                        v-model="viewlog.desc">
+                                        v-model="viewlog.text">
                                 </el-input>
                             </el-form-item>
                             <el-form-item>
@@ -109,39 +109,59 @@
                 viewlogs: [{
                     id:1,
                     name: '南通',
-                    desc: '我是的就会发觉回复撒酒疯好啦是否'
+                    text: '我是的就会发觉回复撒酒疯好啦是否'
                 }, {
                     id:2,
                     name: '女同',
-                    desc: '我是的就会发觉回复撒酒疯好啦是否'
+                    text: '我是的就会发觉回复撒酒疯好啦是否'
                 }
                 ],
             };
         },
         methods: {
             OnSubmit:function (){
-                window.location.href="writeLog.html";
+                this.$confirm('进入写日志界面后，未提交的修改将被清空?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    window.location.href="writelog.html";
+                }).catch(() => {
+                });
             },
             modify:function (message) {//修改
-                alert(message.id)
-                axios({
-                    method:"post",
-                    url:"",
-                    data:message
-                }).then(function (resp) {
-                    //刷新
-                })
+                this.$confirm('是否确定修改?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    alert(message.id)
+                    axios({
+                        method:"post",
+                        url:"",
+                        data:message
+                    }).then(function (resp) {
+                        //刷新
+                    })
+                }).catch(() => {
+                });
             },
             Delete:function (message){
-                alert(message)
-                axios({
-                    method:"post",
-                    url:"",
-                    data:message//通过名字删除可改
-                }).then(function (resp) {
-                    //刷新
-                })
-
+                this.$confirm('是否确定删除?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    alert(message)
+                    axios({
+                        method:"post",
+                        url:"",
+                        data:message//通过名字删除可改
+                    }).then(function (resp) {
+                        //刷新
+                    })
+                }).catch(() => {
+                });
             }
         }
     })

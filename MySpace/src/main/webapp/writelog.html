@@ -101,35 +101,65 @@
         },
         methods: {
             back:function () {
-                window.location.href="viewlog.html";
+                this.$confirm('是否返回日志界面，未提交的内容将被清空?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    window.location.href="viewlog.html";
+                }).catch(() => {
+                });
                 //返回日志界面
             },
             submitForm(formName) {
-                var _this=this;
-                axios({
-                    method:"post",
-                    url:"",//目标地址,
-                    data:_this.SetLog
-                }).then(function (resp) {
-                    if(resp.data=="success"){
-                        _this.$message({
-                            message: '恭喜你，添加成功',
-                            type: 'success'
-                        });
-                    }
-                })
+                // axios({
+                //     method:"post",
+                //     url:"",//目标地址,
+                //     data:{
+                //         diary:this.SetLog
+                //     }
+                // }).then(function (resp) {
+                //     if(resp.data=="success"){
+                //
+                //     }
+                // })
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('提交成功!');
-                        window.location.href="viewlog.html";
+                        this.$confirm('是否发表内容?', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(() => {
+                            alert(this.SetLog);
+                            axios({
+                                method:"post",
+                                url:"",//目标地址,
+                                data:{
+                                    diary:this.SetLog
+                                }
+                            }).then(function (resp) {
+                                if(resp.data=="success"){
+
+                                }
+                            })
+                            window.location.href="viewlog.html";
+                        }).catch(() => {
+                        });
                     } else {
-                        console.log('提交失败!!');
+                        alert('提交失败!');
                         return false;
                     }
                 });
             },
             resetForm(formName) {
-                this.$refs[formName].resetFields();
+                this.$confirm('是否清空内容?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$refs[formName].resetFields();
+                }).catch(() => {
+                });
             }
         }
     })
