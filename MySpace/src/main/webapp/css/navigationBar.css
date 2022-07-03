@@ -1,12 +1,13 @@
 * {
     box-sizing: border-box;
 }
+
 body {
         padding-left: 8%;
         padding-right: 8%;
         background-color: #DCE2F1;
         /*opacity: 0.5;*/
-    padding-bottom: 100px;
+        padding-bottom: 100px;
 }
 
 .topNav {
