@@ -161,11 +161,22 @@
 
             returnMainPage()
             {
-                window.location.href="MyFeed.html";
+                this.$confirm('是否返回主页，未提交的修改将被清空?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                    window.location.href="MyFeed.html";
+            }).catch(() => {
+            });
             },
 
             onSubmit() {
-
+                this.$confirm('是否返回主页，未提交的修改将被清空?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
                 let form=new FormData();
                 form.append("name",this.sizeForm.name);
                 form.append("region",this.sizeForm.region);
@@ -184,7 +195,9 @@
                     if(resp.data=="success"){
                         //成功内容
                     }
-                })
+                    window.location.href="personalProfile.html";
+                }).catch(() => {
+                });
                 //window.location.href="MyFeed.html";
             },
 

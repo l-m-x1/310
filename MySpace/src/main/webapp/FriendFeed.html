@@ -62,13 +62,13 @@
             position: relative;
             font-size:15px;
         }
-        #replyname{
-            /*vertical-align: top;*/
-            position: relative;
-            left:20px;
-            font-size:10px;
-            top:5px;
-        }
+        /*#replyname{*/
+        /*    !*vertical-align: top;*!*/
+        /*    position: relative;*/
+        /*    left:20px;*/
+        /*    font-size:10px;*/
+        /*    top:5px;*/
+        /*}*/
         #cheerNumber{
             color: #3a8ee6;
         }
@@ -153,9 +153,11 @@
                             </p>
                             <span >
                             <el-button id="cheer" type="text" @click="cheer(ruleForm)"><i class="el-icon-magic-stick"></i>点赞</el-button>
-                            </span><span>
-                            <el-button id="reply" type="text" @click="ruleForm.show=!ruleForm.show"><i class="el-icon-s-comment"></i>回复</el-button>
-                            </span><span >
+                            </span>
+<!--                            <span>-->
+<!--                            <el-button id="reply" type="text" @click="ruleForm.show=!ruleForm.show"><i class="el-icon-s-comment"></i>回复</el-button>-->
+<!--                            </span>-->
+                            <span >
                             <el-button id="delete" type="text" @click="remove(ruleForm.id)" icon="el-icon-delete"></el-button>
                             </span>
                         </div>
@@ -176,10 +178,10 @@
                         </el-form>
                         <hr>
                         <span id="cheerNumber"> <i class="el-icon-medal"></i>{{ruleForm.cheer}}人觉得很赞 </span>
-                        <div id="replyname">
-                            <span >{{ruleForm.name}}:</span>
-                            <span>{{ruleForm.text}}</span>
-                        </div>
+<!--                        <div id="replyname">-->
+<!--                            <span >{{ruleForm.name}}:</span>-->
+<!--                            <span>{{ruleForm.text}}</span>-->
+<!--                        </div>-->
                     </div>
                     <br>
                     <br>
@@ -254,29 +256,50 @@
 
         methods: {
             resetForm(formName) {
-                this.$refs[formName].resetFields();
+                this.$confirm('是否重置内容?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$refs[formName].resetFields();
+                }).catch(() => {
+                });
             },
             OnSubmit:function(){
-                alert(this.write.text);
-                var _this=this;
-                axios({
-                    method:"post",
-                    url:"",
-                    data:_this.write.text//通过内容添加
-                }).then(function (resp) {
-                    //刷新
-                })
+                this.$confirm('是否提交内容?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    alert(this.write.text);
+                    var _this=this;
+                    axios({
+                        method:"post",
+                        url:"",
+                        data:_this.write.text//通过内容添加
+                    }).then(function (resp) {
+                        //刷新
+                    })
+                }).catch(() => {
+                });
             },
             remove:function(message){
-                alert(message);
-                var _this=this;
-                axios({
-                    method:"post",
-                    url:"",
-                    data:message//message通过id删除可改
-                }).then(function (resp) {
-                    //刷新
-                })
+                this.$confirm('是否删除该内容?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    alert(message);
+                    var _this=this;
+                    axios({
+                        method:"post",
+                        url:"",
+                        data:message//message通过id删除可改
+                    }).then(function (resp) {
+                        //刷新
+                    })
+                }).catch(() => {
+                });
             },
             cheer(message){//修改点赞数
                 message.cheer++;

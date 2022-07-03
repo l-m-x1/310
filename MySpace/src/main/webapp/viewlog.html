@@ -130,25 +130,38 @@
                 });
             },
             modify:function (message) {//修改
-                alert(message.id)
-                axios({
-                    method:"post",
-                    url:"",
-                    data:message
-                }).then(function (resp) {
-                    //刷新
-                })
+                this.$confirm('是否确定修改?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    alert(message.id)
+                    axios({
+                        method:"post",
+                        url:"",
+                        data:message
+                    }).then(function (resp) {
+                        //刷新
+                    })
+                }).catch(() => {
+                });
             },
             Delete:function (message){
-                alert(message)
-                axios({
-                    method:"post",
-                    url:"",
-                    data:message//通过名字删除可改
-                }).then(function (resp) {
-                    //刷新
-                })
-
+                this.$confirm('是否确定删除?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    alert(message)
+                    axios({
+                        method:"post",
+                        url:"",
+                        data:message//通过名字删除可改
+                    }).then(function (resp) {
+                        //刷新
+                    })
+                }).catch(() => {
+                });
             }
         }
     })
