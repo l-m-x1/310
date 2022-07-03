@@ -37,14 +37,9 @@
     }
 
     #name{
-      vertical-align: top;
+      /*vertical-align: top;*/
       font-size:20px;
-    }
-
-    #id{
-      left: 5%;
-      position: relative;
-      font-size:7px;
+      z-index: 2;
     }
     #text {
       width:85%;
@@ -127,7 +122,7 @@
           </el-form-item>
         </el-form>
         <hr>
-        <ul>
+        <ol>
           <li v-for="commentData in commentDatas">
             <div>
               <div class="div1">
@@ -135,7 +130,7 @@
                         style="width:70px;
                         height:70px;
                         margin-left:10px;">
-                  <span id="name">{{commentData.name}}</span>
+                  <span id="name">{{commentData.username}}</span>
 <!--                  <span id="id" type="index">第{{floor}}楼</span>-->
 <!--                  {{add()}}-->
                   <br>
@@ -173,7 +168,7 @@
             <br>
             <br>
           </li>
-        </ul>
+        </ol>
 
       </el-form>
 
@@ -259,7 +254,7 @@
           axios({
             method:"post",
             url:"http://localhost:80/MsgBoard/add",
-            data:_this.write.text//通过内容添加
+            data:{context:_this.write.text}//通过内容添加
           }).then(function (resp) {
             //刷新
           })
@@ -282,15 +277,6 @@
           })
         }).catch(() => {
         });
-        //alert(message);
-        var _this=this;
-        axios({
-          method:"post",
-          url:"http://localhost:80/MsgBoard/deleteById",
-          data:{id:message}//通过id删除可改
-        }).then(function (resp) {
-          //刷新
-        })
       }
     },
     mounted(){

@@ -150,4 +150,10 @@ public class TrendsServlet extends BaseServlet {
         int likes=jsonObject.getInteger("cheer");
         trendsService.updateLikes(id,likes);
     }
+
+    public void updateContent(){
+        int id=Integer.parseInt(jsonObject.getString("id"));
+        String content=jsonObject.getString("text");
+        trendsService.updateContent(id,content);
+    }
 }

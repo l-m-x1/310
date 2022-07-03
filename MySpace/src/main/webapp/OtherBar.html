@@ -1,32 +1,39 @@
 <ul class="topNav">
     <li ><a href="MyFeed.html"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
-    <li>
-        <div class="friendListTrigger">
-            <a href="#news"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>
-        </div>
-    </li>
+<!--    <li>-->
+<!--        <div class="friendListTrigger">-->
+<!--            <a href="#none"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>-->
+<!--        </div>-->
+<!--    </li>-->
 
-    <li>
-        <div class="addFriendTrigger">
-            <a href="#home"><span class="iconfont icon-tianjiahaoyou">添加好友</span></a>
-        </div>
-    </li>
+<!--    <li>-->
+<!--        <div class="addFriendTrigger">-->
+<!--            <a href="#none"><span class="iconfont icon-tianjiahaoyou">添加好友</span></a>-->
+<!--        </div>-->
+<!--    </li>-->
 
-    <li style="float: right" ><a href="#about"><span class="iconfont icon-logout"></span></a></li>
+<!--    <li>-->
+<!--        <div class="decorationTrigger">-->
+<!--            <a href="#none"><span class="iconfont icon-icon-">空间装扮</span></a>-->
+<!--        </div>-->
+<!--    </li>-->
 
-    <li style="float: right" >
-        <div id="settingTrigger">
-            <a href="#about"><span class="iconfont icon-shezhi"></span></a>
-        </div>
-    </li>
-    <li style="float: right">
-        <div id="checkMesg">
-            <el-badge :value="messageNumber" :max="10" class="item">
-                <el-button size="small" @click="handleClick">消息</el-button>
-            </el-badge>
-        </div>
-    </li>
+    <li style="float: right" ><a href="#none"><span class="iconfont icon-logout"></span></a></li>
+
+<!--    <li style="float: right" >-->
+<!--        <div id="settingTrigger">-->
+<!--            <a href="#none"><span class="iconfont icon-shezhi"></span></a>-->
+<!--        </div>-->
+<!--    </li>-->
+<!--    <li style="float: right">-->
+<!--        <div id="checkMesg">-->
+<!--            <el-badge :value="messageNumber" :max="10" class="item">-->
+<!--                <el-button size="small" @click="handleClick">消息</el-button>-->
+<!--            </el-badge>-->
+<!--        </div>-->
+<!--    </li>-->
 </ul>
+
 <div id="message">
     <el-dialog
             title="添加好友请求"
@@ -123,10 +130,17 @@
 
 <div class="friendList">
 </div>
+
+
+
+
+
 <div id="setting">
     <li><a href="personalProfile.html">修改资料</a></li>
     <li><a href="permissionManagement.html">权限管理</a></li>
 </div>
+
+
 
 <ul class="midNav">
     <li id="active"><a href="OtherFeed.html" >主页</a></li>
@@ -136,4 +150,4 @@
 <!--    <li><a href="#">个人心情</a></li>-->
 </ul>
 
-<script src="./js/OtherBar.js"></script>
+<script src="./js/navigationBar.js"></script>
