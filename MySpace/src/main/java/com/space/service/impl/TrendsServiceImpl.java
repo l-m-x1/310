@@ -13,11 +13,11 @@ import java.util.List;
 public class TrendsServiceImpl implements TrendsService {
 
     SqlSessionFactory factory= SqlSessionFactoryUtils.getSqlSessionFactory();
-    SqlSession session = factory.openSession();
-    TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+
     @Override
     public List<Trends> selectAll() {
-
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         List<Trends> trends = mapper.selectAll();
         session.close();
         return trends;
@@ -25,8 +25,8 @@ public class TrendsServiceImpl implements TrendsService {
 
     @Override
     public Trends selectById(Integer id) {
-//        SqlSession session = factory.openSession();
-//        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         Trends trends = mapper.selectById(id);
         session.close();
         return trends;
@@ -34,8 +34,8 @@ public class TrendsServiceImpl implements TrendsService {
 
     @Override
     public List<Trends> selectByUid(Integer uid) {
-//        SqlSession session = factory.openSession();
-//        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         List<Trends> trends = mapper.selectByUid(uid);
         session.close();
         return trends;
@@ -43,8 +43,8 @@ public class TrendsServiceImpl implements TrendsService {
 
     @Override
     public void insert(Trends trends) {
-//        SqlSession session = factory.openSession();
-//        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         mapper.insert(trends);
         session.commit();
         session.close();
@@ -52,8 +52,8 @@ public class TrendsServiceImpl implements TrendsService {
 
     @Override
     public void deleteById(Integer id) {
-//        SqlSession session = factory.openSession();
-//        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         mapper.deleteById(id);
         session.commit();
         session.close();
@@ -61,8 +61,8 @@ public class TrendsServiceImpl implements TrendsService {
 
     @Override
     public void deleteByUid(Integer uid) {
-//        SqlSession session = factory.openSession();
-//        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         mapper.deleteByUid(uid);
         session.commit();
         session.close();
@@ -70,17 +70,17 @@ public class TrendsServiceImpl implements TrendsService {
 
     @Override
     public void updateLikes(Integer id, Integer likes) {
-//        SqlSession session = factory.openSession();
-//        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         mapper.updateLikes(id,likes);
         session.commit();
         session.close();
     }
 
     @Override
-    public List<Trends> selectByUids(List<Integer> uids) {
-//        SqlSession session = factory.openSession();
-//        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+    public List<Trends> selectByUids(int[] uids) {
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
         List<Trends> trends = mapper.selectByUids(uids);
         session.close();
         return trends;

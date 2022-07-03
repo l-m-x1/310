@@ -7,7 +7,7 @@ let addFriendVue =  new Vue({
             dialogVisible:false,
             resultVisible:false,
             input:'',
-            userAvatar:"./photos/p1.jpg",
+            userAvatar:"photos/p1.jpg",
             userID:'123',
             userName:'123'
         }
@@ -16,6 +16,8 @@ let addFriendVue =  new Vue({
 
         close(){
             $(".searchResult").prop("style","display:none");
+            document.getElementById("formationCheck").hidden=true;
+            document.getElementById("noAccount").hidden=true;
             this.input='';
         },
 
@@ -40,8 +42,10 @@ let addFriendVue =  new Vue({
             let reg=/^\d{9}$/;
             if(reg.test(this.input))
             {
+
+                //formation check success
                 document.getElementById("formationCheck").hidden=true;
-                $(".searchResult").prop("style","display:block");
+                document.getElementById("noAccount").hidden=true;
                 axios({
                     method:"post",
                     url:'',
@@ -49,19 +53,31 @@ let addFriendVue =  new Vue({
                         id:this.input
                     }
                 }).then(resp=>{
-                    if(resp.data!=null)
+                    if(resp.data!='')
                     {
+                        //account exists
                         this.userAvatar=resp.data.avatar;
                         this.userID=resp.data.id;
                         this.userName=resp.data.name;
+                        $(".searchResult").prop("style","display:block");
+                    }
+                    else
+                    {
+                        //no such account
+                        $(".searchResult").prop("style","display:none");
+                        document.getElementById("noAccount").hidden=false;
+
                     }
 
-                })
-
+                });
 
             }
             else{
+                //formation check fails
+                $(".searchResult").prop("style","display:none");
                 document.getElementById("formationCheck").hidden=false;
+                alert(document.getElementById("noAccount"));
+                document.getElementById("noAccount").hidden=false;
             }
 
         }

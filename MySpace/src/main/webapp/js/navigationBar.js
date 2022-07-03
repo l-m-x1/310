@@ -7,7 +7,7 @@ let addFriendVue =  new Vue({
             dialogVisible:false,
             resultVisible:false,
             input:'',
-            userAvatar:"./photos/p1.jpg",
+            userAvatar:"photos/p1.jpg",
             userID:'123',
             userName:'123'
         }
@@ -16,32 +16,36 @@ let addFriendVue =  new Vue({
 
         close(){
             $(".searchResult").prop("style","display:none");
+            document.getElementById("formationCheck").hidden=true;
+            document.getElementById("noAccount").hidden=true;
             this.input='';
         },
 
         addFriend()
         {
-           axios({
-               method:"post",
-               url:'',
-               data:{
-                   id:this.userID
-               }
-           }).then(resp=>{
-               this.$message({
-                   message: '请求发送成功！',
-                   type: 'success'
-               });
-           });
+            axios({
+                method:"post",
+                url:'',
+                data:{
+                    id:this.userID
+                }
+            }).then(resp=>{
+                this.$message({
+                    message: '请求发送成功！',
+                    type: 'success'
+                });
+            });
         },
 
         searchUser()
         {
+            $(".searchResult").prop("style","display:none");
+            document.getElementById("formationCheck").hidden=true;
+            document.getElementById("noAccount").hidden=true;
             let reg=/^\d{9}$/;
             if(reg.test(this.input))
             {
-                document.getElementById("formationCheck").hidden=true;
-                $(".searchResult").prop("style","display:block");
+                //formation check success
                 axios({
                     method:"post",
                     url:'',
@@ -49,25 +53,31 @@ let addFriendVue =  new Vue({
                         id:this.input
                     }
                 }).then(resp=>{
-                    if(resp.data!=null)
+                    if(resp.data=="no account")
                     {
+                        //no such account
+                        document.getElementById("noAccount").hidden=false;
+                    }
+                    else
+                    {
+                        //account exists
                         this.userAvatar=resp.data.avatar;
                         this.userID=resp.data.id;
                         this.userName=resp.data.name;
+                        $(".searchResult").prop("style","display:block");
                     }
 
-                })
-
-
+                });
             }
             else{
+                //formation check fails
                 document.getElementById("formationCheck").hidden=false;
             }
 
         }
 
     }
-})
+});
 
 //set button
 $(".friendListTrigger").mouseenter(function (){
@@ -102,8 +112,26 @@ $("#decoration").mouseleave(function (){
 
 
 
- let decorations =document.getElementsByClassName("decorationColor");
+//set decoration
+let userDecoration="#DCE2F1";
+axios({
+    method:"get",
+    url:"/HomePage/getDecoration"
+}).then(resp=>{
+    if(resp.data!="no decoration")
+    {
+        userDecoration=resp.data;
+    }
+});
+$("body").prop("style","background-color:"+userDecoration);
+$(".leftcolumn").prop("style","background-color:"+userDecoration);
+$(".rightcolumn").prop("style","background-color:"+userDecoration);
 
+
+
+
+// change decoration
+ let decorations =document.getElementsByClassName("decorationColor");
  for(let i=0;i<decorations.length;i++)
  {
      decorations[i].addEventListener("click",function (){
@@ -127,6 +155,8 @@ $("#decoration").mouseleave(function (){
  }
 
 
+
+
 //logout
 $(".topNav .icon-logout").click(function (){
     axios({
@@ -141,34 +171,38 @@ $(".topNav .icon-logout").click(function (){
 
 //get friend List
 class Friend{
-    constructor(url,avatar,name) {
-        this.url=url;
+    constructor(avatar,name,id) {
         this.avatar=avatar;
         this.name=name;
+        this.id=id;
     }
 };
 let friendList=[];
 axios({
     method: "get",
-    url:''
+    url:'/HomePage/getFriendList'
 }).then(resp=>{
     let list=resp.data;
     list.forEach(item=>{
-        friendList.push(new Friend(item.url,item.avatar,item.name));
+        friendList.push(new Friend(item.avatar,item.name,item.id));
     })
 });
 
-friendList.push(new Friend("http://www.baidu.com","./img.png","zhuangsan"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
+friendList.push(new Friend("./img.png","zhuangsan",id="1"));
+friendList.push(new Friend("./img.png","lisi",id="2"));
+friendList.push(new Friend("./img.png","lisi",id="3"));
+friendList.push(new Friend("./img.png","lisi",id="4"));
+friendList.push(new Friend("./img.png","lisi",id="5"));
+friendList.push(new Friend("./img.png","lisi",id="6"));
+friendList.push(new Friend("./img.png","lisi",id="7"));
+
+
+
+
 
 let friends = $(".friendList");
 friendList.forEach(item=>{
-    let friend="<a target=\"_blank\" href=\""+item.url+"\">\n" +
+    let friend="<a target=\"_blank\" href=\""+"/OtherFeed.html?id="+item.id+"\">\n" +
         "        <div class=\"friend\">\n" +
         "\n" +
         "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +

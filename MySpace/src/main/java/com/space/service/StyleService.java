@@ -20,6 +20,6 @@ public interface StyleService {
     void deleteById(Integer id);
 
 
-    void updateType( Integer uid, Integer type);
+    void updateType( Integer uid, String type);
 
 }
