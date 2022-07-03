@@ -85,4 +85,13 @@ public class TrendsServiceImpl implements TrendsService {
         session.close();
         return trends;
     }
+
+    @Override
+    public void updateContent(Integer id, String content) {
+        SqlSession session = factory.openSession();
+        TrendsMapper mapper = session.getMapper(TrendsMapper.class);
+        mapper.updateContent(id,content);
+        session.commit();
+        session.close();
+    }
 }
