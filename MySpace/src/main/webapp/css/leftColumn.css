@@ -2,7 +2,7 @@
 .leftcolumn {
     float: left;
     width: 22%;
-    background-color: #F0FFFF;
+    background-color: #DCE2F1;
     padding-left: 0px;
     border: 5px solid deepskyblue;
     height: 30%;
@@ -18,4 +18,5 @@
     padding-top: 50px;
     text-align: center;
     padding-bottom: 50px;
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 }

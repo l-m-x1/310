@@ -4,7 +4,7 @@
 body {
         padding-left: 8%;
         padding-right: 8%;
-        background-color: #F0FFFF;
+        background-color: #DCE2F1;
         /*opacity: 0.5;*/
     padding-bottom: 100px;
 }
@@ -93,7 +93,7 @@ body {
 .rightcolumn {
     float: left;
     width: 75%;
-    background-color: bisque;
+    background-color: #DCE2F1;
     padding: 20px 30px;
     border: 5px solid deepskyblue;
     border-radius: 10px;

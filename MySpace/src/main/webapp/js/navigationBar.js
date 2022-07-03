@@ -102,8 +102,26 @@ $("#decoration").mouseleave(function (){
 
 
 
- let decorations =document.getElementsByClassName("decorationColor");
+//set decoration
+let userDecoration="#DCE2F1";
+axios({
+    method:"get",
+    url:"/HomePage/getDecoration"
+}).then(resp=>{
+    if(resp.data!="no decoration")
+    {
+        userDecoration=resp.data;
+    }
+});
+$("body").prop("style","background-color:"+userDecoration);
+$(".leftcolumn").prop("style","background-color:"+userDecoration);
+$(".rightcolumn").prop("style","background-color:"+userDecoration);
 
+
+
+
+// change decoration
+ let decorations =document.getElementsByClassName("decorationColor");
  for(let i=0;i<decorations.length;i++)
  {
      decorations[i].addEventListener("click",function (){
@@ -125,6 +143,8 @@ $("#decoration").mouseleave(function (){
          });
      });
  }
+
+
 
 
 //logout
