@@ -248,7 +248,7 @@ let message = new Vue({
     el:"#message",
 
     mounted() {
-
+        this.getMessage();
     },
 
     data(){
@@ -274,8 +274,7 @@ let message = new Vue({
         {
             axios({
                 method:"get",
-                url:""
-
+                url:"/HomePage/getAddFriMsg"
             }).then(resp=>{
                 this.tableData=resp.data;
             });
