@@ -233,38 +233,13 @@ new Vue({
                 method: "get",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
-                let list=resp.data;
-                list.forEach(item=>{
-                    this.friendList.push(new Friend(item.avatar,item.name,item.id));
-                })
+                let resultList=resp.data;
+                for(let i=0;i<list.length;i++)
+                    this.fileList.push(new Friend(resultList[i].avatar,resultList[i].name,resultList[i].id));
             });
         }
     }
 });
-
-
-// let friends = $(".friendList");
-// friendList.forEach(item=>{
-//     let friend="<a target=\"_blank\" href=\""+"/OtherFeed.html?id="+item.id+"\">\n" +
-//         "        <div class=\"friend\">\n" +
-//         "\n" +
-//         "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
-//         "\n" +
-//         "            <div class=\"friendName\">"+item.name+"</div>\n" +
-//         "\n" +
-//         "        </div>\n" +
-//         "    </a>";
-//     friends.append(friend);
-// });
-
-
-
-
-
-
-
-
-
 
 
 

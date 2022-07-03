@@ -54,7 +54,7 @@
             <el-button type="primary" plain @click="showDialog">上传照片</el-button>
             <el-button type="danger" @click="deleteByQuery">批量删除</el-button>
 
-
+            <hr>
                 <div class="block" v-for="photo in photos" :key="photo">
                     <div class="gallery">
                         <input type="checkbox" name="deletePhotos" :value="photo.id" style="position: fixed;z-index: 1"/>
@@ -195,33 +195,7 @@
         {
             return{
                 checkList:[],
-                photos:[
-                    {
-                    date:"2002-2-1",
-                    url:"https://bangongsucai.oss-cn-hangzhou.aliyuncs.com/202004/f72b928ccf.jpg",
-                    id:'1'
-                     },
-                    {
-                        date:"202-2-1",
-                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1",
-                        id:'2'
-                    },
-                    {
-                        date:"202-2-1",
-                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1",
-                        id:'3'
-                    },
-                    {
-                        date:"202-2-1",
-                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1",
-                        id:'4'
-                    },
-                    {
-                        date:"202-2-1",
-                        url:"https://tse1-mm.cn.bing.net/th/id/OIP-C.SCFHb0FzIfV6-c01ejZqYgHaE8?pid=ImgDet&rs=1",
-                        id:'5'
-                    }
-                ]
+                photos:[]
             }
         },
         methods:{
@@ -236,7 +210,6 @@
                 }).then(resp=>{
                     this.photos=resp.data;
                 });
-
             },
 
           showDialog()
