@@ -53,22 +53,21 @@
 
             <el-table-column
                     align="center"
-                    prop="avatarUrl"
             >
                 <template   slot-scope="scope">
-                    <img :src="scope.row.avatarUrl"  min-width="50" height="50" />
+                    <img :src="scope.row.avatar"  style="width: 30%;height: 30%" />
                 </template>
             </el-table-column>
 
+
             <el-table-column
                     prop="name"
-                    align="center"
+                    align="left"
             >
-
             </el-table-column>
 
             <el-table-column
-                    align="center"
+                    align="left"
             >
                 <template slot-scope="scope">
                     <el-row>
@@ -114,6 +113,17 @@
             </template>
         </div>
 
+        <div hidden="hidden" id="noAccount">
+            <template>
+                <el-alert
+                        title="用户不存在"
+                        type="info"
+                        show-icon
+                        :closable="false" disabled="true">
+                </el-alert>
+            </template>
+        </div>
+
         <div class="searchResult" style="margin-bottom: 20px;display: none">
             <hr>
             <img :src="userAvatar" width="50" height="50">
@@ -128,11 +138,72 @@
 </div>
 
 
-<div class="friendList">
+<div id="friendList">
+    <el-table
+            :data="friendList"
+            style="width:100%"
+            :row-class-name="tableRowClassName"
+            @selection-change="handleSelectionChange"
+    >
+
+
+
+        <el-table-column
+                align="center"
+                width="100"
+        >
+            <template   slot-scope="scope">
+                <img :src="scope.row.avatar"  style="width:80%;height: 80%" />
+            </template>
+        </el-table-column>
+
+
+        <el-table-column
+                prop="name"
+                align="center"
+                width="100"
+        >
+        </el-table-column>
+
+        <el-table-column
+                align="center"
+                width="200"
+        >
+            <template slot-scope="scope">
+                <el-column>
+                    <el-button type="primary" size="small" @click="accessFriend(scope.row)">访问空间</el-button>
+                    <el-button type="danger" size="small" @click="deleteFriend(scope.row)">删除好友</el-button>
+                </el-column>
+            </template>
+        </el-table-column>
+
+    </el-table>
 </div>
 
 
 
+<div id="decoration">
+
+    <div id="decorationText">选择空间背景</div>
+    <div class="decorationColor" style="background-color:#FFFFFF ">
+    </div>
+    <div class="decorationColor" style="background-color: #FAF9DE">
+    </div>
+    <div class="decorationColor" style="background-color: #FFF2E2">
+    </div>
+    <div class="decorationColor" style="background-color: #FDE6E0">
+    </div>
+    <div class="decorationColor" style="background-color: #E3EDCD">
+    </div>
+    <div class="decorationColor" style="background-color: #DCE2F1">
+    </div>
+    <div class="decorationColor" style="background-color: #E9EBFE">
+    </div>
+    <div class="decorationColor" style="background-color: #EAEAEF">
+    </div>
+    <div class="decorationColor" style="background-color: #3c4043">
+    </div>
+</div>
 
 
 <div id="setting">
@@ -143,11 +214,11 @@
 
 
 <ul class="midNav">
-    <li id="active"><a href="OtherFeed.html" >主页</a></li>
+    <li><a href="OtherFeed.html" >主页</a></li>
 <!--    <li><a href="album.html">相册</a></li>-->
 <!--    <li><a href="viewlog.html">日志</a></li>-->
     <li><a href="OtherComment.html">留言版</a></li>
-<!--    <li><a href="#">个人心情</a></li>-->
+    <!--    <li><a href="#">个人心情</a></li>-->
 </ul>
 
 <script src="./js/navigationBar.js"></script>

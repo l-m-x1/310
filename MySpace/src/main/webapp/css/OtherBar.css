@@ -60,7 +60,8 @@ body {
 .midNav li {
     float: left;
     border-radius:40px;
-    border: 2px solid deepskyblue;
+    border: 3px solid deepskyblue;
+    margin-right: 5px;
 }
 
 .midNav li a {
@@ -69,6 +70,7 @@ body {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    width: 100px;
 }
 
 
@@ -106,42 +108,19 @@ body {
 
 
 
-.friendList {
+#friendList {
     display: none;
     position: fixed;
     background-color: #f9f9f9;
-    min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     margin-left: 19%;
     margin-top: 3%;
     max-height: 50%;
+    width: 26%;
     overflow-y: scroll;
-    z-index: 1;
+    overflow-x: hidden;
+    z-index: 2;
 }
-
-.friend {
-    padding: 10px;
-    box-sizing: border-box;
-    height: 70px;
-    width: 200px;
-    border: 2px solid white;
-    margin: 10px;
-}
-.friend:hover {
-    border-color :#3a8ee6;
-}
-
-.friendAvatar {
-    width: 50px;
-    height: 50px;
-    float: left;
-}
-.friendName {
-    float: left;
-    padding-left: 20px;
-    padding-top: 10px;
-}
-
 
 #decoration {
     display: none;

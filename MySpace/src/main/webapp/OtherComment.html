@@ -114,7 +114,7 @@
                                   placeholder="请输入内容"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="OnSubmit">提交</el-button>
+                        <el-button type="primary" @click="OnSubmit('write')">提交</el-button>
                         <el-button @click="resetForm('write')">重置</el-button>
                     </el-form-item>
                 </el-form>
@@ -217,7 +217,9 @@
                 }).catch(() => {
                 });
             },
-            OnSubmit:function(){
+            OnSubmit(formName){
+                this.$refs[formName].validate((valid) => {
+                        if (valid) {
                 this.$confirm('是否确定提交?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -233,6 +235,11 @@
                         //刷新
                     })
                 }).catch(() => {
+                })
+                        } else {
+                            alert('提交失败!');
+                            return false;
+                        }
                 });
             }
         },
