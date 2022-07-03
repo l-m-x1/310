@@ -53,22 +53,21 @@
 
             <el-table-column
                     align="center"
-                    prop="avatarUrl"
             >
                 <template   slot-scope="scope">
-                    <img :src="scope.row.avatarUrl"  min-width="50" height="50" />
+                    <img :src="scope.row.avatar"  style="width: 30%;height: 30%" />
                 </template>
             </el-table-column>
 
+
             <el-table-column
                     prop="name"
-                    align="center"
+                    align="left"
             >
-
             </el-table-column>
 
             <el-table-column
-                    align="center"
+                    align="left"
             >
                 <template slot-scope="scope">
                     <el-row>
@@ -139,7 +138,46 @@
 </div>
 
 
-<div class="friendList">
+<div id="friendList">
+    <el-table
+            :data="friendList"
+            style="width:100%"
+            :row-class-name="tableRowClassName"
+            @selection-change="handleSelectionChange"
+    >
+
+
+
+        <el-table-column
+                align="center"
+                width="100"
+        >
+            <template   slot-scope="scope">
+                <img :src="scope.row.avatar"  style="width:80%;height: 80%" />
+            </template>
+        </el-table-column>
+
+
+        <el-table-column
+                prop="name"
+                align="center"
+                width="100"
+        >
+        </el-table-column>
+
+        <el-table-column
+                align="center"
+                width="200"
+        >
+            <template slot-scope="scope">
+                <el-column>
+                    <el-button type="primary" size="small" @click="accessFriend(scope.row)">访问空间</el-button>
+                    <el-button type="danger" size="small" @click="deleteFriend(scope.row)">删除好友</el-button>
+                </el-column>
+            </template>
+        </el-table-column>
+
+    </el-table>
 </div>
 
 
