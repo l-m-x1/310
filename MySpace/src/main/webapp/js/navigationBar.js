@@ -161,10 +161,10 @@ $(".topNav .icon-logout").click(function (){
 
 //get friend List
 class Friend{
-    constructor(url,avatar,name) {
-        this.url=url;
+    constructor(avatar,name,id) {
         this.avatar=avatar;
         this.name=name;
+        this.id=id;
     }
 };
 let friendList=[];
@@ -174,21 +174,25 @@ axios({
 }).then(resp=>{
     let list=resp.data;
     list.forEach(item=>{
-        friendList.push(new Friend(item.url,item.avatar,item.name));
+        friendList.push(new Friend(item.avatar,item.name,item.id));
     })
 });
 
-friendList.push(new Friend("http://www.baidu.com","./img.png","zhuangsan"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
-friendList.push(new Friend("","./img.png","lisi"));
+friendList.push(new Friend("./img.png","zhuangsan",id="1"));
+friendList.push(new Friend("./img.png","lisi",id="2"));
+friendList.push(new Friend("./img.png","lisi",id="3"));
+friendList.push(new Friend("./img.png","lisi",id="4"));
+friendList.push(new Friend("./img.png","lisi",id="5"));
+friendList.push(new Friend("./img.png","lisi",id="6"));
+friendList.push(new Friend("./img.png","lisi",id="7"));
+
+
+
+
 
 let friends = $(".friendList");
 friendList.forEach(item=>{
-    let friend="<a target=\"_blank\" href=\""+item.url+"\">\n" +
+    let friend="<a target=\"_blank\" href=\""+"/OtherFeed.html?id="+item.id+"\">\n" +
         "        <div class=\"friend\">\n" +
         "\n" +
         "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
