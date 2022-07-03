@@ -283,7 +283,7 @@
                         url:"http://localhost:80/Trends/add",
                         data:{text:_this.write.text}//通过内容添加
                     }).then(function (resp) {
-                        //刷新
+                        window.location.reload()//刷新
                     })
                 }).catch(() => {
                 })
@@ -299,13 +299,12 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    alert(message);
                     axios({
                         method:"post",
                         url:"http://localhost:80/Trends/deleteById",
                         data:{id:message}//message通过id删除
                     }).then(function (resp) {
-                        //刷新
+                        window.location.reload()//刷新
                     })
                 }).catch(() => {
                 });
@@ -317,14 +316,13 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    alert(message.id);
                     axios({
                         method:"post",
                         url:"http://localhost:80/Trends/updateContent",
                         data:{id:message.id,
                             text:_this.write.text}//message通过id可改
                     }).then(function (resp) {
-                        //刷新
+                        window.location.reload()//刷新
                     })
                 }).catch(() => {
                 });
@@ -337,7 +335,7 @@
                     data:{id :message.id,
                         cheer: message.cheer}//message通过id可改
                 }).then(function (resp) {
-                    //刷新
+
                 })
             }
 

@@ -273,14 +273,13 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    alert(this.write.text);
                     var _this=this;
                     axios({
                         method:"post",
                         url:"http://localhost:80/Trends/add",
                         data:{text:_this.write.text}//通过内容添加
                     }).then(function (resp) {
-                        //刷新
+                        window.location.reload()//刷新
                     })
                 }).catch(() => {
                 })
@@ -296,14 +295,13 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    alert(message);
                     var _this=this;
                     axios({
                         method:"post",
                         url:"http://localhost:80/Trends/deleteById",
                         data:{id:message}//message通过id删除可改
                     }).then(function (resp) {
-                        //刷新
+                        window.location.reload() //刷新
                     })
                 }).catch(() => {
                 });
@@ -317,7 +315,7 @@
                     cheer: message.cheer}
                     //message通过id可改
                 }).then(function (resp) {
-                    //刷新
+
                 })
             }
         }

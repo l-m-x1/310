@@ -112,17 +112,6 @@
                 //返回日志界面
             },
             submitForm(formName) {
-                // axios({
-                //     method:"post",
-                //     url:"",//目标地址,
-                //     data:{
-                //         diary:this.SetLog
-                //     }
-                // }).then(function (resp) {
-                //     if(resp.data=="success"){
-                //
-                //     }
-                // })
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.$confirm('是否发表内容?', '提示', {
@@ -130,7 +119,6 @@
                             cancelButtonText: '取消',
                             type: 'warning'
                         }).then(() => {
-                            alert(this.SetLog);
                             axios({
                                 method:"post",
                                 url:"",//目标地址,
@@ -139,7 +127,7 @@
                                 }
                             }).then(function (resp) {
                                 if(resp.data=="success"){
-
+                                    window.location.reload()
                                 }
                             })
                             window.location.href="viewlog.html";

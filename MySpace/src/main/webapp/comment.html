@@ -251,14 +251,13 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          alert(this.write.text);
           var _this=this;
           axios({
             method:"post",
             url:"http://localhost:80/MsgBoard/add",
             data:{context:_this.write.text}//通过内容添加
           }).then(function (resp) {
-            //刷新
+            window.location.reload()//刷新
           })
         }).catch(() => {
         });
@@ -280,7 +279,7 @@
             url:"http://localhost:80/MsgBoard/deleteById",
             data:{id:message}//通过id删除可改
           }).then(function (resp) {
-            //刷新
+            window.location.reload()//刷新
           })
         }).catch(() => {
         });

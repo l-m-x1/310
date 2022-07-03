@@ -135,13 +135,12 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    alert(message.id)
                     axios({
                         method:"post",
                         url:"",
                         data:message
                     }).then(function (resp) {
-                        //刷新
+                        window.location.reload()//刷新
                     })
                 }).catch(() => {
                 });
@@ -152,13 +151,12 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    alert(message)
                     axios({
                         method:"post",
                         url:"",
                         data:message//通过名字删除可改
                     }).then(function (resp) {
-                        //刷新
+                        window.location.reload()//刷新
                     })
                 }).catch(() => {
                 });
