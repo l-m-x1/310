@@ -167,7 +167,14 @@
             onSubmit() {
 
                 let form=new FormData();
-                form.append("form",this.sizeForm);
+                form.append("name",this.sizeForm.name);
+                form.append("region",this.sizeForm.region);
+                form.append("date",this.sizeForm.date);
+                form.append("hometown",this.sizeForm.hometown);
+                form.append("address",this.sizeForm.address);
+                form.append("work",this.sizeForm.work);
+                form.append("companyName",this.sizeForm.companyName);
+                form.append("companyAddress",this.sizeForm.companyAddress);
                 form.append("avatar",this.avatar);
                 axios({
                             method:"post",
