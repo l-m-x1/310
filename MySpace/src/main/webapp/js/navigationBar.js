@@ -228,6 +228,7 @@ new Vue({
 
         },
         getFriendList(){
+           this.fileList=[];
             axios({
                 method: "get",
                 url:'/HomePage/getFriendList'
@@ -237,14 +238,6 @@ new Vue({
                     this.friendList.push(new Friend(item.avatar,item.name,item.id));
                 })
             });
-
-            this.friendList.push(new Friend("./img.png","zhuangsan",id="1"));
-            this.friendList.push(new Friend("./img.png","lisi",id="2"));
-            this.friendList.push(new Friend("./img.png","lisi",id="3"));
-            this.friendList.push(new Friend("./img.png","lisi",id="4"));
-            this.friendList.push(new Friend("./img.png","lisi",id="5"));
-            this.friendList.push(new Friend("./img.png","lisi",id="6"));
-            this.friendList.push(new Friend("./img.png","lisi",id="7"));
         }
     }
 });

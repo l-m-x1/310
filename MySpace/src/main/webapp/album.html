@@ -150,6 +150,13 @@
                     url:'/Photos/upload',
                     data:formData
                 }).then(resp=>{
+                    this.dialogVisible=false;
+                    this.$message({
+                        message: '上传成功！',
+                        type: 'success'
+                    });
+
+                    photoSource.getPhotos();
 
                 });
             },
@@ -221,12 +228,13 @@
 
             getPhotos()
             {
+                this.photos=[];
                 //get album
                 axios({
                     methods: "get",
-                    url:'http://localhost/Photos/getPhotos'
+                    url:'/Photos/getPhotos'
                 }).then(resp=>{
-                    photoSource.photos=resp.data;
+                    this.photos=resp.data;
                 });
 
             },
