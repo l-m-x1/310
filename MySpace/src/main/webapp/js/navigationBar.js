@@ -25,7 +25,7 @@ let addFriendVue =  new Vue({
         {
             axios({
                 method:"post",
-                url:'',
+                url:'/HomePage/addFriend',
                 data:{
                     id:this.userID
                 }
@@ -48,7 +48,7 @@ let addFriendVue =  new Vue({
                 //formation check success
                 axios({
                     method:"post",
-                    url:'',
+                    url:'/HomePage/selectFriend',
                     data:{
                         id:this.input
                     }
@@ -161,7 +161,7 @@ $(".rightcolumn").prop("style","background-color:"+userDecoration);
 $(".topNav .icon-logout").click(function (){
     axios({
         method:'get',
-        url:''
+        url:'/HomePage/logout'
     }).then(resp=>{
         document.location="./login.html";
     });
@@ -188,13 +188,13 @@ axios({
     })
 });
 
-friendList.push(new Friend("./img.png","zhuangsan",id="1"));
-friendList.push(new Friend("./img.png","lisi",id="2"));
-friendList.push(new Friend("./img.png","lisi",id="3"));
-friendList.push(new Friend("./img.png","lisi",id="4"));
-friendList.push(new Friend("./img.png","lisi",id="5"));
-friendList.push(new Friend("./img.png","lisi",id="6"));
-friendList.push(new Friend("./img.png","lisi",id="7"));
+// friendList.push(new Friend("./img.png","zhuangsan",id="1"));
+// friendList.push(new Friend("./img.png","lisi",id="2"));
+// friendList.push(new Friend("./img.png","lisi",id="3"));
+// friendList.push(new Friend("./img.png","lisi",id="4"));
+// friendList.push(new Friend("./img.png","lisi",id="5"));
+// friendList.push(new Friend("./img.png","lisi",id="6"));
+// friendList.push(new Friend("./img.png","lisi",id="7"));
 
 
 
@@ -227,7 +227,7 @@ let message = new Vue({
     el:"#message",
 
     mounted() {
-
+        this.getMessage();
     },
 
     data(){
@@ -253,7 +253,7 @@ let message = new Vue({
         {
             axios({
                 method:"get",
-                url:""
+                url:"/HomePage/getAddFriMsg"
 
             }).then(resp=>{
                 this.tableData=resp.data();
@@ -265,7 +265,7 @@ let message = new Vue({
 
             axios({
                 method:"post",
-                url:'',
+                url:'/HomePage/accept',
                 data:{
                     id:row.id,
                     type:"agree"

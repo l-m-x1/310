@@ -32,10 +32,10 @@ public class AddFriServiceImpl implements AddFriService {
     }
 
     @Override
-    public List<AddFriMsg> selectByTo(Integer to) {
+    public List<AddFriMsg> selectByTo(Integer msg_to) {
         SqlSession session = factory.openSession();
         AddFriMapper mapper = session.getMapper(AddFriMapper.class);
-        return mapper.selectByTo(to);
+        return mapper.selectByTo(msg_to);
     }
 
     @Override

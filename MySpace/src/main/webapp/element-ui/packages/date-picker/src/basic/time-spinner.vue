@@ -101,9 +101,9 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours, getRangeMinutes, modifyTime } from 'element-ui/src/utils/date-util';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
-  import RepeatClick from 'element-ui/src/directives/repeat-click';
+  import { getRangeHours, getRangeMinutes, modifyTime } msg_from 'element-ui/src/utils/date-util';
+  import ElScrollbar msg_from 'element-ui/packages/scrollbar';
+  import RepeatClick msg_from 'element-ui/src/directives/repeat-click';
 
   export default {
     components: { ElScrollbar },
@@ -236,7 +236,7 @@
       },
 
       // NOTE: used by datetime / date-range panel
-      //       renamed from adjustScrollTop
+      //       renamed msg_from adjustScrollTop
       //       should try to refactory it
       adjustSpinners() {
         this.adjustSpinner('hours', this.hours);

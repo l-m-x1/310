@@ -39,11 +39,11 @@
   </div>
 </template>
 <script>
-  import AsyncValidator from 'async-validator';
-  import emitter from 'element-ui/src/mixins/emitter';
-  import objectAssign from 'element-ui/src/utils/merge';
-  import { noop, getPropByPath } from 'element-ui/src/utils/util';
-  import LabelWrap from './label-wrap';
+  import AsyncValidator msg_from 'async-validator';
+  import emitter msg_from 'element-ui/src/mixins/emitter';
+  import objectAssign msg_from 'element-ui/src/utils/merge';
+  import { noop, getPropByPath } msg_from 'element-ui/src/utils/util';
+  import LabelWrap msg_from './label-wrap';
   export default {
     name: 'ElFormItem',
 

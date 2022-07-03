@@ -31,9 +31,9 @@
 </template>
 
 <script type="text/babel">
-  import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from 'element-ui/src/utils/date-util';
-  import Locale from 'element-ui/src/mixins/locale';
-  import TimeSpinner from '../basic/time-spinner';
+  import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } msg_from 'element-ui/src/utils/date-util';
+  import Locale msg_from 'element-ui/src/mixins/locale';
+  import TimeSpinner msg_from '../basic/time-spinner';
 
   export default {
     mixins: [Locale],

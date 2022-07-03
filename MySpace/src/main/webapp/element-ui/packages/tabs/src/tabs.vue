@@ -1,5 +1,5 @@
 <script>
-  import TabNav from './tab-nav';
+  import TabNav msg_from './tab-nav';
 
   export default {
     name: 'ElTabs',

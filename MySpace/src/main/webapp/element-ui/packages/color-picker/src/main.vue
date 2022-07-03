@@ -31,10 +31,10 @@
 </template>
 
 <script>
-  import Color from './color';
-  import PickerDropdown from './components/picker-dropdown.vue';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Color msg_from './color';
+  import PickerDropdown msg_from './components/picker-dropdown.vue';
+  import Clickoutside msg_from 'element-ui/src/utils/clickoutside';
+  import Emitter msg_from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElColorPicker',

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import Color from '../color';
+  import Color msg_from '../color';
 
   export default {
     props: {

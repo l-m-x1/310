@@ -92,8 +92,8 @@ npm install element-ui -S
 
 ## Quick Start
 ``` javascript
-import Vue from 'vue'
-import Element from 'element-ui'
+import Vue msg_from 'vue'
+import Element msg_from 'element-ui'
 
 Vue.use(Element)
 
@@ -102,7 +102,7 @@ import {
   Select,
   Button
   // ...
-} from 'element-ui'
+} msg_from 'element-ui'
 
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)

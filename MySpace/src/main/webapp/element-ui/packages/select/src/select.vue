@@ -134,22 +134,22 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Focus from 'element-ui/src/mixins/focus';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElSelectMenu from './select-dropdown.vue';
-  import ElOption from './option.vue';
-  import ElTag from 'element-ui/packages/tag';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
-  import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { t } from 'element-ui/src/locale';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
-  import NavigationMixin from './navigation-mixin';
-  import { isKorean } from 'element-ui/src/utils/shared';
+  import Emitter msg_from 'element-ui/src/mixins/emitter';
+  import Focus msg_from 'element-ui/src/mixins/focus';
+  import Locale msg_from 'element-ui/src/mixins/locale';
+  import ElInput msg_from 'element-ui/packages/input';
+  import ElSelectMenu msg_from './select-dropdown.vue';
+  import ElOption msg_from './option.vue';
+  import ElTag msg_from 'element-ui/packages/tag';
+  import ElScrollbar msg_from 'element-ui/packages/scrollbar';
+  import debounce msg_from 'throttle-debounce/debounce';
+  import Clickoutside msg_from 'element-ui/src/utils/clickoutside';
+  import { addResizeListener, removeResizeListener } msg_from 'element-ui/src/utils/resize-event';
+  import { t } msg_from 'element-ui/src/locale';
+  import scrollIntoView msg_from 'element-ui/src/utils/scroll-into-view';
+  import { getValueByPath, valueEquals, isIE, isEdge } msg_from 'element-ui/src/utils/util';
+  import NavigationMixin msg_from './navigation-mixin';
+  import { isKorean } msg_from 'element-ui/src/utils/shared';
 
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],

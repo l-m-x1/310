@@ -55,8 +55,8 @@
 </template>
 
 <script>
-import throttle from 'throttle-debounce/throttle';
-import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import throttle msg_from 'throttle-debounce/throttle';
+import { addResizeListener, removeResizeListener } msg_from 'element-ui/src/utils/resize-event';
 
 export default {
   name: 'ElCarousel',
