@@ -30,4 +30,7 @@ public interface TrendsMapper {
 
     @Update("update trends set likes = #{likes} where id=#{id} ;")
     void updateLikes(@Param("id") Integer id, @Param("likes") Integer likes);
+
+    @Update("update trends set content=#{content} where id=#{id}")
+    void updateContent(@Param("id") Integer id, @Param("content") String content);
 }

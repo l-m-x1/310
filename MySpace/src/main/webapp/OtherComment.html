@@ -61,12 +61,6 @@
 
             left: 100px;
         }
-        #delete{
-            position: relative;
-            font-size:7px;
-            left: 50%;
-
-        }
         #in{
             position: relative;
             top: 20px;
@@ -125,7 +119,7 @@
                     </el-form-item>
                 </el-form>
                 <hr>
-                <ul>
+                <ol>
                     <li v-for="commentData in commentDatas">
                         <div>
                             <div class="div1">
@@ -135,7 +129,7 @@
                         margin-left:10px;">
 
                                     <span id="name">{{commentData.name}}</span>
-                                    <span id="id">第{{commentData.id}}楼</span>
+<!--                                    <span id="id">第{{commentData.id}}楼</span>-->
 
                                     <br>
                                 <div id="text">
@@ -151,7 +145,7 @@
                         <br>
                         <br>
                     </li>
-                </ul>
+                </ol>
 
             </el-form>
 
@@ -168,6 +162,17 @@
 <script>
     $("#OtherBar").load("./OtherBar.html");
     $(".leftcolumn").load("./leftColumn.html");
+    //get friendId
+    function getParams(key) {
+        let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        let r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    };
+    // alert(getParams("id"));
+    var friendId=getParams("id");
 
     new Vue({
         el: '#comment',
@@ -203,37 +208,42 @@
         },
         methods: {
             resetForm(formName) {
-                this.$refs[formName].resetFields();
+                this.$confirm('是否确定清空?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$refs[formName].resetFields();
+                }).catch(() => {
+                });
             },
             OnSubmit:function(){
-                alert(this.write.text);
-                var _this=this;
-                axios({
-                    method:"post",
-                    url:"",
-                    data:_this.write.text//通过内容添加
-                }).then(function (resp) {
-                    //刷新
-                })
-            },
-            remove(message){
-                alert(message);
-                var _this=this;
-                axios({
-                    method:"post",
-                    url:"",
-                    data:message//通过id删除可改
-                }).then(function (resp) {
-                    //刷新
-                })
+                this.$confirm('是否确定提交?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    var _this=this;
+                    axios({
+                        method:"post",
+                        url:"",
+                        data:{ friendId:friendId,
+                            text:_this.write.text}//通过内容添加
+                    }).then(function (resp) {
+                        //刷新
+                    })
+                }).catch(() => {
+                });
             }
         },
         mounted(){
             var _this=this;
             axios({
                 method:"get",
-                url:" "//网站
+                url:" ",//网站
+                data:{id:friendId}//通过id删除可改
             }).then(function (resp){
+
                 //_this.commentDatas=resp.data;
             })
         },
