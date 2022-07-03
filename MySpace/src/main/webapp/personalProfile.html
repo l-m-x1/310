@@ -77,7 +77,7 @@
         </el-row>
 
         <hr>
-        <el-form-item label="昵称">
+        <el-form-item label="昵称" >
             <el-input class="input"   v-model="sizeForm.name"></el-input>
         </el-form-item>
         <el-form-item label="性别">
@@ -168,11 +168,12 @@
 
                 let form=new FormData();
                 form.append("form",this.sizeForm);
+                form.append("imageUrl",this.sizeForm.imageUrl);
                 form.append("avatar",this.avatar);
                 axios({
                             method:"post",
-                            url:"http://localhost:80/",
-                            data:this.sizeForm
+                            url:"http://localhost:80/test",
+                            data:form
                 }).then(function (resp) {
                     if(resp.data=="success"){
                         //成功内容

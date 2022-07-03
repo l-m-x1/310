@@ -117,12 +117,13 @@ public class PhotosServlet extends BaseServlet {
                 String fileName=fileItem.getName();
                 int index = fileName.lastIndexOf('.');
                 String  suffix=fileName.substring(index);
-                String path="./src/main/webapp/photos/"+UUID.randomUUID()+suffix;
+                String newName=UUID.randomUUID()+suffix;
+                String path="./src/main/webapp/photos/"+newName;
                 FileOutputStream fileOutputStream = new FileOutputStream(path);
                 IOUtils.copy(inputStream,fileOutputStream);
                 Photos photos = new Photos();
                 photos.setUid(id);
-                photos.setPath(path);
+                photos.setPath("./photos/"+newName);
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String s = format.format(date);
@@ -134,8 +135,8 @@ public class PhotosServlet extends BaseServlet {
 
     public void getPhotos() throws IOException {
         System.out.println("getPhotos");
-//        Integer uid= (Integer) req.getSession().getAttribute("id");
-        Integer uid=1;
+        Integer uid= (Integer) req.getSession().getAttribute("id");
+//        Integer uid=1;
         PhotosService photosService = new PhotosServiceImpl();
         List<Photos> photos = photosService.selectByUid(uid);
 
@@ -197,7 +198,8 @@ public class PhotosServlet extends BaseServlet {
         PhotosServiceImpl photosService = new PhotosServiceImpl();
 
         for(Object delete:deletes){
-            photosService.deleteById((Integer) delete);
+
+            photosService.deleteById(Integer.parseInt(delete.toString()));
         }
     }
 

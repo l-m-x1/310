@@ -8,7 +8,10 @@ public class Info {
     private String city;
     private String birthday;
 
-    private String avatar;
+    private String homeTown;
+//    private String
+
+
 
 
     public Integer getId() {
@@ -46,22 +49,5 @@ public class Info {
         this.birthday = birthday;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    @Override
-    public String toString() {
-        return "Info{" +
-                "id=" + id +
-                ", gender='" + gender + '\'' +
-                ", city='" + city + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", avatar='" + avatar + '\'' +
-                '}';
-    }
 }

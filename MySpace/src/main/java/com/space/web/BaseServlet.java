@@ -29,12 +29,14 @@ public class BaseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.req=req;
         this.resp=resp;
-        if(req.getMethod().equals("POST")){
+        String contentType = req.getContentType();
+        System.out.println(contentType);
+        if(contentType!=null&&contentType.contains("application/json")){
             String requestBody = IOUtils.toString(req.getInputStream());
             jsonObject = JSON.parseObject(requestBody);
         }
 
-        req.getSession().setAttribute("id",1);
+//        req.getSession().setAttribute("id",1);
 
 
         String uri = req.getRequestURI();
