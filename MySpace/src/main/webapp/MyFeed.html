@@ -161,21 +161,6 @@
                             <el-button id="delete" type="text" @click="remove(ruleForm.id)" icon="el-icon-delete"></el-button>
                             </span>
                             </div>
-                            <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px"  v-show="!ruleForm.name">
-                                <hr>
-                                <el-form-item label="回复内容" prop="desc">
-                                    <el-input
-                                            type="textarea"
-                                            :autosize="{ minRows: 6, maxRows: 100}"
-                                            placeholder="请输入内容"
-                                            v-model="ruleForm.desc">
-                                    </el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-button type="primary" @click="submitForm(ruleForm)">确认</el-button>
-                                    <el-button @click="resetForm('ruleForm')">清空</el-button>
-                                </el-form-item>
-                            </el-form>
                             <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px"  v-show="ruleForm.modify">
                                 <hr>
                                 <el-form-item label="修改内容" prop="text">
@@ -214,11 +199,10 @@
     new Vue({
         el: '#FriendFeed',
         mounted(){
-            _this.ruleForms[0].modify=false;
             var _this=this;
             axios({
                 method:"get",
-                url:'http://localhost:80/Trends/showMyself'//网站
+                url:'/Trends/showMyself'//网站
             }).then(function (resp){
                 _this.ruleForms=resp.data;
             })
@@ -238,6 +222,7 @@
                     text:'津贴喝好圣诞节交罚款哈咖啡壶看不见了都',
                     cheer:0,
                     show:false,
+                    modify: true
                 },
                     {
                         id:2,
@@ -280,7 +265,7 @@
                     var _this=this;
                     axios({
                         method:"post",
-                        url:"http://localhost:80/Trends/add",
+                        url:"/Trends/add",
                         data:{text:_this.write.text}//通过内容添加
                     }).then(function (resp) {
                         window.location.reload()//刷新
@@ -301,7 +286,7 @@
                 }).then(() => {
                     axios({
                         method:"post",
-                        url:"http://localhost:80/Trends/deleteById",
+                        url:"/Trends/deleteById",
                         data:{id:message}//message通过id删除
                     }).then(function (resp) {
                         window.location.reload()//刷新
@@ -318,7 +303,7 @@
                 }).then(() => {
                     axios({
                         method:"post",
-                        url:"http://localhost:80/Trends/updateContent",
+                        url:"/Trends/updateContent",
                         data:{id:message.id,
                             text:_this.write.text}//message通过id可改
                     }).then(function (resp) {
@@ -331,7 +316,7 @@
                 message.cheer++;
                 axios({
                     method:"post",
-                    url:"http://localhost:80/Trends/updateLikes",
+                    url:"/Trends/updateLikes",
                     data:{id :message.id,
                         cheer: message.cheer}//message通过id可改
                 }).then(function (resp) {
