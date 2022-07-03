@@ -35,24 +35,10 @@ public class InfoServlet extends BaseServlet {
         resp.setContentType("text/json;charset=utf-8");
         resp.getWriter().write(ret);
     }
-    public void modifyInfo(){
-        Integer id = (Integer) req.getSession().getAttribute("id");
-        InfoServiceImpl infoService = new InfoServiceImpl();
-        Info info = infoService.selectById(id);
-        if(!jsonObject.getString("city").isEmpty()){
-            info.setCity(jsonObject.getString("city"));
-        }
-        if(!jsonObject.getString("gender").isEmpty()){
-            info.setGender(jsonObject.getString("gender"));
-        }
-        if(!jsonObject.getString("birthday").isEmpty()){
-            info.setBirthday(jsonObject.getString("birthday"));
-        }
-        infoService.update(info);
-    }
 
 
-    public void modifyInfo1() throws IOException {
+
+    public void modifyInfo() throws IOException {
         Integer id=(Integer)req.getSession().getAttribute("id");
         DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
         ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);

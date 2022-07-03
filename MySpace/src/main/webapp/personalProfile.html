@@ -134,12 +134,12 @@
         el: '#app',
         mounted(){
 
-            // axios({
-            //     method:"get",
-            //     url:""
-            // }).then(resp=>{
-            //     this.sizeForm=resp.data;
-            // })
+            axios({
+                method:"get",
+                url:"/Info/getInfo"
+            }).then(resp=>{
+                this.sizeForm=resp.data;
+            })
         },
         data() {
             return {
@@ -183,7 +183,7 @@
                     form.append("avatar", this.avatar);
                     axios({
                         method: "post",
-                        url: "/Info/modifyInfo1",
+                        url: "/Info/modifyInfo",
                         data: form
                     }).then(function (resp) {
                     if(resp.data=="success"){
