@@ -6,7 +6,7 @@ public class Style {
   private Integer id;
 
   private Integer uid;
-
+  private String type;
   public Integer getUid() {
     return uid;
   }
@@ -15,7 +15,7 @@ public class Style {
     this.uid = uid;
   }
 
-  private Integer type;
+
 
 
   public Integer getId() {
@@ -27,11 +27,11 @@ public class Style {
   }
 
 
-  public Integer getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(Integer type) {
+  public void setType(String type) {
     this.type = type;
   }
 

@@ -35,7 +35,7 @@ public class MsgBoardServlet extends BaseServlet {
         msgBoard.setContent(jsonObject.getString("content"));
         msgBoard.setTime(simpleDateFormat.format(new Date()));
         msgBoard.setWrid(jsonObject.getInteger("wrid"));
-        msgBoard.setFloor(jsonObject.getInteger("floor"));
+        //msgBoard.setFloor(jsonObject.getInteger("floor"));
         msgBoardService.insert(msgBoard);
 
     }
@@ -92,7 +92,7 @@ public class MsgBoardServlet extends BaseServlet {
             ret.time=board.getTime();
             User user = userService.selectById(board.getWrid());
             ret.username=user.getUsername();
-            ret.photo="http://localhost/defaultAvatar.png";//+user.getAvatar();
+            ret.photo="http://localhost/"+user.getAvatar();
             rets.add(ret);
         }
         String jsonString = JSON.toJSONString(rets);
@@ -104,7 +104,6 @@ public class MsgBoardServlet extends BaseServlet {
     //删除单条留言板
     public void deleteById(){
         int id = Integer.parseInt(jsonObject.getString("id"));
-        System.out.println(id);
         msgBoardService.deleteById(id);
     }
 

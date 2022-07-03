@@ -7,6 +7,27 @@ public class Trends {
 
   private Integer uid;
 
+  private String time;
+
+  @Override
+  public String toString() {
+    return "Trends{" +
+            "id=" + id +
+            ", uid=" + uid +
+            ", time='" + time + '\'' +
+            ", content='" + content + '\'' +
+            ", likes=" + likes +
+            '}';
+  }
+
+  public String getTime() {
+    return time;
+  }
+
+  public void setTime(String time) {
+    this.time = time;
+  }
+
   public Integer getUid() {
     return uid;
   }
@@ -47,13 +68,4 @@ public class Trends {
     this.likes = likes;
   }
 
-  @Override
-  public String toString() {
-    return "Trends{" +
-            "id=" + id +
-            ", uid=" + uid +
-            ", content='" + content + '\'' +
-            ", likes=" + likes +
-            '}';
-  }
 }

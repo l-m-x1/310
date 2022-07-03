@@ -16,8 +16,9 @@ import java.util.List;
 public class StyleServlet extends BaseServlet {
 
     StyleService styleService=new StyleServiceImpl();
-    HttpSession session=req.getSession();
+
     public void show() throws IOException {
+        HttpSession session=req.getSession();
         Integer uid = (Integer) session.getAttribute("id");
         List<Style> styles = styleService.selectByUid(uid);
         String jsonString = JSON.toJSONString(styles);
@@ -26,8 +27,9 @@ public class StyleServlet extends BaseServlet {
     }
 
     public void updateType(){
+        HttpSession session=req.getSession();
         Integer uid = (Integer) session.getAttribute("id");
-        int type=jsonObject.getInteger("type");
+        String type=jsonObject.getString("type");
         styleService.updateType(uid,type);
     }
 }

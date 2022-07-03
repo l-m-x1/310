@@ -23,6 +23,6 @@ public interface StyleMapper {
     void deleteById(Integer id);
 
     @Update("update style set type=#{type} where uid=#{uid}")
-    void updateType(@Param("uid") Integer uid, @Param("type") Integer type);
+    void updateType(@Param("uid") Integer uid, @Param("type") String type);
 
 }

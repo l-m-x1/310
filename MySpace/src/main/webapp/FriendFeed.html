@@ -207,9 +207,9 @@
             var _this=this;
             axios({
                 method:"get",
-                url:''//网站
+                url:'http://localhost:80/Trends/show'//网站
             }).then(function (resp){
-                //_this.ruleForms=resp.data;
+                _this.ruleForms=resp.data;
             })
         },
         data() {
@@ -275,8 +275,8 @@
                     var _this=this;
                     axios({
                         method:"post",
-                        url:"",
-                        data:_this.write.text//通过内容添加
+                        url:"http://localhost:80/Trends/add",
+                        data:{text:_this.write.text}//通过内容添加
                     }).then(function (resp) {
                         //刷新
                     })
@@ -293,8 +293,8 @@
                     var _this=this;
                     axios({
                         method:"post",
-                        url:"",
-                        data:message//message通过id删除可改
+                        url:"http://localhost:80/Trends/deleteById",
+                        data:{id:message}//message通过id删除可改
                     }).then(function (resp) {
                         //刷新
                     })
@@ -305,8 +305,10 @@
                 message.cheer++;
                 axios({
                     method:"post",
-                    url:"",
-                    data:message//message通过id可改
+                    url:"http://localhost:80/Trends/updateLikes",
+                    data:{id :message.id,
+                    cheer: message.cheer}
+                    //message通过id可改
                 }).then(function (resp) {
                     //刷新
                 })
