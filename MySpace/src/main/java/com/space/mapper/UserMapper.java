@@ -32,4 +32,7 @@ public interface UserMapper {
 
     @Select("select max(id) from user")
     Integer getMaxId();
+
+    @Update("update user set avatar=#{avatar} where id=#{id}")
+    void updateAvatar(@Param("id")Integer id,@Param("avatar") String avatar);
 }

@@ -1,6 +1,6 @@
 <script>
-import ajax from './ajax';
-import UploadDragger from './upload-dragger.vue';
+import ajax msg_from './ajax';
+import UploadDragger msg_from './upload-dragger.vue';
 
 export default {
   inject: ['uploader'],

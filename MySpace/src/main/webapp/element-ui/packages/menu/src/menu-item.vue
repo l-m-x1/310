@@ -29,9 +29,9 @@
   </li>
 </template>
 <script>
-  import Menu from './menu-mixin';
-  import ElTooltip from 'element-ui/packages/tooltip';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Menu msg_from './menu-mixin';
+  import ElTooltip msg_from 'element-ui/packages/tooltip';
+  import Emitter msg_from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElMenuItem',

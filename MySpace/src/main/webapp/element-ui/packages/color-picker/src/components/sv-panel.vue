@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import draggable from '../draggable';
+  import draggable msg_from '../draggable';
 
   export default {
     name: 'el-sl-panel',

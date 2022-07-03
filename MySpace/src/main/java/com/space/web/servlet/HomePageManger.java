@@ -2,6 +2,8 @@ package com.space.web.servlet;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.space.pojo.AddFriMsg;
 import com.space.pojo.Friends;
 import com.space.pojo.User;
@@ -34,8 +36,36 @@ public class HomePageManger extends BaseServlet {
         JSONObject ret =new JSONObject();
 
         class ret{
+            @JSONField(ordinal = 2)
             public String name;
+            @JSONField(ordinal = 1)
             public String avatar;
+            @JSONField(ordinal = 3)
+            public Integer id;
+
+            public Integer getId() {
+                return id;
+            }
+
+            public void setId(Integer id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getAvatar() {
+                return avatar;
+            }
+
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
+            }
         }
         List<ret> retList=new ArrayList<>();
         Integer uid= (Integer) req.getSession().getAttribute("id");
@@ -49,6 +79,7 @@ public class HomePageManger extends BaseServlet {
             User user = userService.selectById(uid);
             tmp.name=user.getUsername();
             tmp.avatar=user.getAvatar();
+            tmp.id=user.getId();
             retList.add(tmp);
         }
         resp.setContentType("text/json;charset=utf-8");
@@ -69,13 +100,13 @@ public class HomePageManger extends BaseServlet {
 
     public void addFriend(){
         Integer uid = (Integer) req.getSession().getAttribute("id");
-        Integer fid = jsonObject.getInteger("fid");
+        Integer fid = jsonObject.getInteger("id");
 
 
         AddFriService addFriService = new AddFriServiceImpl();
         AddFriMsg addFriMsg = new AddFriMsg();
-        addFriMsg.setFrom(uid);
-        addFriMsg.setTo(fid);
+        addFriMsg.setMsg_from(uid);
+        addFriMsg.setMsg_to(fid);
         addFriService.insert(addFriMsg);
     }
 
@@ -84,8 +115,8 @@ public class HomePageManger extends BaseServlet {
         Integer fid = jsonObject.getInteger("fid");
         AddFriServiceImpl addFriService = new AddFriServiceImpl();
         AddFriMsg addFriMsg = new AddFriMsg();
-        addFriMsg.setTo(uid);
-        addFriMsg.setFrom(fid);
+        addFriMsg.setMsg_to(uid);
+        addFriMsg.setMsg_from(fid);
         addFriService.delete(addFriMsg);
         FriendsService friendsService = new FriendsServiceImpl();
         Friends friends=new Friends();
@@ -100,14 +131,108 @@ public class HomePageManger extends BaseServlet {
     }
 
     public void getAddFriMsg() throws IOException {
+
+        class ret{
+            @JSONField(ordinal = 1)
+            public String avatarUrl;
+            @JSONField(ordinal = 2)
+            public String name;
+            @JSONField(ordinal = 3)
+            public Integer id;
+
+            public String getAvatarUrl() {
+                return avatarUrl;
+            }
+
+            public void setAvatarUrl(String avatarUrl) {
+                this.avatarUrl = avatarUrl;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public Integer getId() {
+                return id;
+            }
+
+            public void setId(Integer id) {
+                this.id = id;
+            }
+        }
         Integer uid = (Integer) req.getSession().getAttribute("id");
         AddFriService addFriService = new AddFriServiceImpl();
         List<AddFriMsg> addFriMsgs = addFriService.selectByTo(uid);
-        ArrayList<Integer> froms = new ArrayList<>();
+        ArrayList<ret> froms = new ArrayList<>();
+        UserServiceImpl userService = new UserServiceImpl();
         for (AddFriMsg addFriMsg:addFriMsgs){
-            froms.add(addFriMsg.getFrom());
+            ret ret = new ret();
+            User user = userService.selectById(addFriMsg.getMsg_from());
+            ret.avatarUrl=user.getAvatar();
+            ret.name=user.getUsername();
+            ret.id=user.getId();
+            froms.add(ret);
         }
         resp.setContentType("text/json;charset=utf-8");
-        resp.getWriter().write(JSON.toJSONString(froms));
+        String s = JSON.toJSONString(froms);
+        resp.getWriter().write(s);
+    }
+
+    public void selectFriend() throws IOException {
+        class ret{
+            public String avatar;
+            public Integer id;
+            public String name;
+
+            public String getAvatar() {
+                return avatar;
+            }
+
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
+            }
+
+            public Integer getId() {
+                return id;
+            }
+
+            public void setId(Integer id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+        }
+        UserServiceImpl userService = new UserServiceImpl();
+        User user = userService.selectById(jsonObject.getInteger("id"));
+        ret ret = new ret();
+        ret.avatar=user.getAvatar();
+        ret.name=user.getUsername();
+        ret.id=user.getId();
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(JSON.toJSONString(ret, SerializerFeature.WriteNullStringAsEmpty));
+    }
+
+
+    public void refuse(){
+        Integer uid = (Integer) req.getSession().getAttribute("id");
+        Integer fid = jsonObject.getInteger("fid");
+        AddFriServiceImpl addFriService = new AddFriServiceImpl();
+        AddFriMsg addFriMsg = new AddFriMsg();
+        addFriMsg.setMsg_to(uid);
+        addFriMsg.setMsg_from(fid);
+        addFriService.delete(addFriMsg);
+    }
+    public void getDecoration(){
+        System.out.println("hello");
     }
 }

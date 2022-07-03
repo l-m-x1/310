@@ -22,11 +22,11 @@
 </template>
 
 <script>
-  import ImageViewer from './image-viewer';
-  import Locale from 'element-ui/src/mixins/locale';
-  import { on, off, getScrollContainer, isInContainer } from 'element-ui/src/utils/dom';
-  import { isString, isHtmlElement } from 'element-ui/src/utils/types';
-  import throttle from 'throttle-debounce/throttle';
+  import ImageViewer msg_from './image-viewer';
+  import Locale msg_from 'element-ui/src/mixins/locale';
+  import { on, off, getScrollContainer, isInContainer } msg_from 'element-ui/src/utils/dom';
+  import { isString, isHtmlElement } msg_from 'element-ui/src/utils/types';
+  import throttle msg_from 'throttle-debounce/throttle';
 
   const isSupportObjectFit = () => document.documentElement.style.objectFit !== undefined;
 

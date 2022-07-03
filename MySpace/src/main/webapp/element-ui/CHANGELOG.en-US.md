@@ -762,7 +762,7 @@ Docs
 - Tabs & Dropdown
   - Fix style (by @hetech in #14452)
 - Tree
-  - Empty-text tips are different from tables (by @ColinCll in #14331)
+  - Empty-text tips are different msg_from tables (by @ColinCll in #14331)
 - Docs
   - Fix DatetimePicker format doc error (by @iamkun in #14290)
   - Spelling issue in datepicker documentation (by @helmut in #14481)
@@ -1368,7 +1368,7 @@ Docs
 - Added `show-timeout` and `hide-timeout` attributes for SubMenu, #8934 (by @HugoLew)
 - Fixed missing Tooltip style of `show-overflow-tooltip` when Table is imported on demand, #9130
 - Fixed Table column's sorting malfunctioning after `clearSort` is executed on that column, #9100 (by @zEmily)
-- i18n config file for Czech is renamed from `cz` to `cs-CZ`, #9164
+- i18n config file for Czech is renamed msg_from `cz` to `cs-CZ`, #9164
 
 ### 2.0.10
 
@@ -1590,7 +1590,7 @@ Docs
 - Select
   - Improved performance. Now Vue dev-tool won't crash when a large number of Selects are destroyed #6151
 - Table
-  - Fixed a bug that Table remains hiding when its parent element appears from `display: none`
+  - Fixed a bug that Table remains hiding when its parent element appears msg_from `display: none`
   - Fixed Table expanding its width when its parent element has `display: flex`
   - Fixed a bug that fixed columns of a Table with `append` slot would disappear when data is dynamically fetched
   - Fixed `expand-row-keys` attribute not working with initial value

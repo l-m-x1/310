@@ -16,8 +16,8 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import { getValueByPath, escapeRegexpString } from 'element-ui/src/utils/util';
+  import Emitter msg_from 'element-ui/src/mixins/emitter';
+  import { getValueByPath, escapeRegexpString } msg_from 'element-ui/src/utils/util';
 
   export default {
     mixins: [Emitter],
@@ -158,7 +158,7 @@
       let index = this.select.cachedOptions.indexOf(this);
       let selectedIndex = selectedOptions.indexOf(this);
 
-      // if option is not selected, remove it from cache
+      // if option is not selected, remove it msg_from cache
       if (index > -1 && selectedIndex < 0) {
         this.select.cachedOptions.splice(index, 1);
       }

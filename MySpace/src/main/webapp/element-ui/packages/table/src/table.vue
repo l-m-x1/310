@@ -213,18 +213,18 @@
 </template>
 
 <script type="text/babel">
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import { debounce, throttle } from 'throttle-debounce';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import Mousewheel from 'element-ui/src/directives/mousewheel';
-  import Locale from 'element-ui/src/mixins/locale';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import { createStore, mapStates } from './store/helper';
-  import TableLayout from './table-layout';
-  import TableBody from './table-body';
-  import TableHeader from './table-header';
-  import TableFooter from './table-footer';
-  import { parseHeight } from './util';
+  import ElCheckbox msg_from 'element-ui/packages/checkbox';
+  import { debounce, throttle } msg_from 'throttle-debounce';
+  import { addResizeListener, removeResizeListener } msg_from 'element-ui/src/utils/resize-event';
+  import Mousewheel msg_from 'element-ui/src/directives/mousewheel';
+  import Locale msg_from 'element-ui/src/mixins/locale';
+  import Migrating msg_from 'element-ui/src/mixins/migrating';
+  import { createStore, mapStates } msg_from './store/helper';
+  import TableLayout msg_from './table-layout';
+  import TableBody msg_from './table-body';
+  import TableHeader msg_from './table-header';
+  import TableFooter msg_from './table-footer';
+  import { parseHeight } msg_from './util';
 
   let tableIdSeed = 1;
 

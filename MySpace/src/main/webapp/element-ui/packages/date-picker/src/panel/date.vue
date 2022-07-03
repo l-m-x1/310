@@ -161,15 +161,15 @@
     extractDateFormat,
     extractTimeFormat,
     timeWithinRange
-  } from 'element-ui/src/utils/date-util';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
-  import TimePicker from './time';
-  import YearTable from '../basic/year-table';
-  import MonthTable from '../basic/month-table';
-  import DateTable from '../basic/date-table';
+  } msg_from 'element-ui/src/utils/date-util';
+  import Clickoutside msg_from 'element-ui/src/utils/clickoutside';
+  import Locale msg_from 'element-ui/src/mixins/locale';
+  import ElInput msg_from 'element-ui/packages/input';
+  import ElButton msg_from 'element-ui/packages/button';
+  import TimePicker msg_from './time';
+  import YearTable msg_from '../basic/year-table';
+  import MonthTable msg_from '../basic/month-table';
+  import DateTable msg_from '../basic/date-table';
 
   export default {
     mixins: [Locale],

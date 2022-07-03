@@ -26,4 +26,5 @@ public interface UserService {
      User select(Integer id, String password);
 
     Integer getMaxId();
+    void updateAvatar(Integer id,String avatar);
 }

@@ -15,18 +15,18 @@
 </template>
 
 <script>
-import CascaderMenu from './cascader-menu';
-import Store from './store';
-import merge from 'element-ui/src/utils/merge';
-import AriaUtils from 'element-ui/src/utils/aria-utils';
-import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+import CascaderMenu msg_from './cascader-menu';
+import Store msg_from './store';
+import merge msg_from 'element-ui/src/utils/merge';
+import AriaUtils msg_from 'element-ui/src/utils/aria-utils';
+import scrollIntoView msg_from 'element-ui/src/utils/scroll-into-view';
 import {
   noop,
   coerceTruthyValueToArray,
   isEqual,
   isEmpty,
   valueEquals
-} from 'element-ui/src/utils/util';
+} msg_from 'element-ui/src/utils/util';
 
 const { keys: KeyCode } = AriaUtils;
 const DefaultProps = {

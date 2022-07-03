@@ -8,8 +8,58 @@ public class Info {
     private String city;
     private String birthday;
 
-    private String avatar;
+    private String work;
+    private String companyName;
+    private String companyAddress;
+    private String address;
 
+
+    @Override
+    public String toString() {
+        return "Info{" +
+                "id=" + id +
+                ", gender='" + gender + '\'' +
+                ", city='" + city + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", work='" + work + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", companyAddress='" + companyAddress + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+    public String getWork() {
+        return work;
+    }
+
+    public void setWork(String work) {
+        this.work = work;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyAddress() {
+        return companyAddress;
+    }
+
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
+    }
 
     public Integer getId() {
         return id;
@@ -46,22 +96,5 @@ public class Info {
         this.birthday = birthday;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    @Override
-    public String toString() {
-        return "Info{" +
-                "id=" + id +
-                ", gender='" + gender + '\'' +
-                ", city='" + city + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", avatar='" + avatar + '\'' +
-                '}';
-    }
 }
