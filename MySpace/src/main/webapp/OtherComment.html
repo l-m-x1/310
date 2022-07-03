@@ -210,7 +210,7 @@
                     var _this=this;
                     axios({
                         method:"post",
-                        url:"",
+                        url:"/Trends/addFriend",
                         data:{ friendId:friendId,
                             text:_this.write.text}//通过内容添加
                     }).then(function (resp) {
@@ -229,7 +229,7 @@
             var _this=this;
             axios({
                 method:"get",
-                url:" ",//网站
+                url:"/Trends/showFriend",//网站
                 data:{id:friendId}//通过id删除可改
             }).then(function (resp){
 

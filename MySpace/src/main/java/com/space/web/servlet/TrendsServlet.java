@@ -28,6 +28,12 @@ public class TrendsServlet extends BaseServlet {
         String photo;
         String time;
         Integer cheer;
+        String modify;
+
+        public String getModify() {
+            return modify;
+        }
+
         public String getTime() {
             return time;
         }
@@ -72,13 +78,21 @@ public class TrendsServlet extends BaseServlet {
 
     }
 
-    public void showAUser() throws IOException {
-
+    public void showMyself() throws IOException {
         HttpSession session=req.getSession();
-//        session.setAttribute("id",2);
-
-        //
+        session.setAttribute("id",2);
         Integer uid = (Integer) session.getAttribute("id");
+        showAUser(uid);
+    }
+
+    public void showFriend() throws IOException {
+        Integer fid =  jsonObject.getInteger("id");
+        showAUser(fid);
+    }
+
+    public void showAUser(int uid) throws IOException {
+
+
        //获取好友
        //Integer uid=jsonObject.getInteger("id");
 
@@ -94,6 +108,7 @@ public class TrendsServlet extends BaseServlet {
             ret.cheer=trend.getLikes();
             User user = new UserServiceImpl().selectById(trend.getUid());
             ret.name=user.getUsername();
+            ret.modify="false";
             ret.photo="http://localhost/"+user.getAvatar();
             rets.add(ret);
         }
@@ -131,6 +146,7 @@ public class TrendsServlet extends BaseServlet {
             User user = new UserServiceImpl().selectById(trend.getUid());
             ret.name=user.getUsername();
             ret.photo="http://localhost/"+user.getAvatar();
+            ret.modify="false";
             rets.add(ret);
         }
 
