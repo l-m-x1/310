@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.Diary;
 import com.space.pojo.Friends;
 import com.space.pojo.Info;
+import com.space.pojo.User;
+import com.space.service.impl.UserServiceImpl;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
@@ -41,12 +43,12 @@ public class ServletTest {
         System.out.println(out);
     }
 
-    @Test
-    public void testStream() throws IOException {
-        FileInputStream fileInputStream = new FileInputStream("D:\\project\\java\\310\\MySpace\\pom.xml");
-        String toString = IOUtils.toString(fileInputStream);
-        System.out.println(toString);
-    }
+
+//    public void testStream() throws IOException {
+//        FileInputStream fileInputStream = new FileInputStream("D:\\project\\java\\310\\MySpace\\pom.xml");
+//        String toString = IOUtils.toString(fileInputStream);
+//        System.out.println(toString);
+//    }
 
     @Test
     public void testJSONInt(){
@@ -96,5 +98,12 @@ public class ServletTest {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         System.out.println(simpleDateFormat.format(new Date()));
+    }
+
+    @Test
+    public void test1(){
+        User user=new UserServiceImpl().selectById(2);
+     String s="http://localhost/"+user.getAvatar();
+     System.out.println(s);
     }
 }

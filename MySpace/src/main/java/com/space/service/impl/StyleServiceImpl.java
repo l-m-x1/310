@@ -24,8 +24,8 @@ public class StyleServiceImpl implements StyleService {
 
     @Override
     public Style selectById(Integer id) {
-//        SqlSession session = factory.openSession();
-//        StyleMapper mapper = session.getMapper(StyleMapper.class);
+        SqlSession session = factory.openSession();
+        StyleMapper mapper = session.getMapper(StyleMapper.class);
         Style styles = mapper.selectById(id);
         session.close();
         return styles;
@@ -33,8 +33,8 @@ public class StyleServiceImpl implements StyleService {
 
     @Override
     public List<Style> selectByUid(Integer uid) {
-//        SqlSession session = factory.openSession();
-//        StyleMapper mapper = session.getMapper(StyleMapper.class);
+        SqlSession session = factory.openSession();
+        StyleMapper mapper = session.getMapper(StyleMapper.class);
         List<Style> styles = mapper.selectByUid(uid);
         session.close();
         return styles;
@@ -42,8 +42,8 @@ public class StyleServiceImpl implements StyleService {
 
     @Override
     public void insert(Style style) {
-//        SqlSession session = factory.openSession();
-//        StyleMapper mapper = session.getMapper(StyleMapper.class);
+        SqlSession session = factory.openSession();
+        StyleMapper mapper = session.getMapper(StyleMapper.class);
         mapper.insert(style);
         session.commit();
         session.close();
@@ -51,8 +51,8 @@ public class StyleServiceImpl implements StyleService {
 
     @Override
     public void deleteById(Integer id) {
-//        SqlSession session = factory.openSession();
-//        StyleMapper mapper = session.getMapper(StyleMapper.class);
+        SqlSession session = factory.openSession();
+        StyleMapper mapper = session.getMapper(StyleMapper.class);
         mapper.deleteById(id);
         session.commit();
         session.close();
@@ -60,9 +60,9 @@ public class StyleServiceImpl implements StyleService {
     }
 
     @Override
-    public void updateType(Integer uid, Integer type) {
-//        SqlSession session = factory.openSession();
-//        StyleMapper mapper = session.getMapper(StyleMapper.class);
+    public void updateType(Integer uid, String type) {
+        SqlSession session = factory.openSession();
+        StyleMapper mapper = session.getMapper(StyleMapper.class);
         mapper.updateType(uid,type);
         session.commit();
         session.close();
