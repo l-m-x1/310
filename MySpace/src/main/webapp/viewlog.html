@@ -120,7 +120,14 @@
         },
         methods: {
             OnSubmit:function (){
-                window.location.href="writelog.html";
+                this.$confirm('进入写日志界面后，未提交的修改将被清空?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    window.location.href="writelog.html";
+                }).catch(() => {
+                });
             },
             modify:function (message) {//修改
                 alert(message.id)
