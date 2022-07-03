@@ -147,8 +147,6 @@
 
 
 <script>
-
-
     //get friendId
     function getParams(key) {
         let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
@@ -158,7 +156,9 @@
         }
         return null;
     };
-   let friendId=getParams("id");
+
+    // alert(getParams("id"));
+    var friendId=getParams("id");
 
 
 
@@ -171,7 +171,8 @@
             var _this=this;
             axios({
                 method:"get",
-                url:''//网站
+                url:'',//网站
+                data:{id:friendId}
             }).then(function (resp){
                 //_this.ruleForms=resp.data;
             })
@@ -208,7 +209,9 @@
                 axios({
                     method:"post",
                     url:"",
-                    data:message//message通过id可改
+                    data:{id:message.id,
+                        cheer:message.cheer
+                    }//message通过id可改
                 }).then(function (resp) {
                     //刷新
                 })
