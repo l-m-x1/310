@@ -232,10 +232,10 @@ new Vue({
                 method: "get",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
-                let list=resp.data;
-                list.forEach(item=>{
-                    this.friendList.push(new Friend(item.avatar,item.name,item.id));
-                })
+                this.fileList=[];
+                let resultList=resp.data;
+                for(let i=0;i<resultList.length;i++)
+                    this.fileList.push(new Friend(resultList[i].avatar,resultList[i].name,resultList[i].id));
             });
         }
     }
