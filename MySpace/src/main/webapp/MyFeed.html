@@ -111,7 +111,7 @@
         <div id="FriendFeed">
             <el-form id="date" >
                 <el-row >
-                    <span id="title" class="demonstration"><i class="el-icon-user-solid"></i>我的主页</span>
+                    <span id="title" class="demonstration"><i class="el-icon-user-solid"></i>我的动态</span>
                     <el-button id="button" @click="write.show=!write.show" type="info" plain><i class="el-icon-edit"></i>写说说</el-button>
                 </el-row>
                 <el-form :model="write" ref="write" label-width="100px" v-show="write.show" >
@@ -236,7 +236,7 @@
                     text:'津贴喝好圣诞节交罚款哈咖啡壶看不见了都',
                     cheer:0,
                     show:false,
-                    modify:false
+                    modify:''
                 },
                     {
                         id:2,

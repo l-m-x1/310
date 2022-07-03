@@ -37,14 +37,9 @@
     }
 
     #name{
-      vertical-align: top;
+      /*vertical-align: top;*/
       font-size:20px;
-    }
-
-    #id{
-      left: 5%;
-      position: relative;
-      font-size:7px;
+      z-index: 2;
     }
     #text {
       width:85%;
@@ -135,7 +130,7 @@
                         style="width:70px;
                         height:70px;
                         margin-left:10px;">
-                  <span id="name">{{commentData.name}}</span>
+                  <span id="name">{{commentData.username}}</span>
 <!--                  <span id="id" type="index">第{{floor}}楼</span>-->
 <!--                  {{add()}}-->
                   <br>
