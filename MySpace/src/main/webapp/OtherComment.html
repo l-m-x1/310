@@ -38,12 +38,6 @@
             vertical-align: top;
             font-size:20px;
         }
-
-        #id{
-            left: 5%;
-            position: relative;
-            font-size:7px;
-        }
         #text {
             width:85%;
             top: 10px;
@@ -55,17 +49,6 @@
             font-size:7px;
             left:100px;
         }
-        #reply{
-            position: relative;
-            font-size:7px;
-
-            left: 100px;
-        }
-        #in{
-            position: relative;
-            top: 20px;
-        }
-
         .div1 {
             height: 300px;
             border: 1px solid blue;
@@ -130,7 +113,6 @@
 
                                     <span id="name">{{commentData.name}}</span>
 <!--                                    <span id="id">第{{commentData.id}}楼</span>-->
-
                                     <br>
                                 <div id="text">
                                     <span >{{commentData.text}}</span>
@@ -232,7 +214,7 @@
                         data:{ friendId:friendId,
                             text:_this.write.text}//通过内容添加
                     }).then(function (resp) {
-                        //刷新
+                        window.location.reload() //刷新
                     })
                 }).catch(() => {
                 })
