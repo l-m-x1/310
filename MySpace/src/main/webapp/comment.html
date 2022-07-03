@@ -254,7 +254,7 @@
           axios({
             method:"post",
             url:"http://localhost:80/MsgBoard/add",
-            data:_this.write.text//通过内容添加
+            data:{context:_this.write.text}//通过内容添加
           }).then(function (resp) {
             //刷新
           })
@@ -277,15 +277,6 @@
           })
         }).catch(() => {
         });
-        //alert(message);
-        var _this=this;
-        axios({
-          method:"post",
-          url:"http://localhost:80/MsgBoard/deleteById",
-          data:{id:message}//通过id删除可改
-        }).then(function (resp) {
-          //刷新
-        })
       }
     },
     mounted(){

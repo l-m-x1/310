@@ -48,7 +48,7 @@ let addFriendVue =  new Vue({
                 //formation check success
                 axios({
                     method:"post",
-                    url:'/HomePage/selectFriend',
+                    url:'',
                     data:{
                         id:this.input
                     }
@@ -80,13 +80,22 @@ let addFriendVue =  new Vue({
 });
 
 //set button
-$(".friendListTrigger").mouseenter(function (){
-    $(".friendList").prop("style","display:block");
+let isBlock=false;
+$(".friendListTrigger").click(function (){
+    if(isBlock)
+    {
+        $("#friendList").prop("style","display:none");
+        isBlock=false;
+    }
+    else
+    {
+        $("#friendList").prop("style","display:block");
+        isBlock=true;
+    }
+
 });
 
-$(".friendList").mouseleave(function (){
-    $(".friendList").prop("style","display:none");
-});
+
 
 $("#settingTrigger").click(function ()
 {
@@ -161,7 +170,7 @@ $(".rightcolumn").prop("style","background-color:"+userDecoration);
 $(".topNav .icon-logout").click(function (){
     axios({
         method:'get',
-        url:'/HomePage/logout'
+        url:''
     }).then(resp=>{
         document.location="./login.html";
     });
@@ -177,42 +186,85 @@ class Friend{
         this.id=id;
     }
 };
-let friendList=[];
-axios({
-    method: "get",
-    url:'/HomePage/getFriendList'
-}).then(resp=>{
-    let list=resp.data;
-    list.forEach(item=>{
-        friendList.push(new Friend(item.avatar,item.name,item.id));
-    })
+new Vue({
+   el:"#friendList",
+
+    mounted(){
+        this.getFriendList();
+    },
+
+    data(){
+       return{
+           friendList:[]
+       }
+    },
+
+    methods: {
+
+       accessFriend(row)
+       {
+           location.href="/OtherFeed.html?id="+row.id;
+       },
+
+        deleteFriend(row)
+        {
+            this.$confirm('是否删除好友?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                axios({
+                    method:"post",
+                    url:"/HomePage/deleteFriend",
+                    data:{
+                        id:row.id
+                    }
+                }).then(resp=>{
+                    this.getFriendList();
+                });
+            }).catch(() => {
+
+            });
+
+        },
+        getFriendList(){
+            axios({
+                method: "get",
+                url:'/HomePage/getFriendList'
+            }).then(resp=>{
+                let list=resp.data;
+                list.forEach(item=>{
+                    this.friendList.push(new Friend(item.avatar,item.name,item.id));
+                })
+            });
+
+            this.friendList.push(new Friend("./img.png","zhuangsan",id="1"));
+            this.friendList.push(new Friend("./img.png","lisi",id="2"));
+            this.friendList.push(new Friend("./img.png","lisi",id="3"));
+            this.friendList.push(new Friend("./img.png","lisi",id="4"));
+            this.friendList.push(new Friend("./img.png","lisi",id="5"));
+            this.friendList.push(new Friend("./img.png","lisi",id="6"));
+            this.friendList.push(new Friend("./img.png","lisi",id="7"));
+        }
+    }
 });
 
-// friendList.push(new Friend("./img.png","zhuangsan",id="1"));
-// friendList.push(new Friend("./img.png","lisi",id="2"));
-// friendList.push(new Friend("./img.png","lisi",id="3"));
-// friendList.push(new Friend("./img.png","lisi",id="4"));
-// friendList.push(new Friend("./img.png","lisi",id="5"));
-// friendList.push(new Friend("./img.png","lisi",id="6"));
-// friendList.push(new Friend("./img.png","lisi",id="7"));
+
+// let friends = $(".friendList");
+// friendList.forEach(item=>{
+//     let friend="<a target=\"_blank\" href=\""+"/OtherFeed.html?id="+item.id+"\">\n" +
+//         "        <div class=\"friend\">\n" +
+//         "\n" +
+//         "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
+//         "\n" +
+//         "            <div class=\"friendName\">"+item.name+"</div>\n" +
+//         "\n" +
+//         "        </div>\n" +
+//         "    </a>";
+//     friends.append(friend);
+// });
 
 
-
-
-
-let friends = $(".friendList");
-friendList.forEach(item=>{
-    let friend="<a target=\"_blank\" href=\""+"/OtherFeed.html?id="+item.id+"\">\n" +
-        "        <div class=\"friend\">\n" +
-        "\n" +
-        "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
-        "\n" +
-        "            <div class=\"friendName\">"+item.name+"</div>\n" +
-        "\n" +
-        "        </div>\n" +
-        "    </a>";
-    friends.append(friend);
-});
 
 
 
@@ -227,19 +279,19 @@ let message = new Vue({
     el:"#message",
 
     mounted() {
-        this.getMessage();
+
     },
 
     data(){
         return{
             dialogVisible:false,
             tableData:[{
-                avatarUrl:'./photos/p1.jpg',
+                avatar:'./photos/p1.jpg',
                 name:'zhansan',
                 id:'1'
             },
                 {
-                    avatarUrl:'./img.png',
+                    avatar:'./img.png',
                     name:'lisi',
                     id:'2'
                 }
@@ -253,10 +305,10 @@ let message = new Vue({
         {
             axios({
                 method:"get",
-                url:"/HomePage/getAddFriMsg"
+                url:""
 
             }).then(resp=>{
-                this.tableData=resp.data();
+                this.tableData=resp.data;
             });
         },
 
@@ -267,34 +319,26 @@ let message = new Vue({
                 method:"post",
                 url:'/HomePage/accept',
                 data:{
-                    id:row.id,
-                    type:"agree"
+                    id:row.id
                 }
             }).then(resp=>{
-                if(resp.data=="success")
-                {
                     this.$message({
                         message: '添加成功！',
                         type: 'success'
                     });
-                    this.getMessage()
-                }
+                    this.getMessage();
             })
         },
 
         refuse(row){
             axios({
                 method:"post",
-                url:'',
+                url:'/HomePage/refuse',
                 data:{
-                    id:row.id,
-                    type:"refuse"
+                    id:row.id
                 }
             }).then(resp=>{
-                if(resp.data=="success")
-                {
-                    this.getMessage()
-                }
+                    this.getMessage();
             })
         }
     }
