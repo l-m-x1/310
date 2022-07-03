@@ -36,8 +36,11 @@ public class HomePageManger extends BaseServlet {
         JSONObject ret =new JSONObject();
 
         class ret{
+            @JSONField(ordinal = 2)
             public String name;
+            @JSONField(ordinal = 1)
             public String avatar;
+            @JSONField(ordinal = 3)
             public Integer id;
 
             public Integer getId() {
