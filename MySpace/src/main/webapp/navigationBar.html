@@ -114,6 +114,17 @@
                 </template>
         </div>
 
+        <div hidden="hidden" id="noAccount">
+            <template>
+                <el-alert
+                        title="用户不存在"
+                        type="info"
+                        show-icon
+                        :closable="false" disabled="true">
+                </el-alert>
+            </template>
+        </div>
+
         <div class="searchResult" style="margin-bottom: 20px;display: none">
             <hr>
             <img :src="userAvatar" width="50" height="50">
@@ -165,7 +176,7 @@
 
 
 <ul class="midNav">
-    <li id="active"><a href="FriendFeed.html" >主页</a></li>
+    <li><a href="FriendFeed.html" >主页</a></li>
     <li><a href="album.html">相册</a></li>
     <li><a href="viewlog.html">日志</a></li>
     <li><a href="comment.html">留言版</a></li>

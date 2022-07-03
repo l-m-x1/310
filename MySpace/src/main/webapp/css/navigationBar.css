@@ -59,8 +59,8 @@ body {
 
 .midNav li {
     float: left;
-    border-radius: 5px;
-    border: 2px solid rgba(0,0,0,0);
+    border-radius:40px;
+    border: 2px solid deepskyblue;
 }
 
 .midNav li a {
@@ -76,9 +76,6 @@ body {
     color: #3a8ee6;
 }
 
-#active {
-    border-color: deepskyblue;
-}
 
 
 
