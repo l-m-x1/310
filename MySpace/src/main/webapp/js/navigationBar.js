@@ -234,8 +234,9 @@ new Vue({
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
                 let resultList=resp.data;
-                for(let i=0;i<list.length;i++)
-                    this.fileList.push(new Friend(resultList[i].avatar,resultList[i].name,resultList[i].id));
+                resultList.forEach(item=>{
+                    this.friendList.push(new Friend(item.avatar,item.name,item.id));
+                })
             });
         }
     }
