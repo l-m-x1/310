@@ -29,7 +29,6 @@
     #date{
       margin-left: 20%;
       max-width: 900px;
-
     }
     img {
       position: relative;
@@ -52,17 +51,10 @@
       font-size:7px;
       left:100px;
     }
-    /*#reply{*/
-    /*  position: relative;*/
-    /*  font-size:7px;*/
-
-    /*  left: 100px;*/
-    /*}*/
     #delete{
       position: relative;
       font-size:7px;
       left: 50%;
-
     }
     #in{
       position: relative;
@@ -254,7 +246,7 @@
           var _this=this;
           axios({
             method:"post",
-            url:"http://localhost:80/MsgBoard/add",
+            url:"/MsgBoard/add",
             data:{context:_this.write.text}//通过内容添加
           }).then(function (resp) {
             window.location.reload()//刷新
@@ -276,7 +268,7 @@
           var _this=this;
           axios({
             method:"post",
-            url:"http://localhost:80/MsgBoard/deleteById",
+            url:"/MsgBoard/deleteById",
             data:{id:message}//通过id删除可改
           }).then(function (resp) {
             window.location.reload()//刷新
@@ -289,7 +281,7 @@
       var _this=this;
       axios({
         method:"get",
-        url:"http://localhost:80/MsgBoard/show\n"//网站
+        url:"/MsgBoard/show\n"//网站
       }).then(function (resp){
         _this.commentDatas=resp.data;
         //alert(_this.commentDatas[1].photo);
