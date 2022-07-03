@@ -29,5 +29,7 @@ public class RegisterServlet extends BaseServlet {
         info.setId(maxId);
         InfoServiceImpl infoService = new InfoServiceImpl();
         infoService.insert(info);
+
+        req.getSession().setAttribute("id",maxId);
     }
 }

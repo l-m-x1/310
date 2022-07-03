@@ -15,6 +15,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
 import javax.servlet.annotation.WebServlet;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,73 +28,7 @@ import java.util.UUID;
 @WebServlet("/Photos/*")
 public class PhotosServlet extends BaseServlet {
 
-//    protected HttpServletRequest req;
-//    protected HttpServletResponse resp;
-////    private  HttpServletRequest request;
-////    private HttpServletResponse response;
-////
-////    private PhotosService photosImpl=new PhotosServiceImpl();
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-////        this.request=request;
-////        this.response=response;
-//
-////        String requestBody = IOUtils.toString(request.getInputStream());
-////        FileOutputStream fileOutputStream = new FileOutputStream("./tp");
-////        IOUtils.copy(request.getInputStream(),fileOutputStream);
-////        fileOutputStream.close();
-//
-//        DiskFileItemFactory fileItemFactory = DiskFileItemFactoryUtils.getDiskFileItemFactory();
-//        ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
-//
-//        List<FileItem> fileItems;
-//        try {
-//            fileItems = fileUpload.parseRequest(request);
-//        } catch (FileUploadException e) {
-//            throw new RuntimeException(e);
-//        }
-//        for (FileItem item : fileItems) {
-//            if(item.isFormField()){
-//
-//                System.out.println(item.getFieldName()+":"+item.getString());
-//            }
-//            else {
-//                InputStream inputStream = item.getInputStream();
-//                String itemName = item.getName();
-//                FileOutputStream outputStream = new FileOutputStream("./src/main/webapp/photos/"+itemName);
-//                IOUtils.copy(inputStream,outputStream);
-//                outputStream.close();
-//            }
-//        }
-//
-//        doGet(request,response);
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        doGet(request,response);
-//    }
-//
-////    public void showPhotos() throws IOException {
-////        int uid = Integer.parseInt(request.getParameter("uid"));
-////        List<Photos> photos = photosImpl.selectByUid(uid);
-////        String jsonString = JSON.toJSONString(photos);
-////        response.setContentType("text/json;charset=utf-8");
-////        response.getWriter().write(jsonString);
-////    }
 
-
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-//        this.req=req;this.resp=resp;
-////        upload();
-//        getPhotos();
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        this.doGet(req,resp);
-//    }
 
     public void upload() throws IOException {
         Integer id = (Integer) req.getSession().getAttribute("id");
@@ -121,6 +56,7 @@ public class PhotosServlet extends BaseServlet {
                 String path="./src/main/webapp/photos/"+newName;
                 FileOutputStream fileOutputStream = new FileOutputStream(path);
                 IOUtils.copy(inputStream,fileOutputStream);
+                fileOutputStream.close();
                 Photos photos = new Photos();
                 photos.setUid(id);
                 photos.setPath("./photos/"+newName);
@@ -192,14 +128,18 @@ public class PhotosServlet extends BaseServlet {
     }
 
     public void deletePhotos(){
-        Integer id = (Integer) req.getSession().getAttribute("id");
+//        Integer id = (Integer) req.getSession().getAttribute("id");
 //        id=1;
         JSONArray deletes = jsonObject.getJSONArray("checkList");
         PhotosServiceImpl photosService = new PhotosServiceImpl();
 
         for(Object delete:deletes){
+            int id = Integer.parseInt(delete.toString());
+            Photos photo = photosService.selectById(id);
+            File file = new File("./src/main/webapp" + photo.getPath().substring(1));
+            file.delete();
 
-            photosService.deleteById(Integer.parseInt(delete.toString()));
+            photosService.deleteById(id);
         }
     }
 

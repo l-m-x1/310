@@ -13,6 +13,7 @@ public class Info {
     private String companyAddress;
     private String address;
 
+
     @Override
     public String toString() {
         return "Info{" +
@@ -94,5 +95,6 @@ public class Info {
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+
 
 }
