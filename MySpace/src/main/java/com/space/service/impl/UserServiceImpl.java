@@ -82,4 +82,13 @@ public class UserServiceImpl implements UserService {
         UserMapper mapper = session.getMapper(UserMapper.class);
         return mapper.getMaxId();
     }
+
+    @Override
+    public void updateAvatar(Integer id, String avatar) {
+        SqlSession session = factory.openSession();
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        mapper.updateAvatar(id,avatar);
+        session.commit();
+        session.close();
+    }
 }

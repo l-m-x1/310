@@ -7,13 +7,16 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 public interface InfoMapper {
-    @Insert("insert into info values (#{id},#{gender},#{city},#{birthday},#{avatar})")
+    @Insert("insert into info values (#{id},#{gender},#{city},#{birthday}," +
+            "#{homeTown},#{work},#{companyName},#{companyAddresss},#{address})")
     void insert(Info info);
 
     @Delete("delete from info where id=#{id}")
     void delete(Integer id);
 
-    @Update("update info set gender=#{gender},city=#{city},birthday=#{birthday},avatar=#{avatar} where id=#{id}")
+    @Update("update info set gender=#{gender},city=#{city},birthday=#{birthday}," +
+            "homeTown=#{homeTown},work=#{work},companyName=#{companyName}," +
+            "companyAddress=#{companyAddress},address=#{address} where id=#{id}")
     void update(Info info);
 
     @Select("select *from info where id=#{id}")
