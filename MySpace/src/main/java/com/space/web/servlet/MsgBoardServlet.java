@@ -26,14 +26,14 @@ public class MsgBoardServlet extends BaseServlet {
 
     public void addMyself(){
         HttpSession session=req.getSession();
-        session.setAttribute("id",30);
+//        session.setAttribute("id",30);
         Integer uid =(Integer) session.getAttribute("id");
         add(uid,uid);
     }
 
     public void addFriend(){
         HttpSession session=req.getSession();
-        session.setAttribute("id",30);
+//        session.setAttribute("id",30);
         Integer wrid =(Integer) session.getAttribute("id");
         Integer uid = jsonObject.getInteger("id");
         add(wrid,uid);
@@ -56,7 +56,7 @@ public class MsgBoardServlet extends BaseServlet {
 
     public void showMyself() throws IOException {
         HttpSession session=req.getSession();
-        session.setAttribute("id",30);
+//        session.setAttribute("id",30);
 
         //当前用户id
         Integer uid = (Integer) session.getAttribute("id");

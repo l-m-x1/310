@@ -7,8 +7,8 @@ new Vue ({
 
     data(){
         return {
-            userAvatar:'',
-            useName:''
+            userAvatar:'/defaultAvatar.png',
+            userName:''
         }
     },
 
@@ -17,15 +17,16 @@ new Vue ({
         getUserInfo(){
             axios({
                 method:"get",
-                url:'',
+                url:'/HomePage/getUserInfo',
 
             }).then(resp=>{
                 this.userAvatar=resp.data.userAvatar;
                 this.userName=resp.data.userName;
+                $("#avatar el-avatar img").prop("src",this.userAvatar)
+                $("#userName").text(this.userName);
             });
 
-            $("#avatar el-avatar img").prop("src",this.userAvatar)
-            $("#userName").text(this.userName);
+
         },
 
         errorHandler() {

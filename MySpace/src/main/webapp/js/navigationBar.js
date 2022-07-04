@@ -231,7 +231,7 @@ new Vue({
         async getFriendList(){
            this.fileList=[];
             await axios({
-                method: "get",
+                method: "post",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
                 // console.log(10000);
