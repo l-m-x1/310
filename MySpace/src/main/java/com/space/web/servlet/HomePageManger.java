@@ -85,8 +85,10 @@ public class HomePageManger extends BaseServlet {
             retList.add(tmp);
         }
         resp.setContentType("text/json;charset=utf-8");
-        System.out.println(JSON.toJSONString(retList));
+//        System.out.println(JSON.toJSONString(retList));
+        String s = JSON.toJSONString(retList);
         resp.getWriter().write(JSON.toJSONString(retList));
+//        resp.getWriter().write("hello");
     }
 
     public void getUserInfo() throws IOException {
@@ -94,8 +96,8 @@ public class HomePageManger extends BaseServlet {
         Integer uid= (Integer) req.getSession().getAttribute("id");
         UserService userService=new  UserServiceImpl();
         User user = userService.selectById(uid);
-        ret.put("username",user.getUsername());
-        ret.put("avatar",user.getAvatar());
+        ret.put("userName",user.getUsername());
+        ret.put("userAvatar",user.getAvatar());
 
         resp.setContentType("text/json;charset=utf-8");
         resp.getWriter().write(ret.toJSONString());

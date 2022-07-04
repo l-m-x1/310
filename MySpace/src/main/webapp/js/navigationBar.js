@@ -207,7 +207,22 @@ new Vue({
 
        accessFriend(row)
        {
-           location.href="/OtherFeed.html?id="+row.id;
+           axios({
+               method:"post",
+               url:"/HomePage/getPermission",
+               data:{
+                   id:row.id
+               }
+           }).then(resp=>{
+               if(resp.data=="permission")
+               {
+                   location.href="/OtherFeed.html?id="+row.id;
+               }
+               else
+               {
+                   this.$message.error('好友未为你设置访问权限！');
+               }
+           })
        },
 
         deleteFriend(row)
@@ -234,7 +249,7 @@ new Vue({
         async getFriendList(){
            this.fileList=[];
             await axios({
-                method: "get",
+                method: "post",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
                 // console.log(10000);
