@@ -161,7 +161,7 @@
                             <el-button id="delete" type="text" @click="remove(ruleForm.id)" icon="el-icon-delete"></el-button>
                             </span>
                             </div>
-                            <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px"  v-show="ruleForm.modify">
+                            <el-form :model="ruleForm" :rules="rules"  id="in" ref="ruleForm" label-width="100px"  v-show="!ruleForm.modify">
                                 <hr>
                                 <el-form-item label="修改内容" prop="text">
                                     <el-input
@@ -305,7 +305,7 @@
                         method:"post",
                         url:"/Trends/updateContent",
                         data:{id:message.id,
-                            text:_this.write.text}//message通过id可改
+                            text:message.text}//message通过id可改
                     }).then(function (resp) {
                         window.location.reload()//刷新
                     })
