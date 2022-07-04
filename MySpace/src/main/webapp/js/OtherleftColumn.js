@@ -15,10 +15,9 @@ new Vue ({
     methods: {
 
         getUserInfo(){
-            alert(friendId);
             axios({
-                method:"get",
-                url:'/HomePage/getUserInfo',
+                method:"post",
+                url:'/Access/getUserInfo',
                 data:{id :friendId}
 
             }).then(resp=>{

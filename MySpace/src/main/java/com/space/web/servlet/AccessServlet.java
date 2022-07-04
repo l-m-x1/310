@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.space.pojo.Friends;
 import com.space.pojo.User;
+import com.space.service.UserService;
 import com.space.service.impl.FriendsServiceImpl;
 import com.space.service.impl.UserServiceImpl;
 import com.space.web.BaseServlet;
@@ -97,5 +98,18 @@ public class AccessServlet extends BaseServlet {
             resp.getWriter().write("refused");
         }
 
+    }
+
+    public void getUserInfo() throws IOException {
+        JSONObject ret =new JSONObject();
+//        Integer uid= (Integer) req.getSession().getAttribute("id");
+        Integer uid=jsonObject.getInteger("id");
+        UserService userService=new  UserServiceImpl();
+        User user = userService.selectById(uid);
+        ret.put("userName",user.getUsername());
+        ret.put("userAvatar",user.getAvatar());
+
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(ret.toJSONString());
     }
 }

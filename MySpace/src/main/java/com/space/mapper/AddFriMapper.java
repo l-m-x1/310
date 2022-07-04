@@ -16,6 +16,6 @@ public interface AddFriMapper {
     @Select("select *from add_fri_msg where msg_to=#{msg_to}")
     List<AddFriMsg> selectByTo(Integer msg_to);
 
-    @Select("select *from add_fri_msg where msg_from=#{msg_from}and msg_Fto=#{msg_to}")
+    @Select("select *from add_fri_msg where msg_from=#{msg_from}and msg_to=#{msg_to}")
     AddFriMsg selectSingle(AddFriMsg addFriMsg);
 }
