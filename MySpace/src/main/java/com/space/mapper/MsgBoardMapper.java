@@ -11,7 +11,7 @@ import java.util.List;
         List<MsgBoard> selectAll();
 
 
-        @Select("select *from msg_board where uid=#{uid}")
+        @Select("select *from msg_board where uid=#{uid} order by id desc")
         List<MsgBoard> selectByUid(Integer uid);
 
 

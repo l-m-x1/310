@@ -11,10 +11,10 @@ public interface TrendsMapper {
     @Select("select * from trends")
     List<Trends>  selectAll();
 
-    @Select("select * from trends where id=#{id}")
+    @Select("select * from trends where id=#{id} order by id desc")
     Trends selectById(Integer id);
 
-    @Select("select * from trends where uid=#{uid}")
+    @Select("select * from trends where uid=#{uid} order by id desc")
     List<Trends> selectByUid(Integer uid);
 
     List<Trends> selectByUids(@Param("uids") int[] uids);

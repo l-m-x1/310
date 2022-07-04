@@ -6,6 +6,6 @@
         select * from trends where uid in
         <foreach collection="uids" item="uid" separator="," open="(" close=")">
             #{uid}
-        </foreach>
+        </foreach> order by id desc;
     </select>
 </mapper>
