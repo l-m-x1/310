@@ -8,10 +8,12 @@ import com.space.service.impl.FriendsServiceImpl;
 import com.space.service.impl.UserServiceImpl;
 import com.space.web.BaseServlet;
 
+import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@WebServlet("/Access/*")
 public class AccessServlet extends BaseServlet {
 
     public void setAccess(){
@@ -26,7 +28,7 @@ public class AccessServlet extends BaseServlet {
         friendsService.update(friends);
     }
 
-    public void getAccess() throws IOException {
+    public void getAllAccess() throws IOException {
         Integer id=(Integer) req.getSession().getAttribute("id");
         class ret{
 

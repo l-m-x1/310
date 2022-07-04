@@ -6,12 +6,14 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.space.pojo.AddFriMsg;
 import com.space.pojo.Friends;
+import com.space.pojo.Style;
 import com.space.pojo.User;
 import com.space.service.AddFriService;
 import com.space.service.FriendsService;
 import com.space.service.UserService;
 import com.space.service.impl.AddFriServiceImpl;
 import com.space.service.impl.FriendsServiceImpl;
+import com.space.service.impl.StyleServiceImpl;
 import com.space.service.impl.UserServiceImpl;
 import com.space.web.BaseServlet;
 
@@ -34,83 +36,57 @@ public class HomePageManger extends BaseServlet {
 
     public void getFriendList() throws IOException {
         JSONObject ret =new JSONObject();
-//
-//        class ret{
-//            @JSONField(ordinal = 2)
-//            public String name;
-//            @JSONField(ordinal = 1)
-//            public String avatar;
-//            @JSONField(ordinal = 3)
-//            public Integer id;
-//
-//            public Integer getId() {
-//                return id;
-//            }
-//
-//            public void setId(Integer id) {
-//                this.id = id;
-//            }
-//
-//            public String getName() {
-//                return name;
-//            }
-//
-//            public void setName(String name) {
-//                this.name = name;
-//            }
-//
-//            public String getAvatar() {
-//                return avatar;
-//            }
-//
-//            public void setAvatar(String avatar) {
-//                this.avatar = avatar;
-//            }
-//        }
-//        List<ret> retList=new ArrayList<>();
-//        Integer uid= (Integer) req.getSession().getAttribute("id");
-////        uid=100000012;
-//        FriendsService friendsService = new FriendsServiceImpl();
-//        List<Friends> friends = friendsService.selectById(uid);
-//        UserServiceImpl userService = new UserServiceImpl();
-//        for (Friends friend : friends) {
-//            ret tmp = new ret();
-//            Integer fid = friend.getFid();
-//            User user = userService.selectById(fid);
-//            tmp.name=user.getUsername();
-//            tmp.avatar=user.getAvatar();
-//            tmp.id=user.getId();
-//            retList.add(tmp);
-//        }
+        System.out.println(req.getRequestURL());
 
+        class ret{
+            @JSONField(ordinal = 2)
+            public String name;
+            @JSONField(ordinal = 1)
+            public String avatar;
+            @JSONField(ordinal = 3)
+            public Integer id;
 
+            public Integer getId() {
+                return id;
+            }
 
+            public void setId(Integer id) {
+                this.id = id;
+            }
 
+            public String getName() {
+                return name;
+            }
 
-        Integer uid=(Integer)req.getSession().getAttribute("id");
-        FriendsServiceImpl friendsService = new FriendsServiceImpl();
-        List<Friends> friends = friendsService.selectById(uid);
+            public void setName(String name) {
+                this.name = name;
+            }
 
-        UserServiceImpl userService = new UserServiceImpl();
+            public String getAvatar() {
+                return avatar;
+            }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-
-        for (Friends friend:friends){
-            User user = userService.selectById(friend.getFid());
-
-            stringBuilder.append("{\"avatar\":\""+user.getAvatar()+"\",\"name\":\""+user.getUsername()+"\",\"id\":\""+user.getId()+"\"},");
-            break;
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
+            }
         }
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
-        stringBuilder.append("]");
-
-
+        List<ret> retList=new ArrayList<>();
+        Integer uid= (Integer) req.getSession().getAttribute("id");
+        uid=100000012;
+        FriendsService friendsService = new FriendsServiceImpl();
+        List<Friends> friends = friendsService.selectById(uid);
+        UserServiceImpl userService = new UserServiceImpl();
+        for (Friends friend : friends) {
+            ret tmp = new ret();
+            Integer fid = friend.getFid();
+            User user = userService.selectById(fid);
+            tmp.name=user.getUsername();
+            tmp.avatar=user.getAvatar();
+            tmp.id=user.getId();
+            retList.add(tmp);
+        }
         resp.setContentType("text/plain;charset=utf-8");
-//        System.out.println(JSON.toJSONString(retList));
-//        String s = JSON.toJSONString(retList);
-//        resp.getWriter().write(JSON.toJSONString(retList));
-//        resp.getWriter().write("hello");
+        resp.getWriter().write(JSON.toJSONString(retList));
     }
 
     public void getUserInfo() throws IOException {
@@ -260,11 +236,57 @@ public class HomePageManger extends BaseServlet {
         addFriService.delete(addFriMsg);
     }
 
-    public void getAccess(){
+
+    public void getFriendDecoration() throws IOException {
+        Integer fid = jsonObject.getInteger("id");
+        getDecoration(fid);
+
+    }
+    public void getDecoration(int uid) throws IOException {
+
+        // Integer uid=213141521;
+        Style style = new StyleServiceImpl().selectByUid(uid);
+        String jsonString = JSON.toJSONString(style.getType());
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(jsonString);
+    }
+
+    public void changeMyDecoration(){
+        HttpSession session=req.getSession();
+        Integer uid = (Integer) session.getAttribute("id");
+        changeDecoration(uid);
+    }
+
+    public void changeFriendDecoration() throws IOException {
+        Integer fid = jsonObject.getInteger("id");
+        changeDecoration(fid);
 
     }
 
-    public void getDecoration(){
+    public void changeDecoration(int uid){
 
+        //Integer uid=213141521;
+        String type=jsonObject.getString("color");
+        new StyleServiceImpl().updateType(uid,type);
+    }
+
+    public void getMyDecoration() throws IOException {
+        HttpSession session=req.getSession();
+        Integer uid = (Integer) session.getAttribute("id");
+        getDecoration(uid);
+    }
+
+
+    public void deleteFriends(){
+        Integer id=(Integer) req.getSession().getAttribute("id");
+        Integer id1 = jsonObject.getInteger("id");
+        FriendsServiceImpl friendsService = new FriendsServiceImpl();
+        Friends friends = new Friends();
+        friends.setId(id);
+        friends.setFid(id1);
+        friendsService.delete(friends);
+        friends.setFid(id);
+        friends.setFid(id1);
+        friendsService.delete(friends);
     }
 }

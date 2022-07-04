@@ -36,14 +36,10 @@ public class BaseServlet extends HttpServlet {
             jsonObject = JSON.parseObject(requestBody);
         }
 
-//        req.getSession().setAttribute("id",1);
-
-
         String uri = req.getRequestURI();
         int index = uri.lastIndexOf('/');
         String func = uri.substring(index + 1);
         try {
-            System.out.println(this.getClass());
             this.getClass().getMethod(func).invoke(this);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
