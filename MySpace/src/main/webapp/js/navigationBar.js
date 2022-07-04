@@ -234,12 +234,12 @@ new Vue({
                 method: "get",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
-                console.log(10000);
-                console.log(resp);
-                console.log(resp.data);
-                let resultList=resp.data;
-                for(let i=0;i<resultList.length;i++)
-                    this.fileList.push(new Friend(resultList[i].avatar,resultList[i].name,resultList[i].id));
+                // console.log(10000);
+                // console.log(resp);
+                // console.log(resp.data);
+                // let resultList=resp.data;
+                // for(let i=0;i<resultList.length;i++)
+                //     this.fileList.push(new Friend(resultList[i].avatar,resultList[i].name,resultList[i].id));
             });
         }
     }

@@ -69,7 +69,7 @@ public class HomePageManger extends BaseServlet {
         }
         List<ret> retList=new ArrayList<>();
         Integer uid= (Integer) req.getSession().getAttribute("id");
-
+        uid=100000012;
         FriendsService friendsService = new FriendsServiceImpl();
         List<Friends> friends = friendsService.selectById(uid);
         UserServiceImpl userService = new UserServiceImpl();

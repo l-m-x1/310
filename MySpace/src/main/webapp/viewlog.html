@@ -99,9 +99,9 @@
             var _this=this;
             axios({
                 method:"get",
-                url:""//地址
+                url:"/Diary/viewLogs"//地址
             }).then(function (resp) {
-                //_this.viewlogs=resp.data;
+                _this.viewlogs=resp.data;
             })
         },
         data() {
@@ -136,8 +136,12 @@
                     type: 'warning'
                 }).then(() => {
                     axios({
+                        // headers:{
+                        //     'Content-Type': 'application/json'
+                        // },
+
                         method:"post",
-                        url:"",
+                        url:"/Diary/modifyLogs",
                         data:message
                     }).then(function (resp) {
                         window.location.reload()//刷新
@@ -153,7 +157,7 @@
                 }).then(() => {
                     axios({
                         method:"post",
-                        url:"",
+                        url:"/Diary/deleteLogs",
                         data:message//通过名字删除可改
                     }).then(function (resp) {
                         window.location.reload()//刷新
