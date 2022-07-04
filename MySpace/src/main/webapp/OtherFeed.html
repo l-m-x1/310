@@ -154,7 +154,7 @@
             var _this=this;
             axios({
                 method:"get",
-                url:'',//网站
+                url:'/Trends/showFriend',//网站
                 data:{id:friendId}
             }).then(function (resp){
                 //_this.ruleForms=resp.data;
@@ -191,7 +191,7 @@
                 message.cheer++;
                 axios({
                     method:"post",
-                    url:"",
+                    url:"/Trends/updateLikes",
                     data:{id:message.id,
                         cheer:message.cheer
                     }//message通过id可改
