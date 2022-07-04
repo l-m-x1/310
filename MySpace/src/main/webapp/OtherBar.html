@@ -1,175 +1,30 @@
 <ul class="topNav">
     <li ><a href="MyFeed.html"><span class="iconfont icon-gerenziliao">个人中心</span></a></li>
-<!--    <li>-->
-<!--        <div class="friendListTrigger">-->
-<!--            <a href="#none"><span class="iconfont icon-haoyouliebiao">好友列表</span></a>-->
-<!--        </div>-->
-<!--    </li>-->
 
-<!--    <li>-->
-<!--        <div class="addFriendTrigger">-->
-<!--            <a href="#none"><span class="iconfont icon-tianjiahaoyou">添加好友</span></a>-->
-<!--        </div>-->
-<!--    </li>-->
-
-<!--    <li>-->
-<!--        <div class="decorationTrigger">-->
-<!--            <a href="#none"><span class="iconfont icon-icon-">空间装扮</span></a>-->
-<!--        </div>-->
-<!--    </li>-->
 
     <li style="float: right" ><a href="#none"><span class="iconfont icon-logout"></span></a></li>
 
-<!--    <li style="float: right" >-->
-<!--        <div id="settingTrigger">-->
-<!--            <a href="#none"><span class="iconfont icon-shezhi"></span></a>-->
-<!--        </div>-->
-<!--    </li>-->
-<!--    <li style="float: right">-->
-<!--        <div id="checkMesg">-->
-<!--            <el-badge :value="messageNumber" :max="10" class="item">-->
-<!--                <el-button size="small" @click="handleClick">消息</el-button>-->
-<!--            </el-badge>-->
-<!--        </div>-->
-<!--    </li>-->
 </ul>
 
-<div id="message">
-    <el-dialog
-            title="添加好友请求"
-            :visible.sync="dialogVisible"
-            :before-close="handleClose"
-            @close="close"
-            width="50%"
-    >
-        <el-table
-                :data="tableData"
-                style="width:100%"
-                :row-class-name="tableRowClassName"
-                @selection-change="handleSelectionChange"
-        >
-
-
-
-            <el-table-column
-                    align="center"
-            >
-                <template   slot-scope="scope">
-                    <img :src="scope.row.avatar"  style="width: 30%;height: 30%" />
-                </template>
-            </el-table-column>
-
-
-            <el-table-column
-                    prop="name"
-                    align="left"
-            >
-            </el-table-column>
-
-            <el-table-column
-                    align="left"
-            >
-                <template slot-scope="scope">
-                    <el-row>
-                        <el-button type="primary" @click="agree(scope.row)">同意</el-button>
-                        <el-button type="danger" @click="refuse(scope.row)">拒绝</el-button>
-                    </el-row>
-                </template>
-            </el-table-column>
-
-        </el-table>
-
-
-    </el-dialog>
-
-
-</div>
 
 
 
 
 
-<div id="friendList">
-    <el-table
-            :data="friendList"
-            style="width:100%"
-            :row-class-name="tableRowClassName"
-            @selection-change="handleSelectionChange"
-    >
 
 
 
-        <el-table-column
-                align="center"
-                width="100"
-        >
-            <template   slot-scope="scope">
-                <img :src="scope.row.avatar"  style="width:80%;height: 80%" />
-            </template>
-        </el-table-column>
-
-
-        <el-table-column
-                prop="name"
-                align="center"
-                width="100"
-        >
-        </el-table-column>
-
-        <el-table-column
-                align="center"
-                width="200"
-        >
-            <template slot-scope="scope">
-                <el-column>
-                    <el-button type="primary" size="small" @click="accessFriend(scope.row)">访问空间</el-button>
-                    <el-button type="danger" size="small" @click="deleteFriend(scope.row)">删除好友</el-button>
-                </el-column>
-            </template>
-        </el-table-column>
-
-    </el-table>
-</div>
 
 
 
-<div id="decoration">
-
-    <div id="decorationText">选择空间背景</div>
-    <div class="decorationColor" style="background-color:#FFFFFF ">
-    </div>
-    <div class="decorationColor" style="background-color: #FAF9DE">
-    </div>
-    <div class="decorationColor" style="background-color: #FFF2E2">
-    </div>
-    <div class="decorationColor" style="background-color: #FDE6E0">
-    </div>
-    <div class="decorationColor" style="background-color: #E3EDCD">
-    </div>
-    <div class="decorationColor" style="background-color: #DCE2F1">
-    </div>
-    <div class="decorationColor" style="background-color: #E9EBFE">
-    </div>
-    <div class="decorationColor" style="background-color: #EAEAEF">
-    </div>
-    <div class="decorationColor" style="background-color: #3c4043">
-    </div>
-</div>
-
-
-<div id="setting">
-    <li><a href="personalProfile.html">修改资料</a></li>
-    <li><a href="permissionManagement.html">权限管理</a></li>
-</div>
 
 
 
 <ul class="midNav">
-    <li><a href="OtherFeed.html" >主页</a></li>
-<!--    <li><a href="album.html">相册</a></li>-->
-<!--    <li><a href="viewlog.html">日志</a></li>-->
-    <li><a href="OtherComment.html">留言版</a></li>
-    <!--    <li><a href="#">个人心情</a></li>-->
+    <li><a id="otherFeed" href="OtherFeed.html" >主页</a></li>
+
+    <li><a id="otherComment" href="OtherComment.html">留言版</a></li>
+
 </ul>
 
-<script src="./js/navigationBar.js"></script>
+<script src="./js/OtherBar.js"></script>

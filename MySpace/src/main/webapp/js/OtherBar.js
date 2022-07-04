@@ -1,99 +1,4 @@
-//addFriend dialog
 
-let addFriendVue =  new Vue({
-    el:"#addFriend",
-    data(){
-        return{
-            dialogVisible:false,
-            resultVisible:false,
-            input:'',
-            userAvatar:"photos/p1.jpg",
-            userID:'123',
-            userName:'123'
-        }
-    },
-    methods:{
-
-        close(){
-            $(".searchResult").prop("style","display:none");
-            document.getElementById("formationCheck").hidden=true;
-            document.getElementById("noAccount").hidden=true;
-            this.input='';
-        },
-
-        addFriend()
-        {
-            axios({
-                method:"post",
-                url:'/HomePage/addFriend',
-                data:{
-                    id:this.userID
-                }
-            }).then(resp=>{
-                this.$message({
-                    message: '请求发送成功！',
-                    type: 'success'
-                });
-            });
-        },
-
-        searchUser()
-        {
-            $(".searchResult").prop("style","display:none");
-            document.getElementById("formationCheck").hidden=true;
-            document.getElementById("noAccount").hidden=true;
-            let reg=/^\d{9}$/;
-            if(reg.test(this.input))
-            {
-                //formation check success
-                axios({
-                    method:"post",
-                    url:'',
-                    data:{
-                        id:this.input
-                    }
-                }).then(resp=>{
-                    if(resp.data=="no account")
-                    {
-                        //no such account
-                        document.getElementById("noAccount").hidden=false;
-                    }
-                    else
-                    {
-                        //account exists
-                        this.userAvatar=resp.data.avatar;
-                        this.userID=resp.data.id;
-                        this.userName=resp.data.name;
-                        $(".searchResult").prop("style","display:block");
-                    }
-
-                });
-            }
-            else{
-                //formation check fails
-                document.getElementById("formationCheck").hidden=false;
-            }
-
-        }
-
-    }
-});
-
-//set button
-let isBlock=false;
-$(".friendListTrigger").click(function (){
-    if(isBlock)
-    {
-        $("#friendList").prop("style","display:none");
-        isBlock=false;
-    }
-    else
-    {
-        $("#friendList").prop("style","display:block");
-        isBlock=true;
-    }
-
-});
 
 function getParams(key) {
     let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
@@ -106,36 +11,18 @@ function getParams(key) {
 // alert(getParams("id"));
 var friendId=getParams("id");
 
-$("#settingTrigger").click(function ()
-{
-    $("#setting").prop("style","display:block");
-});
-
-$("#setting").mouseleave(function (){
-    $("#setting").prop("style","display:none");
-});
-
-$(".addFriendTrigger").click(function (){
-    addFriendVue.dialogVisible=true;
-});
-
-
-$(".decorationTrigger").click(function (){
-    $("#decoration").prop("style","display:block");
-});
-
-$("#decoration").mouseleave(function (){
-    $("#decoration").prop("style","display:none");
-});
-
-
+//set url
+$("#otherComment").prop("href","OtherFeed.html?id="+friendId);
+$("#otherFeed").prop("href","OtherFeed.html?id="+friendId);
 
 //set decoration
 let userDecoration="#DCE2F1";
 axios({
     method:"get",
     url:"/HomePage/getFriendDecoration",
-    data:{id:friendId}
+    data:{
+        id:friendId
+    }
 
 }).then(resp=>{
     if(resp.data!="no decoration")
@@ -167,7 +54,7 @@ for(let i=0;i<decorations.length;i++)
 
             data:{
                 color:decorations[i].style.backgroundColor,
-                data:{id:friendId}
+                id:friendId
             }
         }).then(resp=>{
             this.$message({
@@ -193,84 +80,6 @@ $(".topNav .icon-logout").click(function (){
 });
 
 
-//get friend List
-class Friend{
-    constructor(avatar,name,id) {
-        this.avatar=avatar;
-        this.name=name;
-        this.id=id;
-    }
-};
-new Vue({
-    el:"#friendList",
-
-    mounted(){
-        this.getFriendList();
-    },
-
-    data(){
-        return{
-            friendList:[]
-        }
-    },
-
-    methods: {
-
-        accessFriend(row)
-        {
-            location.href="/OtherFeed.html?id="+row.id;
-        },
-
-        deleteFriend(row)
-        {
-            this.$confirm('是否删除好友?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-            }).then(() => {
-                axios({
-                    method:"post",
-                    url:"/HomePage/deleteFriend",
-                    data:{
-                        id:row.id
-                    }
-                }).then(resp=>{
-                    this.getFriendList();
-                });
-            }).catch(() => {
-
-            });
-
-        },
-        getFriendList(){
-
-            axios({
-                method: "get",
-                url:'/HomePage/getFriendList'
-            }).then(resp=>{
-                this.fileList=[];
-                let resultList=resp.data;
-                for(let i=0;i<resultList.length;i++)
-                    this.fileList.push(new Friend(resultList[i].avatar,resultList[i].name,resultList[i].id));
-            });
-        }
-    }
-});
-
-
-// let friends = $(".friendList");
-// friendList.forEach(item=>{
-//     let friend="<a target=\"_blank\" href=\""+"/OtherFeed.html?id="+item.id+"\">\n" +
-//         "        <div class=\"friend\">\n" +
-//         "\n" +
-//         "            <img class=\"friendAvatar\" src=\""+item.avatar+"\"  width=\"50\" height=\"50\" style=\"float: left\">\n" +
-//         "\n" +
-//         "            <div class=\"friendName\">"+item.name+"</div>\n" +
-//         "\n" +
-//         "        </div>\n" +
-//         "    </a>";
-//     friends.append(friend);
-// });
 
 
 
@@ -283,96 +92,6 @@ new Vue({
 
 
 
-let message = new Vue({
-    el:"#message",
-
-    mounted() {
-        this.getMessage();
-    },
-
-    data(){
-        return{
-            dialogVisible:false,
-            tableData:[{
-                avatar:'./photos/p1.jpg',
-                name:'zhansan',
-                id:'1'
-            },
-                {
-                    avatar:'./img.png',
-                    name:'lisi',
-                    id:'2'
-                }
-            ]
-        }
-    },
-
-    methods:{
-
-        getMessage()
-        {
-            axios({
-                method:"get",
-                url:"/HomePage/getAddFriMsg"
-
-            }).then(resp=>{
-                this.tableData=resp.data;
-            });
-        },
-
-        agree(row)
-        {
-
-            axios({
-                method:"post",
-                url:'/HomePage/accept',
-                data:{
-                    id:row.id
-                }
-            }).then(resp=>{
-                this.$message({
-                    message: '添加成功！',
-                    type: 'success'
-                });
-                this.getMessage();
-            })
-        },
-
-        refuse(row){
-            axios({
-                method:"post",
-                url:'/HomePage/refuse',
-                data:{
-                    id:row.id
-                }
-            }).then(resp=>{
-                this.getMessage();
-            })
-        }
-    }
-});
-
-let checkMesg = new Vue({
-    el:"#checkMesg",
-
-    mounted()
-    {
-        this.messageNumber=message.tableData.length;
-    },
 
 
-    data(){
-        return{
-            messageNumber:0
-
-        }
-    },
-
-    methods:{
-        handleClick()
-        {
-            message.dialogVisible=true;
-        }
-    }
-});
 
