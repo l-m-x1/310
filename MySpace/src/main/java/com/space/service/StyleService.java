@@ -11,7 +11,7 @@ public interface StyleService {
 
     Style selectById(Integer id);
 
-    List<Style> selectByUid(Integer uid);
+    Style selectByUid(Integer uid);
 
 
     void insert(Style style);

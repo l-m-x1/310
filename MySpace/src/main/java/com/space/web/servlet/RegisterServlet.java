@@ -3,9 +3,11 @@ package com.space.web.servlet;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.Info;
+import com.space.pojo.Style;
 import com.space.pojo.User;
 import com.space.service.UserService;
 import com.space.service.impl.InfoServiceImpl;
+import com.space.service.impl.StyleServiceImpl;
 import com.space.service.impl.UserServiceImpl;
 import com.space.web.BaseServlet;
 import org.apache.commons.io.IOUtils;
@@ -31,5 +33,10 @@ public class RegisterServlet extends BaseServlet {
         infoService.insert(info);
 
         req.getSession().setAttribute("id",maxId);
+
+        Style style=new Style();
+         style.setUid(maxId);
+        new StyleServiceImpl().insert(style);
+
     }
 }

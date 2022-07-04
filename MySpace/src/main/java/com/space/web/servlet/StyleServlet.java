@@ -20,7 +20,7 @@ public class StyleServlet extends BaseServlet {
     public void show() throws IOException {
         HttpSession session=req.getSession();
         Integer uid = (Integer) session.getAttribute("id");
-        List<Style> styles = styleService.selectByUid(uid);
+        Style styles = styleService.selectByUid(uid);
         String jsonString = JSON.toJSONString(styles);
         resp.setContentType("text/json;charset=utf-8");
         resp.getWriter().write(jsonString);

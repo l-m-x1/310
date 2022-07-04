@@ -6,12 +6,14 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.space.pojo.AddFriMsg;
 import com.space.pojo.Friends;
+import com.space.pojo.Style;
 import com.space.pojo.User;
 import com.space.service.AddFriService;
 import com.space.service.FriendsService;
 import com.space.service.UserService;
 import com.space.service.impl.AddFriServiceImpl;
 import com.space.service.impl.FriendsServiceImpl;
+import com.space.service.impl.StyleServiceImpl;
 import com.space.service.impl.UserServiceImpl;
 import com.space.web.BaseServlet;
 
@@ -233,7 +235,43 @@ public class HomePageManger extends BaseServlet {
         addFriMsg.setMsg_from(fid);
         addFriService.delete(addFriMsg);
     }
-    public void getDecoration(){
-        System.out.println("hello");
+
+    public void getMyDecoration() throws IOException {
+        HttpSession session=req.getSession();
+        Integer uid = (Integer) session.getAttribute("id");
+        getDecoration(uid);
+    }
+
+    public void getFriendDecoration() throws IOException {
+        Integer fid = jsonObject.getInteger("id");
+        getDecoration(fid);
+
+    }
+    public void getDecoration(int uid) throws IOException {
+
+       // Integer uid=213141521;
+        Style style = new StyleServiceImpl().selectByUid(uid);
+        String jsonString = JSON.toJSONString(style.getType());
+        resp.setContentType("text/json;charset=utf-8");
+        resp.getWriter().write(jsonString);
+    }
+
+    public void changeMyDecoration(){
+        HttpSession session=req.getSession();
+        Integer uid = (Integer) session.getAttribute("id");
+        changeDecoration(uid);
+    }
+
+    public void changeFriendDecoration() throws IOException {
+        Integer fid = jsonObject.getInteger("id");
+        changeDecoration(fid);
+
+    }
+
+    public void changeDecoration(int uid){
+
+        //Integer uid=213141521;
+        String type=jsonObject.getString("color");
+        new StyleServiceImpl().updateType(uid,type);
     }
 }
