@@ -77,7 +77,7 @@
             var _this=this;
             axios({
                 method:"get",
-                url:""//地址
+                url:"/Access/getAllAccess"
             }).then(function (resp) {
                 _this.PermissionData=resp.data;
             })
@@ -123,7 +123,7 @@
                 console.log('submit!');
                 axios({
                     method:"post",
-                    url:"",//地址
+                    url:"/Access/setAccess",//地址
                     data:{account:message}
                 }).then(function (resp) {
                     if(resp.data=="success"){
