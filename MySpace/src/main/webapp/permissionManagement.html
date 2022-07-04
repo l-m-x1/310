@@ -91,25 +91,21 @@
 
             return {
                 PermissionData: [{
-                    id:0,
                     name:'姜明',
                     account:'1399582722',
                     permission: "1"
                     },
                     {
-                        id:1,
                         name:'李凯翔',
                         account:'1399582722',
                         permission:"1"
                     },
                     {
-                        id:2,
                         name:'胡洋洋',
                         account:'1399582722',
                         permission:0
                     },
                     {
-                        id:3,
                         name:'刘萌象',
                         account:'1399582722',
                         permission:1
@@ -134,7 +130,7 @@
                 axios({
                     method:"post",
                     url:"",//地址
-                    data:{id:message.id,
+                    data:{account:message.account,
                     }
                 }).then(function (resp) {
                     if(resp.data=="success"){
