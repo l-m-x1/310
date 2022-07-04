@@ -95,7 +95,16 @@ $(".friendListTrigger").click(function (){
 
 });
 
-
+function getParams(key) {
+    let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+    let r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+};
+// alert(getParams("id"));
+var friendId=getParams("id");
 
 $("#settingTrigger").click(function ()
 {
@@ -125,16 +134,20 @@ $("#decoration").mouseleave(function (){
 let userDecoration="#DCE2F1";
 axios({
     method:"get",
-    url:"/HomePage/getDecoration"
+    url:"/HomePage/getFriendDecoration",
+    data:{id:friendId}
+
 }).then(resp=>{
     if(resp.data!="no decoration")
     {
         userDecoration=resp.data;
     }
+
+    $("body").prop("style","background-color:"+userDecoration);
+    $(".leftcolumn").prop("style","background-color:"+userDecoration);
+  //  $(".rightcolumn").prop("style","background-color:"+userDecoration);
+
 });
-$("body").prop("style","background-color:"+userDecoration);
-$(".leftcolumn").prop("style","background-color:"+userDecoration);
-$(".rightcolumn").prop("style","background-color:"+userDecoration);
 
 
 
@@ -150,9 +163,11 @@ for(let i=0;i<decorations.length;i++)
 
         axios({
             method:"post",
-            url:'/HomePage/changeDecoration',
+            url:'/HomePage/changeFriendDecoration',
+
             data:{
-                color:decorations[i].style.backgroundColor
+                color:decorations[i].style.backgroundColor,
+                data:{id:friendId}
             }
         }).then(resp=>{
             this.$message({

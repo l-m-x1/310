@@ -57,9 +57,11 @@
                 <template slot-scope="scope">
                     <!-- scope.row 可以取到当前一行的数据 -->
                     <el-switch v-model="scope.row.permission"
-                               @change="onSubmit(scope.row.name)"
+                               @change="onSubmit(scope.row)"
                                active-text="允许"
-                               inactive-text="不允许">
+                               inactive-text="不允许"
+                               active-value=1
+                               inactive-value=0>
                     </el-switch>
                 </template>
             </el-table-column>
@@ -86,26 +88,27 @@
             })
         },
         data() {
+
             return {
                 PermissionData: [{
                     name:'姜明',
                     account:'1399582722',
-                    permission: true
+                    permission: "1"
                     },
                     {
                         name:'李凯翔',
                         account:'1399582722',
-                        permission:true
+                        permission:"1"
                     },
                     {
                         name:'胡洋洋',
                         account:'1399582722',
-                        permission:true
+                        permission:0
                     },
                     {
                         name:'刘萌象',
                         account:'1399582722',
-                        permission:true
+                        permission:1
                     }]
             };
         },
@@ -122,12 +125,13 @@
             },
             onSubmit(message) {
                 var _this=this;
-                alert(message)
+                alert(message.permission)
                 console.log('submit!');
                 axios({
                     method:"post",
                     url:"",//地址
-                    data:message
+                    data:{account:message.account,
+                    }
                 }).then(function (resp) {
                     if(resp.data=="success"){
                         //成功后的反应

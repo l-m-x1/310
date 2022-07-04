@@ -26,18 +26,18 @@ public class StyleServiceImpl implements StyleService {
     public Style selectById(Integer id) {
         SqlSession session = factory.openSession();
         StyleMapper mapper = session.getMapper(StyleMapper.class);
-        Style styles = mapper.selectById(id);
+        Style style = mapper.selectById(id);
         session.close();
-        return styles;
+        return style;
     }
 
     @Override
-    public List<Style> selectByUid(Integer uid) {
+    public Style selectByUid(Integer uid) {
         SqlSession session = factory.openSession();
         StyleMapper mapper = session.getMapper(StyleMapper.class);
-        List<Style> styles = mapper.selectByUid(uid);
+       Style style = mapper.selectByUid(uid);
         session.close();
-        return styles;
+        return style;
     }
 
     @Override

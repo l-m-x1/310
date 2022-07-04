@@ -65,7 +65,7 @@ public class TrendsServlet extends BaseServlet {
     public void add() {
 
         HttpSession session=req.getSession();
-//        session.setAttribute("id",2);
+        //session.setAttribute("id",2);
         Integer uid=(Integer) session.getAttribute("id");
         Trends trends=new Trends();
         trends.setContent(jsonObject.getString("text"));
@@ -80,7 +80,7 @@ public class TrendsServlet extends BaseServlet {
 
     public void showMyself() throws IOException {
         HttpSession session=req.getSession();
-//        session.setAttribute("id",2);
+      //  session.setAttribute("id",2);
         Integer uid = (Integer) session.getAttribute("id");
         showAUser(uid);
     }
@@ -120,7 +120,7 @@ public class TrendsServlet extends BaseServlet {
     public void show() throws IOException {
         //int[] uids = new int[0];
         HttpSession session=req.getSession();
-//        session.setAttribute("id",2);
+      //  session.setAttribute("id",2);
         Integer uid = (Integer) session.getAttribute("id");
         List<Integer> uids1=new ArrayList<>();
         uids1.add(uid);

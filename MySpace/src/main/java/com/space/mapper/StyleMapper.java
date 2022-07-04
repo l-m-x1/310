@@ -14,9 +14,9 @@ public interface StyleMapper {
     Style selectById(Integer id);
 
     @Select("select * from style where uid=#{uid}")
-    List<Style> selectByUid(Integer uid);
+    Style selectByUid(Integer uid);
 
-    @Insert("insert into style (type, uid) values(#{type},#{id})")
+    @Insert("insert into style ( uid) values(#{uid})")
     void insert(Style style);
 
     @Delete("delete from  style where id=#{id}")

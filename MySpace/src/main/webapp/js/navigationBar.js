@@ -125,16 +125,18 @@ $("#decoration").mouseleave(function (){
 let userDecoration="#DCE2F1";
 axios({
     method:"get",
-    url:"/HomePage/getDecoration"
+    url:"/HomePage/getMyDecoration"
 }).then(resp=>{
     if(resp.data!="no decoration")
     {
         userDecoration=resp.data;
+        console.log(userDecoration)
     }
-});
-$("body").prop("style","background-color:"+userDecoration);
-$(".leftcolumn").prop("style","background-color:"+userDecoration);
+    $("body").prop("style","background-color:"+userDecoration);
+    $(".leftcolumn").prop("style","background-color:"+userDecoration);
 // $(".rightcolumn").prop("style","background-color:"+userDecoration);
+
+});
 
 
 
@@ -150,9 +152,10 @@ $(".leftcolumn").prop("style","background-color:"+userDecoration);
 
          axios({
              method:"post",
-             url:'/HomePage/changeDecoration',
+             url:'/HomePage/changeMyDecoration',
              data:{
                  color:decorations[i].style.backgroundColor
+
              }
          }).then(resp=>{
              this.$message({
@@ -204,7 +207,22 @@ new Vue({
 
        accessFriend(row)
        {
-           location.href="/OtherFeed.html?id="+row.id;
+           axios({
+               method:"post",
+               url:"/HomePage/getPermission",
+               data:{
+                   id:row.id
+               }
+           }).then(resp=>{
+               if(resp.data=="permission")
+               {
+                   location.href="/OtherFeed.html?id="+row.id;
+               }
+               else
+               {
+                   this.$message.error('好友未为你设置访问权限！');
+               }
+           })
        },
 
         deleteFriend(row)
