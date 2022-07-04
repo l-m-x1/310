@@ -69,20 +69,21 @@ public class HomePageManger extends BaseServlet {
         }
         List<ret> retList=new ArrayList<>();
         Integer uid= (Integer) req.getSession().getAttribute("id");
-
+        uid=100000012;
         FriendsService friendsService = new FriendsServiceImpl();
         List<Friends> friends = friendsService.selectById(uid);
         UserServiceImpl userService = new UserServiceImpl();
         for (Friends friend : friends) {
             ret tmp = new ret();
             Integer fid = friend.getFid();
-            User user = userService.selectById(uid);
+            User user = userService.selectById(fid);
             tmp.name=user.getUsername();
             tmp.avatar=user.getAvatar();
             tmp.id=user.getId();
             retList.add(tmp);
         }
         resp.setContentType("text/json;charset=utf-8");
+        System.out.println(JSON.toJSONString(retList));
         resp.getWriter().write(JSON.toJSONString(retList));
     }
 

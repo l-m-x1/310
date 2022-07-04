@@ -1,6 +1,7 @@
 package com.space.web.servlet;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.space.pojo.Info;
 import com.space.pojo.Photos;
 import com.space.pojo.User;
@@ -26,14 +27,27 @@ import java.util.*;
 
 public class InfoServlet extends BaseServlet {
     public void getInfo() throws IOException {
-//        Integer id = jsonObject.getInteger("uid");
         Integer id = (Integer) req.getSession().getAttribute("id");
-        InfoService infoService = new InfoServiceImpl();
+        JSONObject ret = new JSONObject();
 
+        UserServiceImpl userService = new UserServiceImpl();
+        User user = userService.selectById(id);
+        ret.put("imageUrl",user.getAvatar());
+        ret.put("name",user.getUsername());
+
+        InfoService infoService = new InfoServiceImpl();
         Info info = infoService.selectById(id);
-        String ret = JSON.toJSONString(info);
+        ret.put("region",info.getGender());
+        ret.put("date",info.getBirthday());
+        ret.put("hometown",info.getCity());
+        ret.put("address",info.getAddress());
+        ret.put("work",info.getWork());
+        ret.put("companyName",info.getCompanyName());
+        ret.put("companyAddress",info.getCompanyAddress());
+
+//        String ret = JSON.toJSONString(info);
         resp.setContentType("text/json;charset=utf-8");
-        resp.getWriter().write(ret);
+        resp.getWriter().write(ret.toJSONString());
     }
 
 
@@ -85,5 +99,6 @@ public class InfoServlet extends BaseServlet {
         infoService.update(info);
 
     }
+
 
 }
