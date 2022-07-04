@@ -1,6 +1,7 @@
 package com.space.web.servlet;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.space.pojo.Friends;
 import com.space.pojo.User;
@@ -89,7 +90,12 @@ public class AccessServlet extends BaseServlet {
         friends.setFid(jsonObject.getInteger("id"));
         Friends friends1 = friendsService.selectAccess(friends);
 
-        resp.setContentType("text/json;charset=utf-8");
-        resp.getWriter().write(friends1.getAccess());
+        if(friends1.getAccess()==1){
+            resp.getWriter().write("permission");
+        }
+        else {
+            resp.getWriter().write("refused");
+        }
+
     }
 }

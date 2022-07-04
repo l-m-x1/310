@@ -102,8 +102,6 @@ public class ServletTest {
 
     @Test
     public void test1(){
-        User user=new UserServiceImpl().selectById(2);
-     String s="http://localhost/"+user.getAvatar();
-     System.out.println(s);
+
     }
 }

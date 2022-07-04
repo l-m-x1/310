@@ -64,8 +64,6 @@ public class DiaryServlet extends BaseServlet {
 //    }
 
     public void setLog(){
-        String contentType = req.getContentType();
-        System.out.println(contentType);
 
         Integer uid=(Integer)req.getSession().getAttribute("id");
         Diary diary = new Diary();
@@ -76,7 +74,6 @@ public class DiaryServlet extends BaseServlet {
         diary.setTime(s);
         String diary1 = jsonObject.getString("diary");
         JSONObject jsonObject1 = JSON.parseObject(jsonObject.getString("diary"));
-        System.out.println(diary1);
         diary.setTitle(jsonObject1.getString("name"));
         diary.setContent(jsonObject1.getString("text"));
         DiaryService diaryService=new DiaryServiceImpl();

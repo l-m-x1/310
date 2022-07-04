@@ -277,7 +277,7 @@ public class HomePageManger extends BaseServlet {
     }
 
 
-    public void deleteFriends(){
+    public void deleteFriend(){
         Integer id=(Integer) req.getSession().getAttribute("id");
         Integer id1 = jsonObject.getInteger("id");
         FriendsServiceImpl friendsService = new FriendsServiceImpl();
@@ -286,7 +286,7 @@ public class HomePageManger extends BaseServlet {
         friends.setFid(id1);
         friendsService.delete(friends);
         friends.setFid(id);
-        friends.setFid(id1);
+        friends.setId(id1);
         friendsService.delete(friends);
     }
 }

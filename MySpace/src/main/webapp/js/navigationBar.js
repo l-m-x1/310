@@ -195,11 +195,20 @@ new Vue({
     mounted(){
         // this.getFriendList();
         this.getFriendList();
+        console.log(10000);
+        // this.fileList.push(new Friend('/photos/c6a374b6-17d5-4177-b80b-a79e61488b4d.jpg','李四','100000013'));
+        // this.fileList.push(new Friend('/photos/ff03cc60-6036-4294-94df-475ae86ca01e.jpg','王五','100000014'));
+        // this.fileList.push(new Friend('/photos/6b0eef7a-66e1-4789-923b-ed00b5376933.jpg','小明','100000015'));
+        console.log(10000);
+        // console.log(this.fileList);
     },
 
     data(){
        return{
-           friendList:[]
+           // friendList:[]
+           friendList:[new Friend('/photos/c6a374b6-17d5-4177-b80b-a79e61488b4d.jpg','李四','100000013'),
+               new Friend('/photos/ff03cc60-6036-4294-94df-475ae86ca01e.jpg','王五','100000014'),
+               new Friend('/photos/6b0eef7a-66e1-4789-923b-ed00b5376933.jpg','小明','100000015')]
        }
     },
 
@@ -209,7 +218,7 @@ new Vue({
        {
            axios({
                method:"post",
-               url:"/HomePage/getPermission",
+               url:"/Access/getPermission",
                data:{
                    id:row.id
                }
@@ -247,17 +256,16 @@ new Vue({
 
         },
         getFriendList(){
-           this.fileList=[];
+
              axios({
                 method: "get",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
-                console.log(10000);
-                console.log(resp);
-                console.log(resp.data);
-                let resultList=resp.data;
-                for(let i=0;i<resultList.length;i++)
-                    this.fileList.push(new Friend(resultList[i].avatar,resultList[i].name,resultList[i].id));
+                // let resultList=resp.data;
+                // // for(let i=0;i<resultList.length;i++)
+                // //     this.fileList.push(new Friend(resultList[i].avatar,resultList[i].name,resultList[i].id));
+                //  this.friendList=resp.data;
+
             });
         }
     }
