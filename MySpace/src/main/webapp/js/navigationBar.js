@@ -227,9 +227,9 @@ new Vue({
             });
 
         },
-        getFriendList(){
+        async getFriendList(){
            this.fileList=[];
-            axios({
+            await axios({
                 method: "get",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
