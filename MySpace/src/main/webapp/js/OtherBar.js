@@ -12,7 +12,7 @@ function getParams(key) {
 var friendId=getParams("id");
 
 //set url
-$("#otherComment").prop("href","OtherFeed.html?id="+friendId);
+$("#otherComment").prop("href","OtherComment.html?id="+friendId);
 $("#otherFeed").prop("href","OtherFeed.html?id="+friendId);
 
 //set decoration
