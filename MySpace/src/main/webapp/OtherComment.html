@@ -224,7 +224,7 @@
         mounted(){
             var _this=this;
             axios({
-                method:"get",
+                method:"post",
                 url:"/Trends/showFriend",//网站
                 data:{id:friendId}//通过id删除可改
             }).then(function (resp){
