@@ -15,9 +15,12 @@ public interface FriendsMapper {
     @Delete("delete from friends where id=#{id} and fid=#{fid}")
     void delete(Friends friends);
 
-    @Update("update friends set access=#{access},valid=#{valid} where id=#{id} and fid=#{fid}")
+    @Update("update friends set access=#{access} where id=#{id} and fid=#{fid}")
     void update(Friends friends);
 
     @Select("select *from friends where id=#{id}")
     List<Friends> selectById(Integer id);
+
+    @Select("select *from friends where id=#{id} and fid=#{fid}")
+    Friends selectAccess(Friends friends);
 }

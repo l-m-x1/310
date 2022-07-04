@@ -49,4 +49,13 @@ public class FriendsServiceImpl implements FriendsService {
         session.close();
         return friends;
     }
+
+    @Override
+    public Friends selectAccess(Friends friends) {
+        SqlSession session = factory.openSession();
+        FriendsMapper mapper = session.getMapper(FriendsMapper.class);
+        Friends friends1 = mapper.selectAccess(friends);
+        return friends1;
+
+    }
 }

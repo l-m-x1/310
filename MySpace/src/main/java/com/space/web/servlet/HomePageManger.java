@@ -34,58 +34,82 @@ public class HomePageManger extends BaseServlet {
 
     public void getFriendList() throws IOException {
         JSONObject ret =new JSONObject();
+//
+//        class ret{
+//            @JSONField(ordinal = 2)
+//            public String name;
+//            @JSONField(ordinal = 1)
+//            public String avatar;
+//            @JSONField(ordinal = 3)
+//            public Integer id;
+//
+//            public Integer getId() {
+//                return id;
+//            }
+//
+//            public void setId(Integer id) {
+//                this.id = id;
+//            }
+//
+//            public String getName() {
+//                return name;
+//            }
+//
+//            public void setName(String name) {
+//                this.name = name;
+//            }
+//
+//            public String getAvatar() {
+//                return avatar;
+//            }
+//
+//            public void setAvatar(String avatar) {
+//                this.avatar = avatar;
+//            }
+//        }
+//        List<ret> retList=new ArrayList<>();
+//        Integer uid= (Integer) req.getSession().getAttribute("id");
+////        uid=100000012;
+//        FriendsService friendsService = new FriendsServiceImpl();
+//        List<Friends> friends = friendsService.selectById(uid);
+//        UserServiceImpl userService = new UserServiceImpl();
+//        for (Friends friend : friends) {
+//            ret tmp = new ret();
+//            Integer fid = friend.getFid();
+//            User user = userService.selectById(fid);
+//            tmp.name=user.getUsername();
+//            tmp.avatar=user.getAvatar();
+//            tmp.id=user.getId();
+//            retList.add(tmp);
+//        }
 
-        class ret{
-            @JSONField(ordinal = 2)
-            public String name;
-            @JSONField(ordinal = 1)
-            public String avatar;
-            @JSONField(ordinal = 3)
-            public Integer id;
 
-            public Integer getId() {
-                return id;
-            }
 
-            public void setId(Integer id) {
-                this.id = id;
-            }
 
-            public String getName() {
-                return name;
-            }
 
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getAvatar() {
-                return avatar;
-            }
-
-            public void setAvatar(String avatar) {
-                this.avatar = avatar;
-            }
-        }
-        List<ret> retList=new ArrayList<>();
-        Integer uid= (Integer) req.getSession().getAttribute("id");
-        uid=100000012;
-        FriendsService friendsService = new FriendsServiceImpl();
+        Integer uid=(Integer)req.getSession().getAttribute("id");
+        FriendsServiceImpl friendsService = new FriendsServiceImpl();
         List<Friends> friends = friendsService.selectById(uid);
+
         UserServiceImpl userService = new UserServiceImpl();
-        for (Friends friend : friends) {
-            ret tmp = new ret();
-            Integer fid = friend.getFid();
-            User user = userService.selectById(fid);
-            tmp.name=user.getUsername();
-            tmp.avatar=user.getAvatar();
-            tmp.id=user.getId();
-            retList.add(tmp);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+
+        for (Friends friend:friends){
+            User user = userService.selectById(friend.getFid());
+
+            stringBuilder.append("{\"avatar\":\""+user.getAvatar()+"\",\"name\":\""+user.getUsername()+"\",\"id\":\""+user.getId()+"\"},");
+            break;
         }
-        resp.setContentType("text/json;charset=utf-8");
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.append("]");
+
+
+        resp.setContentType("text/plain;charset=utf-8");
 //        System.out.println(JSON.toJSONString(retList));
-        String s = JSON.toJSONString(retList);
-        resp.getWriter().write(JSON.toJSONString(retList));
+//        String s = JSON.toJSONString(retList);
+//        resp.getWriter().write(JSON.toJSONString(retList));
 //        resp.getWriter().write("hello");
     }
 
@@ -115,7 +139,7 @@ public class HomePageManger extends BaseServlet {
 
     public void accept(){
         Integer uid = (Integer) req.getSession().getAttribute("id");
-        Integer fid = jsonObject.getInteger("fid");
+        Integer fid = jsonObject.getInteger("id");
         AddFriServiceImpl addFriService = new AddFriServiceImpl();
         AddFriMsg addFriMsg = new AddFriMsg();
         addFriMsg.setMsg_to(uid);
@@ -137,18 +161,18 @@ public class HomePageManger extends BaseServlet {
 
         class ret{
             @JSONField(ordinal = 1)
-            public String avatarUrl;
+            public String avatar;
             @JSONField(ordinal = 2)
             public String name;
             @JSONField(ordinal = 3)
             public Integer id;
 
-            public String getAvatarUrl() {
-                return avatarUrl;
+            public String getAvatar() {
+                return avatar;
             }
 
-            public void setAvatarUrl(String avatarUrl) {
-                this.avatarUrl = avatarUrl;
+            public void setAvatar(String avatar) {
+                this.avatar = avatar;
             }
 
             public String getName() {
@@ -175,7 +199,7 @@ public class HomePageManger extends BaseServlet {
         for (AddFriMsg addFriMsg:addFriMsgs){
             ret ret = new ret();
             User user = userService.selectById(addFriMsg.getMsg_from());
-            ret.avatarUrl=user.getAvatar();
+            ret.avatar =user.getAvatar();
             ret.name=user.getUsername();
             ret.id=user.getId();
             froms.add(ret);
@@ -228,14 +252,19 @@ public class HomePageManger extends BaseServlet {
 
     public void refuse(){
         Integer uid = (Integer) req.getSession().getAttribute("id");
-        Integer fid = jsonObject.getInteger("fid");
+        Integer fid = jsonObject.getInteger("id");
         AddFriServiceImpl addFriService = new AddFriServiceImpl();
         AddFriMsg addFriMsg = new AddFriMsg();
         addFriMsg.setMsg_to(uid);
         addFriMsg.setMsg_from(fid);
         addFriService.delete(addFriMsg);
     }
+
+    public void getAccess(){
+
+    }
+
     public void getDecoration(){
-        System.out.println("hello");
+
     }
 }

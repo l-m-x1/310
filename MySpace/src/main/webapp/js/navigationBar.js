@@ -48,7 +48,7 @@ let addFriendVue =  new Vue({
                 //formation check success
                 axios({
                     method:"post",
-                    url:'',
+                    url:'/HomePage/selectFriend',
                     data:{
                         id:this.input
                     }
@@ -231,7 +231,7 @@ new Vue({
         async getFriendList(){
            this.fileList=[];
             await axios({
-                method: "post",
+                method: "get",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{
                 // console.log(10000);

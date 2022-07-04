@@ -17,4 +17,6 @@ public interface FriendsService {
     void update(Friends friends);
 
     List<Friends> selectById(Integer id);
+
+    Friends selectAccess(Friends friends);
 }
