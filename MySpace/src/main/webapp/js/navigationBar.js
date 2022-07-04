@@ -189,20 +189,8 @@ class Friend{
         this.id=id;
     }
 };
-new Vue({
+let friendListVue = new Vue({
    el:"#friendList",
-
-    mounted(){
-        // this.getFriendList();
-        this.getFriendList();
-        // console.log(10000);
-        // // this.fileList.push(new Friend('/photos/c6a374b6-17d5-4177-b80b-a79e61488b4d.jpg','李四','100000013'));
-        // // this.fileList.push(new Friend('/photos/ff03cc60-6036-4294-94df-475ae86ca01e.jpg','王五','100000014'));
-        // // this.fileList.push(new Friend('/photos/6b0eef7a-66e1-4789-923b-ed00b5376933.jpg','小明','100000015'));
-        // console.log(10000);
-        // // console.log(this.fileList);
-    },
-
     data(){
        return{
            // friendList:[]
@@ -270,14 +258,12 @@ new Vue({
     }
 });
 
+friendListVue.getFriendList();
 
 
-let message = new Vue({
+let messageVue = new Vue({
     el:"#message",
 
-    mounted() {
-        this.getMessage();
-    },
 
     data(){
         return{
@@ -343,6 +329,8 @@ let message = new Vue({
     }
 });
 
+messageVue.getMessage();
+
 let checkMesg = new Vue({
     el:"#checkMesg",
 
@@ -357,7 +345,7 @@ let checkMesg = new Vue({
     methods:{
         handleClick()
         {
-            message.dialogVisible=true;
+            messageVue.dialogVisible=true;
         }
     }
 });
