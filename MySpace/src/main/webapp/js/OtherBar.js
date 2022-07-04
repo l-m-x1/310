@@ -106,7 +106,6 @@ function getParams(key) {
 // alert(getParams("id"));
 var friendId=getParams("id");
 
-
 $("#settingTrigger").click(function ()
 {
     $("#setting").prop("style","display:block");
