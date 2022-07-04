@@ -93,10 +93,12 @@ body {
 .rightcolumn {
     float: left;
     width: 75%;
-    background-color: #DCE2F1;
+    background-color: rgba(222, 184, 135, 0.5);
+
     padding: 20px 30px;
     border: 5px solid deepskyblue;
     border-radius: 10px;
+
 }
 
 

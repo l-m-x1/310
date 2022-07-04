@@ -134,7 +134,7 @@ axios({
 });
 $("body").prop("style","background-color:"+userDecoration);
 $(".leftcolumn").prop("style","background-color:"+userDecoration);
-$(".rightcolumn").prop("style","background-color:"+userDecoration);
+// $(".rightcolumn").prop("style","background-color:"+userDecoration);
 
 
 
@@ -146,7 +146,7 @@ $(".rightcolumn").prop("style","background-color:"+userDecoration);
      decorations[i].addEventListener("click",function (){
          $("body").prop("style","background-color:"+decorations[i].style.backgroundColor);
          $(".leftcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
-         $(".rightcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
+         // $(".rightcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
 
          axios({
              method:"post",
@@ -228,9 +228,9 @@ new Vue({
             });
 
         },
-        getFriendList(){
+        async getFriendList(){
            this.fileList=[];
-            axios({
+            await axios({
                 method: "get",
                 url:'/HomePage/getFriendList'
             }).then(resp=>{

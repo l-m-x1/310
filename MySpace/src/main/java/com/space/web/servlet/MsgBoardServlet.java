@@ -24,29 +24,52 @@ public class MsgBoardServlet extends BaseServlet {
     MsgBoardService msgBoardService=new MsgBoardServiceImpl();
 
 
-    //添加一条留言板数据
-    public void add(){
-
+    public void addMyself(){
         HttpSession session=req.getSession();
-        //session.setAttribute("id",30);
+        session.setAttribute("id",30);
+        Integer uid =(Integer) session.getAttribute("id");
+        add(uid,uid);
+    }
+
+    public void addFriend(){
+        HttpSession session=req.getSession();
+        session.setAttribute("id",30);
+        Integer wrid =(Integer) session.getAttribute("id");
+        Integer uid = jsonObject.getInteger("id");
+        add(wrid,uid);
+    }
+
+    //添加一条留言板数据
+    public void add(int wrid,int uid){
+
+
         MsgBoard msgBoard=new MsgBoard();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        msgBoard.setUid((Integer) session.getAttribute("id"));
-        msgBoard.setContent(jsonObject.getString("content"));
+        msgBoard.setUid(uid );
+        msgBoard.setContent(jsonObject.getString("text"));
         msgBoard.setTime(simpleDateFormat.format(new Date()));
-        msgBoard.setWrid(jsonObject.getInteger("wrid"));
+        msgBoard.setWrid(wrid);
         //msgBoard.setFloor(jsonObject.getInteger("floor"));
         msgBoardService.insert(msgBoard);
 
     }
 
-    //展示该用户的相关留言板
-    public void show() throws IOException {
+    public void showMyself() throws IOException {
         HttpSession session=req.getSession();
         session.setAttribute("id",30);
 
         //当前用户id
         Integer uid = (Integer) session.getAttribute("id");
+        show(uid);
+    }
+    public void showFriend() throws IOException {
+        Integer fid=jsonObject.getInteger("id");
+        //Integer fid=2;
+        show(fid);
+    }
+    //展示该用户的相关留言板
+    public void show(int uid) throws IOException {
+
         UserService userService=new UserServiceImpl();
 
         List<MsgBoard> boards = msgBoardService.selectByUid(uid);

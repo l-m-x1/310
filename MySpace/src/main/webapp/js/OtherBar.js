@@ -228,6 +228,7 @@ new Vue({
 
         },
         getFriendList(){
+
             axios({
                 method: "get",
                 url:'/HomePage/getFriendList'
@@ -271,7 +272,7 @@ let message = new Vue({
     el:"#message",
 
     mounted() {
-
+        this.getMessage();
     },
 
     data(){
