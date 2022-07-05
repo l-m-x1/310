@@ -173,7 +173,7 @@ axios({
 $(".topNav .icon-logout").click(function (){
     axios({
         method:'get',
-        url:''
+        url:'/HomePage/logout'
     }).then(resp=>{
         document.location="./login.html";
     });

@@ -199,12 +199,11 @@
     new Vue({
         el: '#FriendFeed',
         mounted(){
-            var _this=this;
             axios({
                 method:"get",
                 url:'/Trends/showMyself'//网站
-            }).then(function (resp){
-                _this.ruleForms=resp.data;
+            }).then(resp=>{
+                this.ruleForms=resp.data;
             })
 
         },
@@ -262,12 +261,11 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    var _this=this;
                     axios({
                         method:"post",
                         url:"/Trends/add",
-                        data:{text:_this.write.text}//通过内容添加
-                    }).then(function (resp) {
+                        data:{text:this.write.text}//通过内容添加
+                    }).then(resp=>{
                         window.location.reload()//刷新
                     })
                 }).catch(() => {
@@ -288,7 +286,7 @@
                         method:"post",
                         url:"/Trends/deleteById",
                         data:{id:message}//message通过id删除
-                    }).then(function (resp) {
+                    }).then(resp=>{
                         window.location.reload()//刷新
                     })
                 }).catch(() => {
@@ -306,7 +304,7 @@
                         url:"/Trends/updateContent",
                         data:{id:message.id,
                             text:message.text}//message通过id可改
-                    }).then(function (resp) {
+                    }).then(resp=>{
                         window.location.reload()//刷新
                     })
                 }).catch(() => {
@@ -319,7 +317,7 @@
                     url:"/Trends/updateLikes",
                     data:{id :message.id,
                         cheer: message.cheer}//message通过id可改
-                }).then(function (resp) {
+                }).then(resp=> {
 
                 })
             }

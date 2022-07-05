@@ -243,12 +243,11 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          var _this=this;
           axios({
             method:"post",
             url:"/MsgBoard/addMyself",
-            data:{text:_this.write.text}//通过内容添加
-          }).then(function (resp) {
+            data:{text:this.write.text}//通过内容添加
+          }).then(resp=>{
             window.location.reload()//刷新
           })
         }).catch(() => {
@@ -265,12 +264,11 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          var _this=this;
           axios({
             method:"post",
             url:"/MsgBoard/deleteById",
             data:{id:message}//通过id删除可改
-          }).then(function (resp) {
+          }).then(resp=>{
             window.location.reload()//刷新
           })
         }).catch(() => {
@@ -278,12 +276,11 @@
       }
     },
     mounted(){
-      var _this=this;
       axios({
         method:"get",
-        url:"/MsgBoard/showMyself\n"//网站
-      }).then(function (resp){
-        _this.commentDatas=resp.data;
+        url:"/MsgBoard/showMyself"//网站
+      }).then(resp=>{
+        this.commentDatas=resp.data;
         //alert(_this.commentDatas[1].photo);
       })
     },

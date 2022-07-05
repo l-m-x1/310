@@ -186,10 +186,9 @@
                         data: form
                     }).then(function (resp) {
                     if(resp.data=="success"){
-
+                        window.location.reload();
                     }
                     })
-                window.location.reload();
             },
             change(file){
                 this.sizeForm.imageUrl = URL.createObjectURL(file.raw);

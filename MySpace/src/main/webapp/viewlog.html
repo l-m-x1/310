@@ -96,12 +96,12 @@
     new Vue({
         el: '#app',
         mounted(){
-            var _this=this;
+
             axios({
                 method:"get",
                 url:"/Diary/viewLogs"//地址
-            }).then(function (resp) {
-                _this.viewlogs=resp.data;
+            }).then(resp=>{
+                this.viewlogs=resp.data;
             })
         },
         data() {
