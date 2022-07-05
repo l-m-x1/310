@@ -8,7 +8,6 @@ function getParams(key) {
     }
     return null;
 };
-// alert(getParams("id"));
 var friendId=getParams("id");
 
 //set url
@@ -74,7 +73,7 @@ $(".topNav .icon-logout").click(function (){
         method:'get',
         url:''
     }).then(resp=>{
-        document.location="./login.html";
+        document.location="./index.html";
     });
 
 });

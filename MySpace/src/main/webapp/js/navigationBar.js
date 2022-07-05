@@ -7,9 +7,9 @@ let addFriendVue =  new Vue({
             dialogVisible:false,
             resultVisible:false,
             input:'',
-            userAvatar:"photos/p1.jpg",
-            userID:'123',
-            userName:'123'
+            userAvatar:"",
+            userID:'',
+            userName:''
         }
     },
     methods:{
@@ -134,8 +134,6 @@ axios({
     }
     $("body").prop("style","background-color:"+userDecoration);
     $(".leftcolumn").prop("style","background-color:"+userDecoration);
-// $(".rightcolumn").prop("style","background-color:"+userDecoration);
-
 });
 
 
@@ -148,8 +146,6 @@ axios({
      decorations[i].addEventListener("click",function (){
          $("body").prop("style","background-color:"+decorations[i].style.backgroundColor);
          $(".leftcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
-         // $(".rightcolumn").prop("style","background-color:"+decorations[i].style.backgroundColor);
-
          axios({
              method:"post",
              url:'/HomePage/changeMyDecoration',
@@ -173,9 +169,9 @@ axios({
 $(".topNav .icon-logout").click(function (){
     axios({
         method:'get',
-        url:''
+        url:'/HomePage/logout'
     }).then(resp=>{
-        document.location="./login.html";
+        document.location="./index.html";
     });
 
 });
@@ -194,9 +190,6 @@ let friendListVue = new Vue({
     data(){
        return{
            friendList:[]
-           // friendList:[new Friend('/photos/c6a374b6-17d5-4177-b80b-a79e61488b4d.jpg','李四','100000013'),
-           //     new Friend('/photos/ff03cc60-6036-4294-94df-475ae86ca01e.jpg','王五','100000014'),
-           //     new Friend('/photos/6b0eef7a-66e1-4789-923b-ed00b5376933.jpg','小明','100000015')]
        }
     },
 
@@ -250,16 +243,13 @@ let friendListVue = new Vue({
                 url:'/Friend/getFriendList'
             }).then(resp=>{
                this.friendList=resp.data;
-
             }).catch(()=>{
 
              });
         }
     }
 });
-
 friendListVue.getFriendList();
-
 
 let messageVue = new Vue({
     el:"#message",
@@ -269,15 +259,10 @@ let messageVue = new Vue({
         return{
             dialogVisible:false,
             tableData:[{
-                avatar:'./photos/p1.jpg',
-                name:'zhansan',
-                id:'1'
-            },
-                {
-                    avatar:'./img.png',
-                    name:'lisi',
-                    id:'2'
-                }
+                avatar:'',
+                name:'',
+                id:''
+            }
             ]
         }
     },

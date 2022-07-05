@@ -166,7 +166,7 @@
             return {
                 write: {
                     text: '',
-                    show:false,
+                    show:'',
                 },
                 commentDatas: [{
                     photo:'',
@@ -174,7 +174,7 @@
                     id:'',
                     text:'',
                     time:'',
-                    show:false
+                    show:''
                 }
                 ],
                 rules: {
@@ -203,13 +203,12 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    var _this=this;
                     axios({
                         method:"post",
                         url:"/MsgBoard/addFriend",
                         data:{ id:friendId,
-                            text:_this.write.text}//通过内容添加
-                    }).then(function (resp) {
+                            text:this.write.text}//通过内容添加
+                    }).then(resp=> {
                         window.location.reload() //刷新
                     })
                 }).catch(() => {
@@ -222,13 +221,12 @@
             }
         },
         mounted(){
-            var _this=this;
             axios({
                 method:"post",
                 url:"/MsgBoard/showFriend",//网站
                 data:{id:friendId}//通过id删除可改
-            }).then(function (resp){
-                _this.commentDatas=resp.data;
+            }).then(resp=>{
+                this.commentDatas=resp.data;
             })
         },
     })

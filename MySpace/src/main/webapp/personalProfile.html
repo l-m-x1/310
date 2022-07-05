@@ -143,15 +143,15 @@
         data() {
             return {
                 sizeForm: {
-                    imageUrl: 'https://ts1.cn.mm.bing.net/th?id=OIP-C.KPNhjDww9-Y1Jli6dpjiHgHaFj&w=200&h=170&c=8&rs=1&qlt=90&o=6&dpr=1.88&pid=3.1&rm=2',
-                    name: '姜明',
-                    region: '男',
-                    date: '2003-3-14',
-                    hometown:'江西',
-                    address:'武汉',
-                    work:'学生',
-                    companyName:'华中科技大学',
-                    companyAddress:'洪山区',
+                    imageUrl: '',
+                    name: '',
+                    region: '',
+                    date: '',
+                    hometown:'',
+                    address:'',
+                    work:'',
+                    companyName:'',
+                    companyAddress:'',
                 },
                 avatar:''
             }
@@ -186,10 +186,9 @@
                         data: form
                     }).then(function (resp) {
                     if(resp.data=="success"){
-
+                        window.location.reload();
                     }
                     })
-                window.location.reload();
             },
             change(file){
                 this.sizeForm.imageUrl = URL.createObjectURL(file.raw);

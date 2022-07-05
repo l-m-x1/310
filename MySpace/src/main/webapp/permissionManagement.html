@@ -75,12 +75,11 @@
     new Vue({
         el: '#app',
         mounted(){
-            var _this=this;
             axios({
                 method:"get",
                 url:"/Access/getAllAccess"
-            }).then(function (resp) {
-                _this.PermissionData=resp.data;
+            }).then(resp=>{
+                this.PermissionData=resp.data;
             })
         },
         data() {
@@ -88,25 +87,11 @@
                 yes:1,
                 no:0,
                 PermissionData: [{
-                    name:'姜明',
-                    account:'1399582722',
-                    permission: 1
-                },
-                    {
-                        name:'李凯翔',
-                        account:'1399582721',
-                        permission:0
-                    },
-                    {
-                        name:'胡洋洋',
-                        account:'1399582724',
-                        permission:1
-                    },
-                    {
-                        name:'刘萌象',
-                        account:'1399582723',
-                        permission:0
-                    }]
+                    name:'',
+                    account:'',
+                    permission: ''
+                }
+                   ]
             };
         },
         methods: {
@@ -126,7 +111,7 @@
                     method:"post",
                     url:"/Access/setAccess",//地址
                     data:{account:message}
-                }).then(function (resp) {
+                }).then(resp=> {
                     if(resp.data=="success"){
                         //成功后的反应
                     }
