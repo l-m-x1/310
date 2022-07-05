@@ -11,27 +11,7 @@ import java.io.IOException;
 
 @WebServlet("/Login/*")
 public class LoginServlet extends BaseServlet {
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//        int account= Integer.parseInt(request.getParameter("id"));
-//        String password=request.getParameter("password");
-//
-//        UserServiceImpl userService=new UserServiceImpl();
-//        User user = userService.select(account, password);
-//        if(user!=null)
-//        {
-//            System.out.println("success");
-//        }else {
-//            System.out.println("fail");
-//        }
-//
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        doGet(request,response);
-//    }
+
     public void login() throws IOException {
         UserService userService = new UserServiceImpl();
         Integer id = jsonObject.getInteger("id");
