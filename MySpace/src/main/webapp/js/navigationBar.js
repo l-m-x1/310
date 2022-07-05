@@ -193,10 +193,10 @@ let friendListVue = new Vue({
    el:"#friendList",
     data(){
        return{
-           // friendList:[]
-           friendList:[new Friend('/photos/c6a374b6-17d5-4177-b80b-a79e61488b4d.jpg','李四','100000013'),
-               new Friend('/photos/ff03cc60-6036-4294-94df-475ae86ca01e.jpg','王五','100000014'),
-               new Friend('/photos/6b0eef7a-66e1-4789-923b-ed00b5376933.jpg','小明','100000015')]
+           friendList:[]
+           // friendList:[new Friend('/photos/c6a374b6-17d5-4177-b80b-a79e61488b4d.jpg','李四','100000013'),
+           //     new Friend('/photos/ff03cc60-6036-4294-94df-475ae86ca01e.jpg','王五','100000014'),
+           //     new Friend('/photos/6b0eef7a-66e1-4789-923b-ed00b5376933.jpg','小明','100000015')]
        }
     },
 
@@ -247,7 +247,7 @@ let friendListVue = new Vue({
 
              axios({
                 method: "get",
-                url:'/HomePage/getFriendList'
+                url:'/Friend/getFriendList'
             }).then(resp=>{
                this.friendList=resp.data;
 
