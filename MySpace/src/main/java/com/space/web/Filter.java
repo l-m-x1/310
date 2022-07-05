@@ -18,7 +18,7 @@ public class Filter implements javax.servlet.Filter {
 
         HttpServletRequest req=(HttpServletRequest)servletRequest;
 
-        String []urls={"/css","/element-ui","/icon","/js","/login.html","register.html","/Login","/Register"};
+        String []urls={"/css","/element-ui","/icon","/js","/index.html","register.html","/Login","/Register"};
 
         String url = req.getRequestURL().toString();
         for(String s:urls){
@@ -35,7 +35,7 @@ public class Filter implements javax.servlet.Filter {
         }
         else {
 
-            req.getRequestDispatcher("/login.html").forward(servletRequest,servletResponse);
+            req.getRequestDispatcher("/index.html").forward(servletRequest,servletResponse);
         }
     }
 

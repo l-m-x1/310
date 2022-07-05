@@ -107,13 +107,9 @@
         data() {
             return {
                 viewlogs: [{
-                    id:1,
-                    name: '南通',
-                    text: '我是的就会发觉回复撒酒疯好啦是否'
-                }, {
-                    id:2,
-                    name: '女同',
-                    text: '我是的就会发觉回复撒酒疯好啦是否'
+                    id:'',
+                    name: '',
+                    text: ''
                 }
                 ],
             };
@@ -136,10 +132,6 @@
                     type: 'warning'
                 }).then(() => {
                     axios({
-                        // headers:{
-                        //     'Content-Type': 'application/json'
-                        // },
-
                         method:"post",
                         url:"/Diary/modifyLogs",
                         data:message
