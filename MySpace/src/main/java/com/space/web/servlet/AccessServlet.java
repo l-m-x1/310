@@ -19,14 +19,23 @@ import java.util.List;
 public class AccessServlet extends BaseServlet {
 
     public void setAccess(){
+        FriendsServiceImpl friendsService = new FriendsServiceImpl();
+
         Integer uid=(Integer) req.getSession().getAttribute("id");
         Integer fid=(Integer) jsonObject.getInteger("account");
-        Integer access=(Integer) jsonObject.getInteger("permission");
         Friends friends = new Friends();
         friends.setId(uid);
         friends.setFid(fid);
-        friends.setAccess(access);
-        FriendsServiceImpl friendsService = new FriendsServiceImpl();
+        Friends friends1 = friendsService.selectAccess(friends);
+
+        if(friends1.getAccess()==1){
+            friends.setAccess(0);
+        }
+        else {
+            friends.setAccess(1);
+        }
+
+
         friendsService.update(friends);
     }
 
@@ -78,6 +87,7 @@ public class AccessServlet extends BaseServlet {
             User user = userService.selectById(ret.account);
             ret.name=user.getUsername();
             ret.permission=friend.getAccess();
+            retList.add(ret);
         }
         resp.setContentType("text/json;charset=utf-8");
         resp.getWriter().write(JSON.toJSONString(retList));

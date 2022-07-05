@@ -206,8 +206,8 @@
                     var _this=this;
                     axios({
                         method:"post",
-                        url:"/Trends/addFriend",
-                        data:{ friendId:friendId,
+                        url:"/MsgBoard/addFriend",
+                        data:{ id:friendId,
                             text:_this.write.text}//通过内容添加
                     }).then(function (resp) {
                         window.location.reload() //刷新
@@ -225,7 +225,7 @@
             var _this=this;
             axios({
                 method:"post",
-                url:"/Trends/showFriend",//网站
+                url:"/MsgBoard/showFriend",//网站
                 data:{id:friendId}//通过id删除可改
             }).then(function (resp){
                 _this.commentDatas=resp.data;
