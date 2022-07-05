@@ -186,6 +186,7 @@ public class HomePageManger extends BaseServlet {
 
     public void getFriendDecoration() throws IOException {
         Integer fid = jsonObject.getInteger("id");
+        System.out.println(fid);
         getDecoration(fid);
 
     }

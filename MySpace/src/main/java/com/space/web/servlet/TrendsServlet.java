@@ -109,7 +109,7 @@ public class TrendsServlet extends BaseServlet {
             User user = new UserServiceImpl().selectById(trend.getUid());
             ret.name=user.getUsername();
             ret.modify="false";
-            ret.photo="http://localhost/"+user.getAvatar();
+            ret.photo=user.getAvatar();
             rets.add(ret);
         }
         String jsonString = JSON.toJSONString(rets);
@@ -145,7 +145,7 @@ public class TrendsServlet extends BaseServlet {
             ret.cheer=trend.getLikes();
             User user = new UserServiceImpl().selectById(trend.getUid());
             ret.name=user.getUsername();
-            ret.photo="http://localhost/"+user.getAvatar();
+            ret.photo=user.getAvatar();
             ret.modify="false";
             rets.add(ret);
         }

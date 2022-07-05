@@ -18,8 +18,8 @@ body {
     position: fixed;
     top: -15px;
     width: 70%;
-    border-radius: 5px;
-    border: 5px solid deepskyblue;
+    /*border-radius: 5px;*/
+    /*border: 5px solid deepskyblue;*/
     z-index: 1;
 
 }
@@ -61,8 +61,8 @@ body {
 .midNav li {
     float: left;
     border-radius:40px;
-    border: 3px solid deepskyblue;
-    margin-right: 5px;
+    /*border: 3px solid deepskyblue;*/
+    /*margin-right: 5px;*/
 }
 
 .midNav li a {
@@ -93,11 +93,11 @@ body {
 .rightcolumn {
     float: left;
     width: 75%;
-    background-color: rgba(222, 184, 135, 0.5);
+    background-color: rgba(252, 225, 179, 0.27);
 
     padding: 20px 30px;
-    border: 5px solid deepskyblue;
-    border-radius: 10px;
+    /*border: 5px solid deepskyblue;*/
+    /*border-radius: 10px;*/
 
 }
 

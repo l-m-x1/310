@@ -70,7 +70,7 @@ public class PhotosServlet extends BaseServlet {
     }
 
     public void getPhotos() throws IOException {
-        System.out.println("getPhotos");
+//        System.out.println("getPhotos");
         Integer uid= (Integer) req.getSession().getAttribute("id");
 //        Integer uid=1;
         PhotosService photosService = new PhotosServiceImpl();

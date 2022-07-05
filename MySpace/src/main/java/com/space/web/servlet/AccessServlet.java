@@ -97,8 +97,8 @@ public class AccessServlet extends BaseServlet {
         Integer id=(Integer) req.getSession().getAttribute("id");
         FriendsServiceImpl friendsService = new FriendsServiceImpl();
         Friends friends = new Friends();
-        friends.setId(id);
-        friends.setFid(jsonObject.getInteger("id"));
+        friends.setFid(id);
+        friends.setId(jsonObject.getInteger("id"));
         Friends friends1 = friendsService.selectAccess(friends);
 
         if(friends1.getAccess()==1){

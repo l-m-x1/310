@@ -30,6 +30,7 @@ public class BaseServlet extends HttpServlet {
         this.req=req;
         this.resp=resp;
         String contentType = req.getContentType();
+        System.out.println(contentType+"13");
         if(contentType!=null&&contentType.contains("application/json")){
             String requestBody = IOUtils.toString(req.getInputStream());
             jsonObject = JSON.parseObject(requestBody);

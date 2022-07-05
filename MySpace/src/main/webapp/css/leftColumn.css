@@ -1,10 +1,10 @@
 /* 左列 */
 .leftcolumn {
     float: left;
-    width: 22%;
+    width: 15%;
     background-color: #DCE2F1;
     padding-left: 0px;
-    border: 5px solid deepskyblue;
+    border: 5px solid rgba(252, 225, 179, 0.5);
     height: 30%;
     margin-right: 3%;
     border-radius: 10px;
@@ -15,7 +15,7 @@
     padding-top: 20px;
 }
 .leftcolumn #userName {
-    padding-top: 50px;
+    padding-top: 10px;
     text-align: center;
     padding-bottom: 50px;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;

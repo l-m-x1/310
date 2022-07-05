@@ -115,7 +115,7 @@ public class MsgBoardServlet extends BaseServlet {
             ret.time=board.getTime();
             User user = userService.selectById(board.getWrid());
             ret.username=user.getUsername();
-            ret.photo="http://localhost/"+user.getAvatar();
+            ret.photo=user.getAvatar();
             rets.add(ret);
         }
         String jsonString = JSON.toJSONString(rets);

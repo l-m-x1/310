@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -101,7 +102,10 @@ public class ServletTest {
     }
 
     @Test
-    public void test1(){
-
+    public void test1() throws ParseException {
+        String time="Thu Jul 14 2022 00:00:00 GMT+0800 (中国标准时间)";
+        SimpleDateFormat format=new SimpleDateFormat("");
+        Date parse = format.parse(time);
+        System.out.println(parse);
     }
 }

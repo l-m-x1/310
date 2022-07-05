@@ -17,7 +17,7 @@ $("#otherFeed").prop("href","OtherFeed.html?id="+friendId);
 //set decoration
 let userDecoration="#DCE2F1";
 axios({
-    method:"get",
+    method:"post",
     url:"/HomePage/getFriendDecoration",
     data:{
         id:friendId

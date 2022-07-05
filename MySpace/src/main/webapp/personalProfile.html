@@ -81,13 +81,13 @@
         </el-form-item>
         <el-form-item label="性别">
             <el-select v-model="sizeForm.region" placeholder="请选择性别">
-                <el-option label="男" value="shanghai"></el-option>
-                <el-option label="女" value="beijing"></el-option>
+                <el-option label="男" value="男"></el-option>
+                <el-option label="女" value="女"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item label="生日">
             <el-col >
-                <el-date-picker type="date" placeholder="选择日期" v-model="sizeForm.date" style="width:200px;"></el-date-picker>
+                <el-date-picker type="date" placeholder="选择日期" v-model="sizeForm.date" value-format="yyyy-MM-dd" style="width:200px;"></el-date-picker>
             </el-col>
         </el-form-item>
         <el-form-item label="现居地">
@@ -143,15 +143,6 @@
         data() {
             return {
                 sizeForm: {
-                    imageUrl: '',
-                    name: '',
-                    region: '',
-                    date: '',
-                    hometown:'',
-                    address:'',
-                    work:'',
-                    companyName:'',
-                    companyAddress:'',
                 },
                 avatar:''
             }
@@ -184,10 +175,11 @@
                         method: "post",
                         url: "/Info/modifyInfo",
                         data: form
-                    }).then(function (resp) {
-                    if(resp.data=="success"){
-                        window.location.reload();
-                    }
+                    }).then(resp=>{
+                        this.$message({
+                            message: '修改成功！',
+                            type: 'success'
+                        });
                     })
             },
             change(file){
