@@ -34,60 +34,7 @@ public class HomePageManger extends BaseServlet {
         session.removeAttribute("password");
     }
 
-    public void getFriendList() throws IOException {
-        JSONObject ret =new JSONObject();
-        System.out.println(req.getRequestURL());
 
-        class ret{
-            @JSONField(ordinal = 2)
-            public String name;
-            @JSONField(ordinal = 1)
-            public String avatar;
-            @JSONField(ordinal = 3)
-            public Integer id;
-
-            public Integer getId() {
-                return id;
-            }
-
-            public void setId(Integer id) {
-                this.id = id;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getAvatar() {
-                return avatar;
-            }
-
-            public void setAvatar(String avatar) {
-                this.avatar = avatar;
-            }
-        }
-        List<ret> retList=new ArrayList<>();
-        Integer uid= (Integer) req.getSession().getAttribute("id");
-        uid=100000012;
-        FriendsService friendsService = new FriendsServiceImpl();
-        List<Friends> friends = friendsService.selectById(uid);
-        UserServiceImpl userService = new UserServiceImpl();
-        for (Friends friend : friends) {
-            ret tmp = new ret();
-            Integer fid = friend.getFid();
-            User user = userService.selectById(fid);
-            tmp.name=user.getUsername();
-            tmp.avatar=user.getAvatar();
-            tmp.id=user.getId();
-            retList.add(tmp);
-        }
-        resp.setContentType("text/plain;charset=utf-8");
-        resp.getWriter().write(JSON.toJSONString(retList));
-    }
 
     public void getUserInfo() throws IOException {
         JSONObject ret =new JSONObject();
@@ -246,6 +193,10 @@ public class HomePageManger extends BaseServlet {
 
         // Integer uid=213141521;
         Style style = new StyleServiceImpl().selectByUid(uid);
+
+        if(style==null){
+            resp.getWriter().write("no decoration");
+        }
         String jsonString = JSON.toJSONString(style.getType());
         resp.setContentType("text/json;charset=utf-8");
         resp.getWriter().write(jsonString);
